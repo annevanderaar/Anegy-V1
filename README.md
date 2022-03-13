@@ -1,16 +1,16 @@
-# Anne's Movie Application
+# Anne's Movies and Series Website
 
-_This app was made using the tutorial from Asish George Tech. You can find that using this link: https://www.youtube.com/watch?v=9Bvt6BFf6_U. I used this tutorial as a base but i have made it my own by implementing more functions and rewrite it using React_
+This website was made using the tutorial from Asish George Tech. You can find that using this link: https://www.youtube.com/watch?v=9Bvt6BFf6_U. I used this tutorial as a base but i have made it my own by implementing more functions and rewrite it using Vuetify.
 
-With Anne's Movie Application you can discover all the movies and series. You can make an account and add your favorite movies to you watch list. You can also keep up with you favorite movies and series and cross of the episodes/movies that you have watched. You can search and filter using genre, year and title. You can also select if you want to see the most populair movies or series.
+With Anne's Movies and Series Website you can discover all the movies and series. You can make an account and add your favorite movies to you watch list. You can also keep up with you favorite movies and series and cross of the episodes/movies that you have watched. You can search and filter using genre, year and title. You can also select if you want to see the most populair movies or series.
 
-_It makes use of the TMDB API. You can find everything about this API here: https://developers.themoviedb.org/._
+It makes use of the TMDB API. You can find everything about this API here: https://developers.themoviedb.org/.
 
-The App is made in React with a MODX backend.
+The website is made using Vuetify in the frontend and using PHP in the backend.
 
 ## Features
 
-### These are the features that i used from the tutorial:
+### These are the features that were used from the tutorial:
 
 - A search bar that searches on title.
 - A filter that you can use to pick a specific genre.
