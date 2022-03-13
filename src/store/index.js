@@ -5,11 +5,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    drawer: false,
   },
   mutations: {
+    setDrawerInput: (state, value) => (state.drawer = value),
   },
   actions: {
+    setDrawerInput: ({commit}, input) => commit('setDrawerInput', input),
   },
-  modules: {
+  getters: {
+    drawer: (state) => state.drawer,
   }
 })
