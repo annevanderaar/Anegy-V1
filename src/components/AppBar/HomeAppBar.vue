@@ -1,5 +1,8 @@
 <template>
     <v-app-bar app color="secondary" clipped-left>
+      <v-btn icon class="white--text"><v-icon>fas fa-video</v-icon></v-btn>
+      <v-btn icon class="white--text"><v-icon>fas fa-tv</v-icon></v-btn>
+      <v-spacer></v-spacer>
       <a href="/"><v-img alt="Logo Anne's Movies and Series website" contain src="/Naamloos-1.png" transition="scale-transition" width="40px" height="40px"/></a>
       <v-spacer></v-spacer>
       <v-btn icon class="white--text"><v-icon>fas fa-search</v-icon></v-btn>

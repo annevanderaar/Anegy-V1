@@ -1,6 +1,6 @@
 <template>
     <section>
-        <v-navigation-drawer clipped v-model="drawer" style="height: 100%; width: 400px;" absolute>
+        <v-navigation-drawer clipped v-model="drawer" style="max-height: 100%; width: 400px;" absolute>
             <v-container>
                 <v-row>
                     <v-col><h1 class="ml-2">Filter</h1></v-col>
