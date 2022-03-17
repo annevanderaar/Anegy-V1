@@ -4,7 +4,7 @@
     <v-main>
       <div class="d-flex justify-space-between my-4">
         <v-btn @click="openFilter" class="mx-2">Filter</v-btn>
-        <h1 class="titles mr-16 pr-4">Movies</h1>
+        <h1 class="titles mr-16 pr-16">Movies</h1>
         <MoviesFilters />
       </div>
       <div class="d-flex flex-wrap justify-center">

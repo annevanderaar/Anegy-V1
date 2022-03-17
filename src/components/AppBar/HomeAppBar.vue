@@ -25,8 +25,8 @@
         ><v-icon>fas fa-user-astronaut</v-icon></v-btn
       >
       <v-btn icon class="white--text"><v-icon>fas fa-heart</v-icon></v-btn>
-      <!-- <v-btn icon class="white--text" v-if="!$vuetify.theme.dark" @click="darkMode"><v-icon>fas fa-moon</v-icon></v-btn>
-        <v-btn icon class="white--text" v-else @click="darkMode"><v-icon>fas fa-sun</v-icon></v-btn> -->
+      <v-btn icon class="white--text" v-if="!$vuetify.theme.dark" @click="darkMode"><v-icon>fas fa-moon</v-icon></v-btn>
+      <v-btn icon class="white--text" v-else @click="darkMode"><v-icon>fas fa-sun</v-icon></v-btn>
     </div>
   </v-app-bar>
 </template>

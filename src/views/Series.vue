@@ -4,7 +4,7 @@
     <v-main>
       <div class="d-flex justify-space-between my-4">
         <v-btn @click="openFilter" class="mx-2">Filter</v-btn>
-        <h1 class="titles mr-16 pr-4">Series</h1>
+        <h1 class="titles mr-16 pr-16">Series</h1>
         <SeriesFilters />
       </div>
       <div class="d-flex flex-wrap justify-center">
@@ -91,7 +91,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost/Series.php")
+      .get("http://localhost/Library/Series/Series.php")
       .then((res) => {
         this.currentPage = res.data.page;
         this.totalPages = res.data.total_pages;
