@@ -1,10 +1,7 @@
 <template>
   <v-app>
     <HomeAppBar />
-    <v-main>
-      <v-btn :to="`/movies`">Movies</v-btn>
-      <v-btn :to="`/series`">Series</v-btn>
-    </v-main>
+    <v-main> </v-main>
     <WebsiteFooter />
   </v-app>
 </template>

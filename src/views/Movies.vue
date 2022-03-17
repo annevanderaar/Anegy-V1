@@ -91,7 +91,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost/Movies.php")
+      .get("http://localhost/Library/Movies/Movies.php")
       .then((res) => {
         this.currentPage = res.data.page;
         this.totalPages = res.data.total_pages;
