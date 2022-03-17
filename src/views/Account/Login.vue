@@ -1,12 +1,12 @@
 <template>
-    <v-app>
-        
-    </v-app>
+  <v-app>
+    <v-main></v-main>
+  </v-app>
 </template>
 
 <script>
 export default {
-  name: 'Create Account',
+  name: "Login",
   data: () => ({
     //
   }),

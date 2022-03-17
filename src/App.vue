@@ -1,12 +1,19 @@
 <template>
-  <router-view/>
+  <router-view />
 </template>
 
 <script>
 export default {
-  name: 'App',
+  name: "App",
   data: () => ({
     //
   }),
 };
 </script>
+
+<style>
+.titles {
+  font-family: "Fredoka", sans-serif;
+  font-weight: 900;
+}
+</style>

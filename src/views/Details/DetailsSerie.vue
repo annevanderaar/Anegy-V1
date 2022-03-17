@@ -2,8 +2,7 @@
   <v-app>
     <HomeAppBar />
     <v-main>
-      <v-btn :to="`/movies`">Movies</v-btn>
-      <v-btn :to="`/series`">Series</v-btn>
+      <!-- Hier komen de details van de serie. De cast. trailers. en meer-->
     </v-main>
     <WebsiteFooter />
   </v-app>
@@ -14,7 +13,7 @@ import HomeAppBar from "@/components/AppBar/HomeAppBar.vue";
 import WebsiteFooter from "@/components/WebsiteFooter.vue";
 
 export default {
-  name: "Homepage",
+  name: "DetailsSerie",
   components: {
     HomeAppBar,
     WebsiteFooter,

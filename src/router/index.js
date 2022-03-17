@@ -11,19 +11,29 @@ const routes = [
     component: Homepage
   },
   {
+    path: '/movies',
+    name: 'Movies',
+    component: () => import(/* webpackChunkName: "account" */ '../views/Movies.vue')
+  },
+  {
+    path: '/series',
+    name: 'Series',
+    component: () => import(/* webpackChunkName: "account" */ '../views/Series.vue')
+  },
+  {
     path: '/account',
     name: 'Account',
-    component: () => import(/* webpackChunkName: "account" */ '../views/Account.vue')
+    component: () => import(/* webpackChunkName: "account" */ '../views/Account/Account.vue')
   },
   {
     path: '/create-account',
     name: 'Create Account',
-    component: () => import(/* webpackChunkName: "createAccount" */ '../views/CreateAccount.vue')
+    component: () => import(/* webpackChunkName: "createAccount" */ '../views/Account/CreateAccount.vue')
   },
   {
     path: '/login',
     name: 'Login',
-    component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue')
+    component: () => import(/* webpackChunkName: "login" */ '../views/Account/Login.vue')
   }
 ]
 

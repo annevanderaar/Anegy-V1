@@ -1,16 +1,17 @@
 <template>
-    <v-app>
-        <AccountAppBar />
-    </v-app>
+  <v-app>
+    <AccountAppBar />
+    <v-main></v-main>
+  </v-app>
 </template>
 
 <script>
 import AccountAppBar from "@/components/AppBar/AccountAppBar.vue";
 
 export default {
-  name: 'Account',
+  name: "Account",
   components: {
-    AccountAppBar
+    AccountAppBar,
   },
   data: () => ({
     //
