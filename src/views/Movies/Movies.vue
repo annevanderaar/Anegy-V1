@@ -4,12 +4,12 @@
     <v-main>
       <div class="d-flex justify-space-between my-4">
         <v-btn @click="openFilter" class="mx-2">Filter</v-btn>
-        <h1 class="titles mr-16 pr-16">Series</h1>
-        <SeriesFilters />
+        <h1 class="titles mr-16 pr-16">Discover Movies</h1>
+        <MoviesFilters />
       </div>
       <div class="d-flex flex-wrap justify-center">
         <v-card
-          class="serie ma-4"
+          class="movie ma-4"
           v-for="item in data.results"
           :key="item.id"
           elevation="4"
@@ -21,8 +21,8 @@
             v-if="item.poster_path == ''"
             src="http://via.placeholder.com/1080x1580"
           ></v-img>
-          <div class="serie-info d-flex justify-space-between">
-            <v-card-title>{{ item.name }}</v-card-title>
+          <div class="movie-info d-flex justify-space-between">
+            <v-card-title>{{ item.title }}</v-card-title>
             <v-avatar
               class="ma-2"
               color="green white--text"
@@ -41,8 +41,8 @@
           </div>
           <v-card class="overview">
             <v-card-subtitle
-              ><strong>First Air Date:</strong>
-              {{ item.first_air_date }}</v-card-subtitle
+              ><strong>Release Date:</strong>
+              {{ item.release_date }}</v-card-subtitle
             >
             <v-card-text>{{ item.overview }}</v-card-text>
             <v-btn elevation="0" color="secondary" class="ml-2"
@@ -66,47 +66,35 @@
 
 <script>
 import HomeAppBar from "@/components/AppBar/HomeAppBar.vue";
-import SeriesFilters from "@/components/Filters/SeriesFilters.vue";
+import MoviesFilters from "@/components/Filters/MoviesFilters.vue";
 import WebsiteFooter from "@/components/WebsiteFooter.vue";
-import { mapActions } from "vuex";
-import axios from "axios";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
-  name: "Series",
+  name: "Movies",
   components: {
     HomeAppBar,
-    SeriesFilters,
+    MoviesFilters,
     WebsiteFooter,
   },
-  data: () => ({
-    data: [],
-    currentPage: 1,
-    totalPages: 100,
-  }),
+  data: () => ({}),
   methods: {
-    ...mapActions(["setDrawerInput"]),
+    ...mapActions(["setDrawerInput", "getMovies"]),
     openFilter() {
       this.setDrawerInput(true);
     },
   },
   mounted() {
-    axios
-      .get("http://localhost/Library/Series/Series.php")
-      .then((res) => {
-        this.currentPage = res.data.page;
-        this.totalPages = res.data.total_pages;
-        this.data = res.data;
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    this.getMovies();
+  },
+  computed: {
+    ...mapGetters(["data", "currentPage"]),
   },
 };
 </script>
 
 <style scoped>
-.serie {
+.movie {
   width: 300px;
   margin: 1rem;
   border-radius: 3px;
@@ -114,7 +102,7 @@ export default {
   overflow: hidden;
 }
 
-.serie .v-img {
+.movie .v-img {
   width: 100%;
   height: 100%;
 }
@@ -131,11 +119,11 @@ export default {
   overflow: auto;
 }
 
-.serie:hover .overview {
+.movie:hover .overview {
   transform: translateY(0);
 }
 
-.serie-info .v-avatar {
+.movie-info .v-avatar {
   padding: 0.25rem 0.5rem;
   border-radius: 3px;
   font-weight: bold;

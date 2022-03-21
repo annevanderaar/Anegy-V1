@@ -4,7 +4,7 @@
     <v-main>
       <div class="d-flex justify-space-between my-4">
         <v-btn @click="openFilter" class="mx-2">Filter</v-btn>
-        <h1 class="titles mr-16 pr-16">Movies</h1>
+        <h1 class="titles mr-16 pr-16">Popular Movies</h1>
         <MoviesFilters />
       </div>
       <div class="d-flex flex-wrap justify-center">
@@ -68,39 +68,27 @@
 import HomeAppBar from "@/components/AppBar/HomeAppBar.vue";
 import MoviesFilters from "@/components/Filters/MoviesFilters.vue";
 import WebsiteFooter from "@/components/WebsiteFooter.vue";
-import { mapActions } from "vuex";
-import axios from "axios";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
-  name: "Movies",
+  name: "MoviesPopular",
   components: {
     HomeAppBar,
     MoviesFilters,
     WebsiteFooter,
   },
-  data: () => ({
-    data: [],
-    currentPage: 1,
-    totalPages: 100,
-  }),
+  data: () => ({}),
   methods: {
-    ...mapActions(["setDrawerInput"]),
+    ...mapActions(["setDrawerInput", "getPopularMovies"]),
     openFilter() {
       this.setDrawerInput(true);
     },
   },
   mounted() {
-    axios
-      .get("http://localhost/Library/Movies/Movies.php")
-      .then((res) => {
-        this.currentPage = res.data.page;
-        this.totalPages = res.data.total_pages;
-        this.data = res.data;
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    this.getPopularMovies();
+  },
+  computed: {
+    ...mapGetters(["data", "currentPage"]),
   },
 };
 </script>

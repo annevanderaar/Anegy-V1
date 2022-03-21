@@ -14,9 +14,43 @@
           >
         </v-row>
         <v-divider></v-divider>
-        <v-list-item v-for="item in genres" :key="item.name" link>
-          {{ item.name }}
-        </v-list-item>
+        <v-list>
+          <v-list-group color="secondary">
+            <template v-slot:activator>
+              <v-list-item-content>
+                <v-list-item-title v-text="'Sort By'"></v-list-item-title>
+              </v-list-item-content>
+            </template>
+            <v-list-item href="/movies/popular"
+              ><v-icon class="mr-3" color="secondary">fas fa-fire</v-icon>
+              Popular</v-list-item
+            >
+            <v-list-item href="/movies/playing"
+              ><v-icon class="mr-3" color="secondary">far fa-play-circle</v-icon
+              >Playing</v-list-item
+            >
+            <v-list-item href="/movies/top-rated"
+              ><v-icon class="mr-3" color="secondary"
+                >fas fa-star-of-life</v-icon
+              >Top Rated</v-list-item
+            >
+            <v-list-item href="/movies/upcoming"
+              ><v-icon class="mr-3" color="secondary"
+                >far fa-calendar-alt</v-icon
+              >Upcoming</v-list-item
+            >
+          </v-list-group>
+        </v-list>
+        <v-list>
+          <v-list-group color="secondary">
+            <template v-slot:activator>
+              <v-list-item-content>
+                <v-list-item-title v-text="'Genres'"></v-list-item-title>
+              </v-list-item-content>
+            </template>
+            <v-list-item>Genres</v-list-item>
+          </v-list-group>
+        </v-list>
       </v-container>
     </v-navigation-drawer>
   </section>
@@ -27,30 +61,7 @@ import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "MoviesFilters",
-  data: () => ({
-    genres: [
-      { id: 28, name: "Action" },
-      { id: 12, name: "Adventure" },
-      { id: 16, name: "Animation" },
-      { id: 35, name: "Comedy" },
-      { id: 80, name: "Crime" },
-      { id: 99, name: "Documentary" },
-      { id: 18, name: "Drama" },
-      { id: 10751, name: "Family" },
-      { id: 14, name: "Fantasy" },
-      { id: 36, name: "History" },
-      { id: 27, name: "Horror" },
-      { id: 10402, name: "Music" },
-      { id: 9648, name: "Mystery" },
-      { id: 10749, name: "Romance" },
-      { id: 878, name: "Science Fiction" },
-      { id: 10770, name: "TV Movie" },
-      { id: 53, name: "Thriller" },
-      { id: 10752, name: "War" },
-      { id: 37, name: "Western" },
-    ],
-    selectedGenre: [],
-  }),
+  data: () => ({}),
   methods: {
     ...mapActions(["setDrawerInput"]),
     closeFilter() {
