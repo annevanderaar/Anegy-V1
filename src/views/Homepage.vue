@@ -1,7 +1,11 @@
 <template>
   <v-app>
     <HomeAppBar />
-    <v-main> </v-main>
+    <v-main>
+      <div class="d-flex justify-center">
+        <h1 class="titles mr-4">Anegy</h1>
+      </div>
+    </v-main>
     <WebsiteFooter />
   </v-app>
 </template>

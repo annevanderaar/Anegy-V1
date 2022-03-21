@@ -9,7 +9,7 @@
       >
     </div>
     <v-spacer></v-spacer>
-    <a class="ml-16" href="/"
+    <v-btn class="ml-16" :to="`/`" plain large
       ><v-img
         alt="Logo Anne's Movies and Series website"
         contain
@@ -17,7 +17,7 @@
         transition="scale-transition"
         width="40px"
         height="40px"
-    /></a>
+    /></v-btn>
     <v-spacer></v-spacer>
     <v-text-field
       label="Search"

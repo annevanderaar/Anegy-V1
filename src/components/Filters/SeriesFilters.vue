@@ -21,20 +21,20 @@
                 <v-list-item-title v-text="'Sort By'"></v-list-item-title>
               </v-list-item-content>
             </template>
-            <v-list-item href="/series/popular"
+            <v-list-item :to="`/series/popular`"
               ><v-icon class="mr-3" color="secondary">fas fa-fire</v-icon>
               Popular</v-list-item
             >
-            <v-list-item href="/series/playing"
+            <v-list-item :to="`/series/playing`"
               ><v-icon class="mr-3" color="secondary">far fa-play-circle</v-icon
               >Playing</v-list-item
             >
-            <v-list-item href="/series/top-rated"
+            <v-list-item :to="`/series/top-rated`"
               ><v-icon class="mr-3" color="secondary"
                 >fas fa-star-of-life</v-icon
               >Top Rated</v-list-item
             >
-            <v-list-item href="/series/upcoming"
+            <v-list-item :to="`/series/upcoming`"
               ><v-icon class="mr-3" color="secondary"
                 >far fa-calendar-alt</v-icon
               >Upcoming</v-list-item
