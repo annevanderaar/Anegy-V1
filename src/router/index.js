@@ -32,7 +32,7 @@ const routes = [
   },
   {
     path: '/movies/upcoming',
-    name: 'Popular Movies',
+    name: 'Upcoming Movies',
     component: () => import(/* webpackChunkName: "account" */ '../views/Movies/MoviesUpcoming.vue')
   },
   {
@@ -57,7 +57,7 @@ const routes = [
   },
   {
     path: '/series/upcoming',
-    name: 'Popular Series',
+    name: 'Upcoming Series',
     component: () => import(/* webpackChunkName: "account" */ '../views/Series/SeriesAiring.vue')
   },
   {

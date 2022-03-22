@@ -13,6 +13,7 @@
 <script>
 import HomeAppBar from "@/components/AppBar/HomeAppBar.vue";
 import WebsiteFooter from "@/components/WebsiteFooter.vue";
+// import mapActions from "vuex";
 
 export default {
   name: "Homepage",
@@ -21,8 +22,12 @@ export default {
     WebsiteFooter,
   },
   data: () => ({}),
-  methods: {},
-  mounted() {},
+  methods: {
+    // ...mapActions(["searchMulti"]),
+  },
+  mounted() {
+    // this.searchMulti();
+  },
 };
 </script>
 

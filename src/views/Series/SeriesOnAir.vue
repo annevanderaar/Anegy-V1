@@ -16,10 +16,12 @@
         >
           <v-img
             :src="`https://image.tmdb.org/t/p/w500${item.poster_path}`"
+            :alt="`${item.name}`"
           ></v-img>
           <v-img
-            v-if="item.poster_path == ''"
+            v-if="item.poster_path == null"
             src="http://via.placeholder.com/1080x1580"
+            :alt="`${item.name}`"
           ></v-img>
           <div class="serie-info d-flex justify-space-between">
             <v-card-title>{{ item.name }}</v-card-title>
@@ -71,7 +73,7 @@ import WebsiteFooter from "@/components/WebsiteFooter.vue";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
-  name: "Series On Air",
+  name: "SeriesOnAir",
   components: {
     HomeAppBar,
     SeriesFilters,
