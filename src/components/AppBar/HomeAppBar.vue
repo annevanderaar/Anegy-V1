@@ -51,12 +51,15 @@
 </template>
 
 <script>
+// import mapActions from "vuex";
+
 export default {
   name: "AppBar",
   data: () => ({
     show: false,
   }),
   methods: {
+    // ...mapActions(["searchMulti"]),
     openAccount() {
       this.$router.push({ path: `/account` });
     },
@@ -70,6 +73,8 @@ export default {
       } else {
         this.show = false;
       }
+
+      // this.searchMulti();
     },
   },
 };

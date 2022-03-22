@@ -36,7 +36,7 @@ export default new Vuex.Store({
           this.state.currentPage = res.data.page;
           this.state.totalPages = res.data.total_pages;
           this.state.data = res.data;
-          // console.log(res.data);
+          console.log(res.data);
         })
         .catch((err) => {
           console.log(err);
@@ -101,7 +101,7 @@ export default new Vuex.Store({
           this.state.currentPage = res.data.page;
           this.state.totalPages = res.data.total_pages;
           this.state.data = res.data;
-          // console.log(res.data);
+          console.log(res.data);
         })
         .catch((err) => {
           console.log(err);
