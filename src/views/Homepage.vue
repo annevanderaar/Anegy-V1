@@ -8,65 +8,40 @@
           With Anegy you can discover all the movies and series ever made.
         </h2>
       </v-row>
-      <v-row class="mt-10 d-flex justify-center align-center flex-row">
-        <v-card class="cards" elevation="4" outlined>
+      <v-container
+        fluid
+        class="mt-10 d-flex justify-center align-center flex-row"
+      >
+        <v-card class="cards" elevation="4" outlined width="100%">
           <v-card-title class="titles">First</v-card-title>
           <v-card-text class="titles">Make an account</v-card-text>
+          <v-btn
+            elevation="0"
+            color="secondary"
+            class="my-2"
+            :to="`/create-account`"
+            >Create account</v-btn
+          >
         </v-card>
-        <v-card class="cards" elevation="4" outlined>
+        <v-card class="cards" elevation="4" outlined width="100%">
           <v-card-title class="titles">Second</v-card-title>
           <v-card-text class="titles"
             >Add your favorites to your watch list.</v-card-text
           >
+          <v-btn elevation="0" color="secondary" class="my-2" :to="`/movies`"
+            >Find favorites</v-btn
+          >
         </v-card>
-        <v-card class="cards" elevation="4" outlined>
+        <v-card class="cards" elevation="4" outlined width="100%">
           <v-card-title class="titles">Third</v-card-title>
           <v-card-text class="titles"
             >Cross of everything you have watched.</v-card-text
           >
+          <v-btn elevation="0" color="secondary" class="my-2" :to="`/account`"
+            >Go to account</v-btn
+          >
         </v-card>
-      </v-row>
-      <v-row class="mt-10 d-flex justify-center align-center flex-column">
-        <h2 class="titles">Create your account now!</h2>
-        <v-btn
-          elevation="0"
-          color="secondary"
-          class="mt-2"
-          :to="`/create-account`"
-          >Create account</v-btn
-        >
-      </v-row>
-      <v-row class="mt-10 d-flex justify-center align-center flex-column">
-        <h2 class="titles">Or look around without an account</h2>
-      </v-row>
-      <v-row class="mb-8 d-flex justify-center align-center flex-row">
-        <v-card
-          class="d-flex flex-wrap justify-center mb-16 ma-4"
-          elevation="4"
-          outlined
-          :to="`/movies`"
-          style="height: 500px; width: 300px"
-        >
-          <v-card-title>Movies</v-card-title>
-          <v-img
-            style="width: 100%; height: 100%"
-            src="https://image.tmdb.org/t/p/w500/wFjboE0aFZNbVOF05fzrka9Fqyx.jpg"
-          ></v-img>
-        </v-card>
-        <v-card
-          elevation="4"
-          outlined
-          :to="`/series`"
-          style="height: 500px; width: 300px"
-          class="d-flex flex-wrap justify-center mb-16 ma-4"
-        >
-          <v-card-title>Series</v-card-title>
-          <v-img
-            style="width: 100%; height: 100%"
-            src="https://image.tmdb.org/t/p/w500/jtnfNzqZwN4E32FGGxx1YZaBWWf.jpg"
-          ></v-img>
-        </v-card>
-      </v-row>
+      </v-container>
     </v-main>
     <WebsiteFooter />
   </v-app>

@@ -88,6 +88,7 @@ export default {
   },
   mounted() {
     this.getSeries();
+    this.setDrawerInput(false);
   },
   computed: {
     ...mapGetters(["data", "currentPage"]),

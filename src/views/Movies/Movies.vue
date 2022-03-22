@@ -88,6 +88,7 @@ export default {
   },
   mounted() {
     this.getMovies();
+    this.setDrawerInput(false);
   },
   computed: {
     ...mapGetters(["data", "currentPage"]),
