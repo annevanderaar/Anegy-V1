@@ -3,7 +3,7 @@
     <v-navigation-drawer
       clipped
       v-model="drawer"
-      style="max-height: 100%; width: 400px"
+      style="max-height: 100%; width: 300px"
       absolute
     >
       <v-container>

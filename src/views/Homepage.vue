@@ -27,18 +27,21 @@
         </v-card>
       </v-row>
       <v-row class="mt-10 d-flex justify-center align-center flex-column">
-        <h2 class="titles">Make your account now!</h2>
+        <h2 class="titles">Create your account now!</h2>
         <v-btn
           elevation="0"
           color="secondary"
-          class="mt-4"
+          class="mt-2"
           :to="`/create-account`"
-          >Make account</v-btn
+          >Create account</v-btn
         >
       </v-row>
-      <v-row class="my-10 d-flex justify-center align-center flex-row">
+      <v-row class="mt-10 d-flex justify-center align-center flex-column">
+        <h2 class="titles">Or look around without an account</h2>
+      </v-row>
+      <v-row class="mb-8 d-flex justify-center align-center flex-row">
         <v-card
-          class="d-flex flex-wrap justify-center mb-16 mx-4"
+          class="d-flex flex-wrap justify-center mb-16 ma-4"
           elevation="4"
           outlined
           :to="`/movies`"
@@ -55,7 +58,7 @@
           outlined
           :to="`/series`"
           style="height: 500px; width: 300px"
-          class="d-flex flex-wrap justify-center mb-16 mx-4"
+          class="d-flex flex-wrap justify-center mb-16 ma-4"
         >
           <v-card-title>Series</v-card-title>
           <v-img

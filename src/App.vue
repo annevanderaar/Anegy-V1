@@ -5,9 +5,7 @@
 <script>
 export default {
   name: "App",
-  data: () => ({
-    //
-  }),
+  data: () => ({}),
 };
 </script>
 
@@ -15,5 +13,7 @@ export default {
 .titles {
   font-family: "Fredoka", sans-serif;
   font-weight: 900;
+  margin: 8px;
+  text-align: center;
 }
 </style>
