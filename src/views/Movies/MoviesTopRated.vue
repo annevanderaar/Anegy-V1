@@ -86,6 +86,7 @@ export default {
   },
   mounted() {
     this.getTopRatedMovies();
+    this.setDrawerInput(false);
   },
   computed: {
     ...mapGetters(["data", "currentPage"]),
