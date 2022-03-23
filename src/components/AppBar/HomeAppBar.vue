@@ -11,7 +11,7 @@
     >
     <v-spacer></v-spacer>
     <!-- <v-img
-      alt="Logo Anne's Movies and Series website"
+      alt="Logo Anegy"
       contain
       src="/Naamloos-1.png"
       transition="scale-transition"
@@ -49,15 +49,12 @@
 </template>
 
 <script>
-// import mapActions from "vuex";
-
 export default {
   name: "AppBar",
   data: () => ({
     show: false,
   }),
   methods: {
-    // ...mapActions(["searchMulti"]),
     openAccount() {
       this.$router.push({ path: `/account` });
     },
@@ -71,8 +68,21 @@ export default {
       } else {
         this.show = false;
       }
-
-      // this.searchMulti();
+    },
+    searchMulti(search) {
+      axios
+        .get("http://localhost/Library/Search.php", {
+          query: search
+        })
+        .then((res) => {
+          //this.state.currentPage = res.data.page;
+          //this.state.totalPages = res.data.total_pages;
+          //this.state.data = res.data;
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 };
