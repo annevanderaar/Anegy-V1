@@ -69,7 +69,7 @@ export default {
       this.setDrawerInput(false);
     },
     call(val) {
-      console.log(this.filter);
+      //Dit zorgt ervoor dat de link in de filter niet goed staat. Even fixen.
       if (this.filter == "movies") {
         this.$router.push({ path: `/movies/${val}` });
       }
