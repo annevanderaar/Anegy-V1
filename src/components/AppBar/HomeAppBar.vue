@@ -28,12 +28,12 @@
       flat
       v-if="this.show == true"
     ></v-text-field>
-    <v-btn icon class="white--text" @click="showSearch"
+    <!-- <v-btn icon class="white--text" @click="showSearch"
       ><v-icon>fas fa-search</v-icon></v-btn
     >
     <v-btn icon class="white--text" @click="openAccount"
       ><v-icon>fas fa-user-astronaut</v-icon></v-btn
-    >
+    > -->
     <v-btn icon class="white--text"><v-icon>fas fa-heart</v-icon></v-btn>
     <v-btn
       icon
