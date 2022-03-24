@@ -1,9 +1,9 @@
 <template>
   <v-app-bar app color="secondary" clipped-left>
-    <v-btn icon class="white--text" :to="`/movies`"
+    <v-btn icon class="white--text" :to="`/movies/popular`"
       ><v-icon>fas fa-video</v-icon></v-btn
     >
-    <v-btn icon class="white--text" :to="`/series`"
+    <v-btn icon class="white--text" :to="`/series/popular`"
       ><v-icon>fas fa-tv</v-icon></v-btn
     >
     <v-btn icon class="white--text" :to="`/`"

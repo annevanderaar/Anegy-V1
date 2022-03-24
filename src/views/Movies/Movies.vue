@@ -4,7 +4,30 @@
     <v-main>
       <div class="d-flex justify-space-between my-4">
         <v-btn @click="openFilter" class="mx-2">Filter</v-btn>
-        <h1 class="titles mr-16 pr-16">Discover Movies</h1>
+        <h1
+          class="titles mr-16 pr-16"
+          v-if="this.$route.path == '/movies/popular'"
+        >
+          Popular Movies
+        </h1>
+        <h1
+          class="titles mr-16 pr-16"
+          v-if="this.$route.path == '/movies/playing'"
+        >
+          Movies Playing
+        </h1>
+        <h1
+          class="titles mr-16 pr-16"
+          v-if="this.$route.path == '/movies/top-rated'"
+        >
+          Top Rated Movies
+        </h1>
+        <h1
+          class="titles mr-16 pr-16"
+          v-if="this.$route.path == '/movies/upcoming'"
+        >
+          Upcoming Movies
+        </h1>
         <MoviesFilters />
       </div>
       <cards :data="data" />
@@ -36,6 +59,7 @@ export default {
     data: [],
     currentPage: 1,
     totalPages: 100,
+    url: "http://localhost/Library/Movies/MoviesPopular.php",
   }),
   methods: {
     ...mapActions(["setDrawerInput"]),
@@ -44,12 +68,12 @@ export default {
     },
     getMovies() {
       axios
-        .get("http://localhost/Library/Movies/Movies.php")
+        .get(this.url)
         .then((res) => {
           this.currentPage = res.data.page;
           this.totalPages = res.data.total_pages;
           this.data = res.data;
-          console.log(res.data);
+          //console.log(res.data);
         })
         .catch((err) => {
           console.log(err);
@@ -57,8 +81,26 @@ export default {
     },
   },
   mounted() {
-    this.setDrawerInput(false);
-    this.getMovies();
+    if (this.$route.path == "/movies/popular") {
+      this.url = "http://localhost/Library/Movies/MoviesPopular.php";
+      this.getMovies();
+      this.setDrawerInput(false);
+    }
+    if (this.$route.path == "/movies/top-rated") {
+      this.url = "http://localhost/Library/Movies/MoviesTopRated.php";
+      this.getMovies();
+      this.setDrawerInput(false);
+    }
+    if (this.$route.path == "/movies/playing") {
+      this.url = "http://localhost/Library/Movies/MoviesPlaying.php";
+      this.getMovies();
+      this.setDrawerInput(false);
+    }
+    if (this.$route.path == "/movies/upcoming") {
+      this.url = "http://localhost/Library/Movies/MoviesUpcoming.php";
+      this.getMovies();
+      this.setDrawerInput(false);
+    }
   },
 };
 </script>

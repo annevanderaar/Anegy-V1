@@ -4,7 +4,30 @@
     <v-main>
       <div class="d-flex justify-space-between my-4">
         <v-btn @click="openFilter" class="mx-2">Filter</v-btn>
-        <h1 class="titles mr-16 pr-16">Discover Series</h1>
+        <h1
+          class="titles mr-16 pr-16"
+          v-if="this.$route.path == '/series/popular'"
+        >
+          Popular Series
+        </h1>
+        <h1
+          class="titles mr-16 pr-16"
+          v-if="this.$route.path == '/series/playing'"
+        >
+          Series Playing
+        </h1>
+        <h1
+          class="titles mr-16 pr-16"
+          v-if="this.$route.path == '/series/top-rated'"
+        >
+          Top Rated Series
+        </h1>
+        <h1
+          class="titles mr-16 pr-16"
+          v-if="this.$route.path == '/series/upcoming'"
+        >
+          Upcoming Series
+        </h1>
         <SeriesFilters />
       </div>
       <cards :data="data" />
@@ -36,6 +59,7 @@ export default {
     data: [],
     currentPage: 1,
     totalPages: 100,
+    url: "http://localhost/Library/Series/SeriesPopular.php",
   }),
   methods: {
     ...mapActions(["setDrawerInput"]),
@@ -44,12 +68,12 @@ export default {
     },
     getSeries() {
       axios
-        .get("http://localhost/Library/Series/Series.php")
+        .get(this.url)
         .then((res) => {
           this.currentPage = res.data.page;
           this.totalPages = res.data.total_pages;
           this.data = res.data;
-          console.log(res.data);
+          //console.log(res.data);
         })
         .catch((err) => {
           console.log(err);
@@ -57,8 +81,23 @@ export default {
     },
   },
   mounted() {
-    this.getSeries();
     this.setDrawerInput(false);
+    if (this.$route.path === "/series/popular") {
+      this.url = "http://localhost/Library/Series/SeriesPopular.php";
+      this.getSeries();
+    }
+    if (this.$route.path === "/series/top-rated") {
+      this.url = "http://localhost/Library/Series/SeriesTopRated.php";
+      this.getSeries();
+    }
+    if (this.$route.path === "/series/playing") {
+      this.url = "http://localhost/Library/Series/SeriesOnAir.php";
+      this.getSeries();
+    }
+    if (this.$route.path === "/series/upcoming") {
+      this.url = "http://localhost/Library/Series/SeriesAiring.php";
+      this.getSeries();
+    }
   },
 };
 </script>
