@@ -28,7 +28,7 @@
         >
           Upcoming Series
         </h1>
-        <SeriesFilters />
+        <filters :filter="filter" />
       </div>
       <cards :data="data" />
       <pagination :currentPage="currentPage" />
@@ -39,7 +39,7 @@
 
 <script>
 import HomeAppBar from "@/components/AppBar/HomeAppBar.vue";
-import SeriesFilters from "@/components/Filters/SeriesFilters.vue";
+import Filters from "@/components/Filters.vue";
 import WebsiteFooter from "@/components/WebsiteFooter.vue";
 import Cards from "@/components/Cards.vue";
 import Pagination from "@/components/Pagination.vue";
@@ -50,7 +50,7 @@ export default {
   name: "Series",
   components: {
     HomeAppBar,
-    SeriesFilters,
+    Filters,
     WebsiteFooter,
     Cards,
     Pagination,
@@ -60,6 +60,7 @@ export default {
     currentPage: 1,
     totalPages: 100,
     url: "http://localhost/Library/Series/SeriesPopular.php",
+    filter: "series",
   }),
   methods: {
     ...mapActions(["setDrawerInput"]),

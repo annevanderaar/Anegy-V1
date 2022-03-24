@@ -62,14 +62,20 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   name: "MoviesFilters",
   data: () => ({}),
+  props: ["filter"],
   methods: {
     ...mapActions(["setDrawerInput"]),
     closeFilter() {
       this.setDrawerInput(false);
     },
     call(val) {
-      this.$router.push({ path: `/series/${val}` });
-      this.$forceUpdate();
+      console.log(this.filter);
+      if (this.filter == "movies") {
+        this.$router.push({ path: `/movies/${val}` });
+      }
+      if (this.filter == "series") {
+        this.$router.push({ path: `/series/${val}` });
+      }
     },
   },
   computed: {
