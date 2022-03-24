@@ -2,6 +2,9 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from "axios";
 
+const API_KEY = "api_key=bcf92184fb403a95217a5f2d32a0a8df";
+const BASE_URL = "https://api.themoviedb.org/3";
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -18,7 +21,7 @@ export default new Vuex.Store({
     setDrawerInput: ({ commit }, input) => commit('setDrawerInput', input),
     getMovies() {
       axios
-        .get("http://localhost/Library/Movies/Movies.php")
+        .get(BASE_URL + "/discover/movie?sort_by=popularity.desc&" + API_KEY)
         .then((res) => {
           this.state.currentPage = res.data.page;
           this.state.totalPages = res.data.total_pages;
@@ -31,7 +34,7 @@ export default new Vuex.Store({
     },
     getPopularMovies() {
       axios
-        .get("http://localhost/Library/Movies/MoviesPopular.php")
+        .get(BASE_URL + "/movie/popular?" + API_KEY)
         .then((res) => {
           this.state.currentPage = res.data.page;
           this.state.totalPages = res.data.total_pages;
@@ -44,7 +47,7 @@ export default new Vuex.Store({
     },
     getPlayingMovies() {
       axios
-        .get("http://localhost/Library/Movies/MoviesPlaying.php")
+        .get(BASE_URL + "/movie/now_playing?" + API_KEY)
         .then((res) => {
           this.state.currentPage = res.data.page;
           this.state.totalPages = res.data.total_pages;
@@ -57,7 +60,7 @@ export default new Vuex.Store({
     },
     getTopRatedMovies() {
       axios
-        .get("http://localhost/Library/Movies/MoviesTopRated.php")
+        .get(BASE_URL + "/movie/top_rated?" + API_KEY)
         .then((res) => {
           this.state.currentPage = res.data.page;
           this.state.totalPages = res.data.total_pages;
@@ -70,7 +73,7 @@ export default new Vuex.Store({
     },
     getUpcomingMovies() {
       axios
-        .get("http://localhost/Library/Movies/MoviesUpcoming.php")
+        .get(BASE_URL + "/movie/upcoming?" + API_KEY)
         .then((res) => {
           this.state.currentPage = res.data.page;
           this.state.totalPages = res.data.total_pages;
@@ -83,7 +86,7 @@ export default new Vuex.Store({
     },
     getSeries() {
       axios
-        .get("http://localhost/Library/Series/Series.php")
+        .get(BASE_URL + "/discover/tv?sort_by=popularity.desc&" + API_KEY)
         .then((res) => {
           this.state.currentPage = res.data.page;
           this.state.totalPages = res.data.total_pages;
@@ -96,7 +99,7 @@ export default new Vuex.Store({
     },
     getPopularSeries() {
       axios
-        .get("http://localhost/Library/Series/SeriesPopular.php")
+        .get(BASE_URL + "/tv/popular?" + API_KEY)
         .then((res) => {
           this.state.currentPage = res.data.page;
           this.state.totalPages = res.data.total_pages;
@@ -109,7 +112,7 @@ export default new Vuex.Store({
     },
     getTopRatedSeries() {
       axios
-        .get("http://localhost/Library/Series/SeriesTopRated.php")
+        .get(BASE_URL + "/tv/top_rated?" + API_KEY)
         .then((res) => {
           this.state.currentPage = res.data.page;
           this.state.totalPages = res.data.total_pages;
@@ -122,7 +125,7 @@ export default new Vuex.Store({
     },
     getAiringSeries() {
       axios
-        .get("http://localhost/Library/Series/SeriesAiring.php")
+        .get(BASE_URL + "/tv/airing_today?" + API_KEY)
         .then((res) => {
           this.state.currentPage = res.data.page;
           this.state.totalPages = res.data.total_pages;
@@ -135,7 +138,7 @@ export default new Vuex.Store({
     },
     getOnAirSeries() {
       axios
-        .get("http://localhost/Library/Series/SeriesOnAir.php")
+        .get(BASE_URL + "/tv/on_the_air?" + API_KEY)
         .then((res) => {
           this.state.currentPage = res.data.page;
           this.state.totalPages = res.data.total_pages;

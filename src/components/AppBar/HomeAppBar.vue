@@ -73,9 +73,10 @@ export default {
     },
     searchMulti(search) {
       axios
-        .get("http://localhost/Library/Search.php", {
-          query: search
-        })
+        .get(
+          "https://api.themoviedb.org/3/search/multi?api_key=bcf92184fb403a95217a5f2d32a0a8df&query=" +
+            search
+        )
         .then((res) => {
           //this.state.currentPage = res.data.page;
           //this.state.totalPages = res.data.total_pages;
