@@ -61,11 +61,6 @@ const routes = [
     component: () => import(/* webpackChunkName: "account" */ '../views/Series/SeriesAiring.vue')
   },
   {
-    path: '/search-results',
-    name: 'Search Results',
-    component: () => import(/* webpackChunkName: "account" */ '../views/SearchResults.vue')
-  },
-  {
     path: '/account',
     name: 'Account',
     component: () => import(/* webpackChunkName: "account" */ '../views/Account/Account.vue')

@@ -8,7 +8,7 @@
           With Anegy you can discover all the movies and series ever made.
         </h2>
       </v-row>
-      <!-- <v-container
+      <v-container
         fluid
         class="mt-10 d-flex justify-center align-center flex-row"
       >
@@ -41,7 +41,7 @@
             >Go to account</v-btn
           >
         </v-card>
-      </v-container> -->
+      </v-container>
     </v-main>
     <WebsiteFooter />
   </v-app>
