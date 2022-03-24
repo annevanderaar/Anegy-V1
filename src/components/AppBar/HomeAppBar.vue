@@ -28,13 +28,13 @@
       flat
       v-if="this.show == true"
     ></v-text-field>
-    <!-- <v-btn icon class="white--text" @click="showSearch"
+    <v-btn icon class="white--text" @click="showSearch"
       ><v-icon>fas fa-search</v-icon></v-btn
     >
-    <v-btn icon class="white--text" @click="openAccount"
+    <!-- <v-btn icon class="white--text" @click="openAccount"
       ><v-icon>fas fa-user-astronaut</v-icon></v-btn
-    > -->
-    <v-btn icon class="white--text"><v-icon>fas fa-heart</v-icon></v-btn>
+    >
+    <v-btn icon class="white--text"><v-icon>fas fa-heart</v-icon></v-btn> -->
     <v-btn
       icon
       class="white--text"
@@ -50,6 +50,7 @@
 
 <script>
 import axios from "axios";
+//import qs from "qs";
 
 export default {
   name: "AppBar",
@@ -72,15 +73,14 @@ export default {
       }
     },
     searchMulti(search) {
-      axios
-        .get(
-          "https://api.themoviedb.org/3/search/multi?api_key=bcf92184fb403a95217a5f2d32a0a8df&query=" +
-            search
-        )
+      axios({
+        method: "post",
+        url: "http://localhost/Library/Search.php",
+        data: {
+          query: search,
+        },
+      })
         .then((res) => {
-          //this.state.currentPage = res.data.page;
-          //this.state.totalPages = res.data.total_pages;
-          //this.state.data = res.data;
           console.log(res.data);
         })
         .catch((err) => {

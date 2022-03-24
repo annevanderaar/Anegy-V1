@@ -70,7 +70,8 @@
 import HomeAppBar from "@/components/AppBar/HomeAppBar.vue";
 import SeriesFilters from "@/components/Filters/SeriesFilters.vue";
 import WebsiteFooter from "@/components/WebsiteFooter.vue";
-import { mapActions, mapGetters } from "vuex";
+import { mapActions } from "vuex";
+import axios from "axios";
 
 export default {
   name: "Series",
@@ -79,19 +80,33 @@ export default {
     SeriesFilters,
     WebsiteFooter,
   },
-  data: () => ({}),
+  data: () => ({
+    data: [],
+    currentPage: 1,
+    totalPages: 100,
+  }),
   methods: {
-    ...mapActions(["setDrawerInput", "getSeries"]),
+    ...mapActions(["setDrawerInput"]),
     openFilter() {
       this.setDrawerInput(true);
+    },
+    getSeries() {
+      axios
+        .get("http://localhost/Library/Series/Series.php")
+        .then((res) => {
+          this.currentPage = res.data.page;
+          this.totalPages = res.data.total_pages;
+          this.data = res.data;
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
   mounted() {
     this.getSeries();
     this.setDrawerInput(false);
-  },
-  computed: {
-    ...mapGetters(["data", "currentPage"]),
   },
 };
 </script>
