@@ -75,7 +75,7 @@ export default {
     searchMulti(search) {
       axios({
         method: "post",
-        url: "http://localhost/Library/Search.php",
+        url: "http://localhost/Library/Search/Search.php",
         data: {
           query: search,
         },
