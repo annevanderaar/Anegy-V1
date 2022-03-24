@@ -4,13 +4,13 @@
     <v-main>
       <v-container fluid class="d-flex flex-column justify-center align-center">
         <h1 class="display-4">404</h1>
+        <h1>Page not found</h1>
         <!-- make background of smiley transparent -->
         <v-img
           src="8-82835_sad-face-emoji-png-sad-face-emoji-transparent.png"
           width="300px"
+          class="mt-2"
         ></v-img>
-        <h1>Page not found</h1>
-        <h2>Return to <a href="/" class="secondary--text">home</a></h2>
       </v-container>
     </v-main>
     <WebsiteFooter />
