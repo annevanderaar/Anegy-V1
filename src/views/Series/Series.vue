@@ -82,19 +82,19 @@ export default {
   },
   mounted() {
     this.setDrawerInput(false);
-    if (this.$route.path === "/series/popular") {
+    if (this.$route.path == "/series/popular") {
       this.url = "http://localhost/Library/Series/SeriesPopular.php";
       this.getSeries();
     }
-    if (this.$route.path === "/series/top-rated") {
+    if (this.$route.path == "/series/top-rated") {
       this.url = "http://localhost/Library/Series/SeriesTopRated.php";
       this.getSeries();
     }
-    if (this.$route.path === "/series/playing") {
+    if (this.$route.path == "/series/playing") {
       this.url = "http://localhost/Library/Series/SeriesOnAir.php";
       this.getSeries();
     }
-    if (this.$route.path === "/series/upcoming") {
+    if (this.$route.path == "/series/upcoming") {
       this.url = "http://localhost/Library/Series/SeriesAiring.php";
       this.getSeries();
     }
