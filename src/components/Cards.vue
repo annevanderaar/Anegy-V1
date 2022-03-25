@@ -44,7 +44,22 @@
           {{ item.first_air_date }}</v-card-subtitle
         >
         <v-card-text>{{ item.overview }}</v-card-text>
-        <v-btn elevation="0" color="secondary" class="ml-2">Know more</v-btn>
+        <v-btn
+          v-if="item.video == false"
+          elevation="0"
+          color="secondary"
+          class="ml-2"
+          :to="`/movies/details/${item.id}`"
+          >Know more</v-btn
+        >
+        <v-btn
+          v-else
+          elevation="0"
+          color="secondary"
+          class="ml-2"
+          :to="`/series/details/${item.id}`"
+          >Know more</v-btn
+        >
         <v-btn icon color="secondary"><v-icon>far fa-heart</v-icon></v-btn>
         <!-- <v-btn icon color="secondary"><v-icon>fas fa-heart</v-icon></v-btn> -->
       </v-card>

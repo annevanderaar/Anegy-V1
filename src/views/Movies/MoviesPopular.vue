@@ -49,7 +49,7 @@ export default {
     getPopularMovies(page) {
       axios({
         method: "post",
-        url: "http://localhost/Library/Movies/Movies.php",
+        url: "http://localhost/Library/Movies.php",
         data: {
           url: "/movie/popular?",
           page: page,
@@ -59,7 +59,7 @@ export default {
           this.currentPage = res.data.page;
           //this.totalPages = res.data.total_pages;
           this.data = res.data;
-          console.log(res.data);
+          //console.log(res.data);
         })
         .catch((err) => {
           console.log(err);

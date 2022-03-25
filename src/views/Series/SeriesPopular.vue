@@ -49,7 +49,7 @@ export default {
     getPopularSeries() {
       axios({
         method: "post",
-        url: "http://localhost/Library/Series/Series.php",
+        url: "http://localhost/Library/Series.php",
         data: {
           url: "/tv/popular?",
           page: this.currentPage,

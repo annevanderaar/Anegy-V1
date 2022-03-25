@@ -49,7 +49,7 @@ export default {
     getOnAirSeries() {
       axios({
         method: "post",
-        url: "http://localhost/Library/Series/Series.php",
+        url: "http://localhost/Library/Series.php",
         data: {
           url: "/tv/on_the_air?",
           page: this.currentPage,

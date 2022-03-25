@@ -49,7 +49,7 @@ export default {
     getPlayingMovies() {
       axios({
         method: "post",
-        url: "http://localhost/Library/Movies/Movies.php",
+        url: "http://localhost/Library/Movies.php",
         data: {
           url: "/movie/now_playing?",
           page: this.currentPage,
