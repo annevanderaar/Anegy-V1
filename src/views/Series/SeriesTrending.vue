@@ -3,8 +3,8 @@
     <HomeAppBar />
     <v-main>
       <v-btn @click="openFilter" class="filterBtn">Filter</v-btn>
-      <h1 class="titles">Top Rated Movies</h1>
-      <MoviesFilters />
+      <h1 class="titles mr-16 pr-16">Trending Series</h1>
+      <SeriesFilters />
       <cards :data="data" />
       <v-pagination
         color="secondary"
@@ -20,17 +20,17 @@
 
 <script>
 import HomeAppBar from "@/components/AppBar/HomeAppBar.vue";
-import MoviesFilters from "@/components/Filters/MoviesFilters.vue";
+import SeriesFilters from "@/components/Filters/SeriesFilters.vue";
 import WebsiteFooter from "@/components/WebsiteFooter.vue";
 import Cards from "@/components/Cards.vue";
 import { mapActions } from "vuex";
 import axios from "axios";
 
 export default {
-  name: "MoviesTopRated",
+  name: "SeriesTrending",
   components: {
     HomeAppBar,
-    MoviesFilters,
+    SeriesFilters,
     WebsiteFooter,
     Cards,
   },
@@ -44,18 +44,18 @@ export default {
     openFilter() {
       this.setDrawerInput(true);
     },
-    getTopRatedMovies() {
+    getTrendingSeries() {
       axios({
         method: "post",
-        url: "http://localhost/Library/Movies.php",
+        url: "http://localhost/Library/Series.php",
         data: {
-          url: "/movie/top_rated?",
+          url: "/trending/tv/day?",
           page: this.currentPage,
         },
       })
         .then((res) => {
           this.currentPage = res.data.page;
-          this.totalPages = res.data.total_pages;
+          //this.totalPages = res.data.total_pages;
           this.data = res.data;
           //console.log(res.data);
         })
@@ -65,12 +65,12 @@ export default {
     },
   },
   mounted() {
-    this.getTopRatedMovies();
+    this.getTrendingSeries();
     this.setDrawerInput(false);
   },
   watch: {
     currentPage(val) {
-      this.getTopRatedMovies(val);
+      this.getTrendingSeries(val);
       window.scrollTo({ top: 0, behavior: "smooth" });
     },
   },

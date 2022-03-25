@@ -1,24 +1,26 @@
 <template>
   <v-app-bar app color="secondary" clipped-left>
-    <v-btn icon class="white--text" :to="`/movies/popular`"
+    <v-btn icon class="white--text" :to="`/movies/trending`"
       ><v-icon>fas fa-video</v-icon></v-btn
     >
-    <v-btn icon class="white--text" :to="`/series/popular`"
+    <v-btn icon class="white--text" :to="`/series/trending`"
       ><v-icon>fas fa-tv</v-icon></v-btn
     >
-    <v-btn icon class="white--text" :to="`/`"
+    <!-- <v-btn icon class="white--text" :to="`/`"
       ><v-icon>fas fa-home</v-icon></v-btn
-    >
+    > -->
     <v-spacer></v-spacer>
-    <!-- <v-img
-      alt="Logo Anegy"
-      contain
-      src="/Naamloos-1.png"
-      transition="scale-transition"
-      width="40px"
-      height="40px"
-    ></v-img>
-    <v-spacer></v-spacer> -->
+    <v-btn plain depressed icon :to="`/`">
+      <v-img
+        alt="Logo Anegy"
+        contain
+        src="/Naamloos-1.png"
+        transition="scale-transition"
+        width="40px"
+        height="40px"
+      ></v-img>
+    </v-btn>
+    <v-spacer></v-spacer>
     <v-text-field
       label="Search"
       solo
@@ -55,6 +57,7 @@ export default {
   name: "AppBar",
   data: () => ({
     show: false,
+    url: "/search/multi?",
   }),
   methods: {
     openAccount() {
@@ -71,13 +74,34 @@ export default {
         this.show = false;
       }
     },
-    searchMulti(search) {
+    searchCall(search) {
+      if (
+        this.$route.path == "/movies/trending" ||
+        this.$route.path == "/movies/popular" ||
+        this.$route.path == "/movies/playing" ||
+        this.$route.path == "/movies/top-rated" ||
+        this.$route.path == "/movies/upcoming"
+      ) {
+        this.url = "/search/movie?";
+      }
+      if (
+        this.$route.path == "/series/trending" ||
+        this.$route.path == "/series/popular" ||
+        this.$route.path == "/series/playing" ||
+        this.$route.path == "/series/top-rated" ||
+        this.$route.path == "/series/upcoming"
+      ) {
+        this.url = "/search/tv?";
+      }
+      if (this.$route.path == "/") {
+        this.url = "/search/multi?";
+      }
       axios({
         method: "post",
-        url: "http://localhost/Library/Search/Search.php",
+        url: "http://localhost/Library/Search.php",
         data: {
           query: search,
-          url: "/search/multi?",
+          url: this.url,
         },
       })
         .then((res) => {

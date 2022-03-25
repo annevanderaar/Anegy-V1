@@ -60,7 +60,7 @@
           :to="`/series/details/${item.id}`"
           >Know more</v-btn
         >
-        <v-btn icon color="secondary"><v-icon>far fa-heart</v-icon></v-btn>
+        <!-- <v-btn icon color="secondary"><v-icon>far fa-heart</v-icon></v-btn> -->
         <!-- <v-btn icon color="secondary"><v-icon>fas fa-heart</v-icon></v-btn> -->
       </v-card>
     </v-card>

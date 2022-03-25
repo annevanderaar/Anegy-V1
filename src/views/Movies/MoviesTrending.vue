@@ -3,7 +3,7 @@
     <HomeAppBar />
     <v-main>
       <v-btn @click="openFilter" class="filterBtn">Filter</v-btn>
-      <h1 class="titles">Top Rated Movies</h1>
+      <h1 class="titles">Trending Movies</h1>
       <MoviesFilters />
       <cards :data="data" />
       <v-pagination
@@ -27,7 +27,7 @@ import { mapActions } from "vuex";
 import axios from "axios";
 
 export default {
-  name: "MoviesTopRated",
+  name: "MoviesPopular",
   components: {
     HomeAppBar,
     MoviesFilters,
@@ -44,18 +44,18 @@ export default {
     openFilter() {
       this.setDrawerInput(true);
     },
-    getTopRatedMovies() {
+    getTrendingMovies(page) {
       axios({
         method: "post",
         url: "http://localhost/Library/Movies.php",
         data: {
-          url: "/movie/top_rated?",
-          page: this.currentPage,
+          url: "/trending/movie/day?",
+          page: page,
         },
       })
         .then((res) => {
           this.currentPage = res.data.page;
-          this.totalPages = res.data.total_pages;
+          //this.totalPages = res.data.total_pages;
           this.data = res.data;
           //console.log(res.data);
         })
@@ -65,12 +65,12 @@ export default {
     },
   },
   mounted() {
-    this.getTopRatedMovies();
+    this.getTrendingMovies(this.currentPage);
     this.setDrawerInput(false);
   },
   watch: {
     currentPage(val) {
-      this.getTopRatedMovies(val);
+      this.getTrendingMovies(val);
       window.scrollTo({ top: 0, behavior: "smooth" });
     },
   },

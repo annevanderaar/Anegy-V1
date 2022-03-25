@@ -2,12 +2,10 @@
   <v-app>
     <HomeAppBar />
     <v-main>
-      <v-row class="mt-2 d-flex justify-center align-center flex-column">
-        <h1 class="titles mr-4">Anegy</h1>
-        <h2 class="titles">
-          With Anegy you can discover all the movies and series ever made.
-        </h2>
-      </v-row>
+      <!-- <h1 class="titles mr-4">Anegy</h1>
+      <h2 class="titles">
+        With Anegy you can discover all the movies and series ever made.
+      </h2> -->
       <!-- <v-container
         fluid
         class="mt-10 d-flex justify-center align-center flex-row"
@@ -42,6 +40,17 @@
           >
         </v-card>
       </v-container> -->
+      <h1 class="titles mt-10 mb-5">
+        Dicover Today's Trending Movies &amp; Series
+      </h1>
+      <cards :data="data" />
+      <v-pagination
+        color="secondary"
+        v-model="currentPage"
+        :length="totalPages"
+        :total-visible="10"
+        class="my-4"
+      ></v-pagination>
     </v-main>
     <WebsiteFooter />
   </v-app>
@@ -50,20 +59,66 @@
 <script>
 import HomeAppBar from "@/components/AppBar/HomeAppBar.vue";
 import WebsiteFooter from "@/components/WebsiteFooter.vue";
+import Cards from "@/components/Cards.vue";
+import axios from "axios";
 
 export default {
   name: "Homepage",
   components: {
     HomeAppBar,
     WebsiteFooter,
+    Cards,
   },
-  data: () => ({}),
-  methods: {},
-  mounted() {},
+  data: () => ({
+    data: [],
+    currentPage: 1,
+    totalPages: 500,
+  }),
+  methods: {
+    getTrending(page) {
+      axios({
+        method: "post",
+        url: "http://localhost/Library/Movies.php",
+        data: {
+          url: "/trending/all/day?",
+          page: page,
+        },
+      })
+        .then((res) => {
+          this.currentPage = res.data.page;
+          //this.totalPages = res.data.total_pages;
+          this.data = res.data;
+          //console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
+  mounted() {
+    this.getTrending(this.currentPage);
+  },
+  watch: {
+    currentPage(val) {
+      this.getTrending(val);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    },
+  },
 };
 </script>
 
 <style>
+.titles {
+  font-family: "Fredoka", sans-serif;
+  font-weight: 900;
+  margin: 8px;
+  text-align: center;
+}
+
+.filterBtn {
+  position: fixed;
+  margin: 16px;
+}
 .cards {
   margin: 8px;
   display: flex;

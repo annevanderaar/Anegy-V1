@@ -2,11 +2,9 @@
   <v-app>
     <HomeAppBar />
     <v-main>
-      <div class="d-flex justify-space-between my-4">
-        <v-btn @click="openFilter" class="mx-2">Filter</v-btn>
-        <h1 class="titles mr-16 pr-16">Upcoming Series</h1>
-        <SeriesFilters />
-      </div>
+      <v-btn @click="openFilter" class="filterBtn">Filter</v-btn>
+      <h1 class="titles">Upcoming Series</h1>
+      <SeriesFilters />
       <cards :data="data" />
       <v-pagination
         color="secondary"

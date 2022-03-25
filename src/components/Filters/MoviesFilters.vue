@@ -4,7 +4,8 @@
       clipped
       v-model="drawer"
       style="max-height: 100%; width: 300px"
-      absolute
+      fixed
+      class="mt-16"
     >
       <v-container>
         <v-row>
@@ -21,8 +22,12 @@
                 <v-list-item-title v-text="'Sort By'"></v-list-item-title>
               </v-list-item-content>
             </template>
-            <v-list-item :to="`/movies/popular`"
+            <v-list-item :to="`/movies/trending`"
               ><v-icon class="mr-3" color="secondary">fas fa-fire</v-icon>
+              Trending</v-list-item
+            >
+            <v-list-item :to="`/movies/popular`"
+              ><v-icon class="mr-3" color="secondary">fas fa-poll-h</v-icon>
               Popular</v-list-item
             >
             <v-list-item :to="`/movies/playing`"
