@@ -57,9 +57,9 @@ export default {
   },
   data: () => ({
     data: [],
-    currentPage: 1,
+    currentPage: 2,
     totalPages: 100,
-    url: "http://localhost/Library/Movies/MoviesPopular.php",
+    url: "/movie/popular?",
     filter: "movies",
   }),
   methods: {
@@ -68,13 +68,19 @@ export default {
       this.setDrawerInput(true);
     },
     getMovies() {
-      axios
-        .get(this.url)
+      axios ({
+        method: "post",
+        url: "http://localhost/Library/Movies/Movies.php",
+        data: {
+          url: this.url,
+          page: this.currentPage,
+        }
+      })
         .then((res) => {
           this.currentPage = res.data.page;
           this.totalPages = res.data.total_pages;
           this.data = res.data;
-          //console.log(res.data);
+          console.log(res.data);
         })
         .catch((err) => {
           console.log(err);
@@ -83,24 +89,24 @@ export default {
   },
   mounted() {
     if (this.$route.path == "/movies/popular") {
-      this.url = "http://localhost/Library/Movies/MoviesPopular.php";
-      this.getMovies();
+      this.url = "/movie/popular?";
       this.setDrawerInput(false);
+      this.getMovies();
     }
     if (this.$route.path == "/movies/top-rated") {
-      this.url = "http://localhost/Library/Movies/MoviesTopRated.php";
-      this.getMovies();
+      this.url = "/movie/top_rated?";
       this.setDrawerInput(false);
+      this.getMovies();
     }
     if (this.$route.path == "/movies/playing") {
-      this.url = "http://localhost/Library/Movies/MoviesPlaying.php";
-      this.getMovies();
+      this.url = "/movie/now_playing?";
       this.setDrawerInput(false);
+      this.getMovies();
     }
     if (this.$route.path == "/movies/upcoming") {
-      this.url = "http://localhost/Library/Movies/MoviesUpcoming.php";
-      this.getMovies();
+      this.url = "/movie/upcoming?";
       this.setDrawerInput(false);
+      this.getMovies();
     }
   },
 };

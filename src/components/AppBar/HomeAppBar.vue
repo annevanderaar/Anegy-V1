@@ -77,6 +77,7 @@ export default {
         url: "http://localhost/Library/Search/Search.php",
         data: {
           query: search,
+          url: "/search/multi?",
         },
       })
         .then((res) => {

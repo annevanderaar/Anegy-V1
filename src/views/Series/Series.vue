@@ -59,7 +59,7 @@ export default {
     data: [],
     currentPage: 1,
     totalPages: 100,
-    url: "http://localhost/Library/Series/SeriesPopular.php",
+    url: "/tv/popular?",
     filter: "series",
   }),
   methods: {
@@ -68,13 +68,19 @@ export default {
       this.setDrawerInput(true);
     },
     getSeries() {
-      axios
-        .get(this.url)
+      axios ({
+        method: "post",
+        url: "http://localhost/Library/Series/Series.php",
+        data: {
+          url: this.url,
+          page: this.currentPage,
+        }
+      })
         .then((res) => {
           this.currentPage = res.data.page;
           this.totalPages = res.data.total_pages;
           this.data = res.data;
-          //console.log(res.data);
+          console.log(res.data);
         })
         .catch((err) => {
           console.log(err);
@@ -82,21 +88,24 @@ export default {
     },
   },
   mounted() {
-    this.setDrawerInput(false);
     if (this.$route.path == "/series/popular") {
-      this.url = "http://localhost/Library/Series/SeriesPopular.php";
+      this.url = "/tv/popular?";
+      this.setDrawerInput(false);
       this.getSeries();
     }
     if (this.$route.path == "/series/top-rated") {
-      this.url = "http://localhost/Library/Series/SeriesTopRated.php";
+      this.url = "/tv/top_rated?";
+      this.setDrawerInput(false);
       this.getSeries();
     }
     if (this.$route.path == "/series/playing") {
-      this.url = "http://localhost/Library/Series/SeriesOnAir.php";
+      this.url = "/tv/on_the_air?";
+      this.setDrawerInput(false);
       this.getSeries();
     }
     if (this.$route.path == "/series/upcoming") {
-      this.url = "http://localhost/Library/Series/SeriesAiring.php";
+      this.url = "/tv/airing_today?";
+      this.setDrawerInput(false);
       this.getSeries();
     }
   },
