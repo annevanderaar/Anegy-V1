@@ -111,7 +111,7 @@ export default {
 .titles {
   font-family: "Fredoka", sans-serif;
   font-weight: 900;
-  margin: 8px;
+  margin: 14px;
   text-align: center;
 }
 

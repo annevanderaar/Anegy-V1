@@ -3,7 +3,7 @@
     <HomeAppBar />
     <v-main>
       <v-btn @click="openFilter" class="filterBtn">Filter</v-btn>
-      <h1 class="titles mr-16 pr-16">Trending Series</h1>
+      <h1 class="titles">Trending Series</h1>
       <SeriesFilters />
       <cards :data="data" />
       <v-pagination
