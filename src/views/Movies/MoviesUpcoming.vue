@@ -11,7 +11,8 @@
       <v-pagination
         color="secondary"
         v-model="currentPage"
-        :length="6"
+        :length="totalPages"
+        :total-visible="10"
         class="my-4"
       ></v-pagination>
     </v-main>
@@ -46,13 +47,13 @@ export default {
       this.setDrawerInput(true);
     },
     getUpcomingMovies() {
-      axios ({
+      axios({
         method: "post",
         url: "http://localhost/Library/Movies/Movies.php",
         data: {
-          url: '/movie/upcoming?',
+          url: "/movie/upcoming?",
           page: this.currentPage,
-        }
+        },
       })
         .then((res) => {
           this.currentPage = res.data.page;
@@ -68,6 +69,12 @@ export default {
   mounted() {
     this.getUpcomingMovies();
     this.setDrawerInput(false);
+  },
+  watch: {
+    currentPage(val) {
+      this.getUpcomingMovies(val);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    },
   },
 };
 </script> 

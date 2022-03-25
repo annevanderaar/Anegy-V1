@@ -11,7 +11,8 @@
       <v-pagination
         color="secondary"
         v-model="currentPage"
-        :length="6"
+        :length="totalPages"
+        :total-visible="10"
         class="my-4"
       ></v-pagination>
     </v-main>
@@ -46,19 +47,19 @@ export default {
       this.setDrawerInput(true);
     },
     getPopularMovies(page) {
-      axios ({
+      axios({
         method: "post",
         url: "http://localhost/Library/Movies/Movies.php",
         data: {
-          url: '/movie/popular?',
+          url: "/movie/popular?",
           page: page,
-        }
+        },
       })
         .then((res) => {
           this.currentPage = res.data.page;
           this.totalPages = res.data.total_pages;
           this.data = res.data;
-          //console.log(res.data);
+          console.log(res.data);
         })
         .catch((err) => {
           console.log(err);
@@ -72,8 +73,8 @@ export default {
   watch: {
     currentPage(val) {
       this.getPopularMovies(val);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  }
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    },
+  },
 };
 </script> 

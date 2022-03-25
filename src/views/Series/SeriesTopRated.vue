@@ -11,7 +11,8 @@
       <v-pagination
         color="secondary"
         v-model="currentPage"
-        :length="6"
+        :length="totalPages"
+        :total-visible="10"
         class="my-4"
       ></v-pagination>
     </v-main>
@@ -28,7 +29,7 @@ import { mapActions } from "vuex";
 import axios from "axios";
 
 export default {
-  name: "Series Top Rated",
+  name: "SeriesTopRated",
   components: {
     HomeAppBar,
     SeriesFilters,
@@ -46,13 +47,13 @@ export default {
       this.setDrawerInput(true);
     },
     getTopRatedSeries() {
-      axios ({
+      axios({
         method: "post",
         url: "http://localhost/Library/Series/Series.php",
         data: {
-          url: '/tv/top_rated?',
+          url: "/tv/top_rated?",
           page: this.currentPage,
-        }
+        },
       })
         .then((res) => {
           this.currentPage = res.data.page;
@@ -68,6 +69,12 @@ export default {
   mounted() {
     this.getTopRatedSeries();
     this.setDrawerInput(false);
+  },
+  watch: {
+    currentPage(val) {
+      this.getTopRatedSeries(val);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    },
   },
 };
 </script> 

@@ -11,7 +11,8 @@
       <v-pagination
         color="secondary"
         v-model="currentPage"
-        :length="6"
+        :length="totalPages"
+        :total-visible="10"
         class="my-4"
       ></v-pagination>
     </v-main>
@@ -46,13 +47,13 @@ export default {
       this.setDrawerInput(true);
     },
     getPopularSeries() {
-      axios ({
+      axios({
         method: "post",
         url: "http://localhost/Library/Series/Series.php",
         data: {
-          url: '/tv/popular?',
+          url: "/tv/popular?",
           page: this.currentPage,
-        }
+        },
       })
         .then((res) => {
           this.currentPage = res.data.page;
@@ -68,6 +69,12 @@ export default {
   mounted() {
     this.getPopularSeries();
     this.setDrawerInput(false);
+  },
+  watch: {
+    currentPage(val) {
+      this.getPopularSeries(val);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    },
   },
 };
 </script> 
