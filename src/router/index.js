@@ -11,54 +11,54 @@ const routes = [
     component: Homepage
   },
   {
-    path: '/movies/:id',
-    name: 'Movies',
+    path: '/movies/details/:id',
+    name: 'Movie Details',
     component: () => import(/* webpackChunkName: "account" */ '../views/Movies/DetailsMovie.vue')
   },
   {
     path: '/movies/popular',
     name: 'Popular Movies',
-    component: () => import(/* webpackChunkName: "account" */ '../views/Movies/Movies.vue')
+    component: () => import(/* webpackChunkName: "account" */ '../views/Movies/MoviesPopular.vue')
   },
   {
     path: '/movies/playing',
     name: 'Playing Movies',
-    component: () => import(/* webpackChunkName: "account" */ '../views/Movies/Movies.vue')
+    component: () => import(/* webpackChunkName: "account" */ '../views/Movies/MoviesPlaying.vue')
   },
   {
     path: '/movies/top-rated',
     name: 'Top Rated Movies',
-    component: () => import(/* webpackChunkName: "account" */ '../views/Movies/Movies.vue')
+    component: () => import(/* webpackChunkName: "account" */ '../views/Movies/MoviesTopRated.vue')
   },
   {
     path: '/movies/upcoming',
     name: 'Upcoming Movies',
-    component: () => import(/* webpackChunkName: "account" */ '../views/Movies/Movies.vue')
+    component: () => import(/* webpackChunkName: "account" */ '../views/Movies/MoviesUpcoming.vue')
   },
   {
-    path: '/series/:id',
-    name: 'Series',
+    path: '/series/details/:id',
+    name: 'Serie Details',
     component: () => import(/* webpackChunkName: "account" */ '../views/Series/DetailsSerie.vue')
   },
   {
     path: '/series/popular',
     name: 'Popular Series',
-    component: () => import(/* webpackChunkName: "account" */ '../views/Series/Series.vue')
+    component: () => import(/* webpackChunkName: "account" */ '../views/Series/SeriesPopular.vue')
   },
   {
     path: '/series/playing',
     name: 'Playing Series',
-    component: () => import(/* webpackChunkName: "account" */ '../views/Series/Series.vue')
+    component: () => import(/* webpackChunkName: "account" */ '../views/Series/SeriesOnAir.vue')
   },
   {
     path: '/series/top-rated',
     name: 'Top Rated Series',
-    component: () => import(/* webpackChunkName: "account" */ '../views/Series/Series.vue')
+    component: () => import(/* webpackChunkName: "account" */ '../views/Series/SeriesTopRated.vue')
   },
   {
     path: '/series/upcoming',
     name: 'Upcoming Series',
-    component: () => import(/* webpackChunkName: "account" */ '../views/Series/Series.vue')
+    component: () => import(/* webpackChunkName: "account" */ '../views/Series/SeriesAiring.vue')
   },
   {
     path: '/account',

@@ -21,20 +21,20 @@
                 <v-list-item-title v-text="'Sort By'"></v-list-item-title>
               </v-list-item-content>
             </template>
-            <v-list-item @click="call('popular')"
+            <v-list-item :to="`/movies/popular`"
               ><v-icon class="mr-3" color="secondary">fas fa-fire</v-icon>
               Popular</v-list-item
             >
-            <v-list-item @click="call('playing')"
+            <v-list-item :to="`/movies/playing`"
               ><v-icon class="mr-3" color="secondary">far fa-play-circle</v-icon
               >Playing</v-list-item
             >
-            <v-list-item @click="call('top-rated')"
+            <v-list-item :to="`/movies/top-rated`"
               ><v-icon class="mr-3" color="secondary"
                 >fas fa-star-of-life</v-icon
               >Top Rated</v-list-item
             >
-            <v-list-item @click="call('upcoming')"
+            <v-list-item :to="`/movies/upcoming`"
               ><v-icon class="mr-3" color="secondary"
                 >far fa-calendar-alt</v-icon
               >Upcoming</v-list-item
@@ -62,20 +62,10 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   name: "MoviesFilters",
   data: () => ({}),
-  props: ["filter"],
   methods: {
     ...mapActions(["setDrawerInput"]),
     closeFilter() {
       this.setDrawerInput(false);
-    },
-    call(val) {
-      //Dit zorgt ervoor dat de link in de filter niet goed staat. Even fixen.
-      if (this.filter == "movies") {
-        this.$router.push({ path: `/movies/${val}` });
-      }
-      if (this.filter == "series") {
-        this.$router.push({ path: `/series/${val}` });
-      }
     },
   },
   computed: {
