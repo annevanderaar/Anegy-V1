@@ -39,7 +39,7 @@ export default {
   data: () => ({
     data: [],
     currentPage: 1,
-    totalPages: 100,
+    totalPages: 500,
   }),
   methods: {
     ...mapActions(["setDrawerInput"]),
@@ -57,7 +57,7 @@ export default {
       })
         .then((res) => {
           this.currentPage = res.data.page;
-          this.totalPages = res.data.total_pages;
+          //this.totalPages = res.data.total_pages;
           this.data = res.data;
           console.log(res.data);
         })

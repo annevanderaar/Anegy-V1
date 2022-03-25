@@ -39,7 +39,7 @@ export default {
   data: () => ({
     data: [],
     currentPage: 1,
-    totalPages: 100,
+    totalPages: 500,
   }),
   methods: {
     ...mapActions(["setDrawerInput"]),
