@@ -2,6 +2,9 @@
   <v-app>
     <HomeAppBar />
     <v-main>
+      <v-container fluid class="d-flex flex-wrap justify-center">
+        <h1>{{ data.title }}</h1>
+      </v-container>
       <!-- Hier komen de details van de film. De cast. trailers. en meer-->
     </v-main>
     <WebsiteFooter />
@@ -21,6 +24,7 @@ export default {
   },
   data: () => ({
     url: "/movie/",
+    data: [],
   }),
   methods: {
     getDetails(id) {
@@ -33,8 +37,8 @@ export default {
         },
       })
         .then((res) => {
-          //this.data = res.data;
-          console.log(res.data);
+          this.data = res.data;
+          //console.log(res.data);
         })
         .catch((err) => {
           console.log(err);

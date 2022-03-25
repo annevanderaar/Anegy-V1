@@ -2,6 +2,9 @@
   <v-app>
     <HomeAppBar />
     <v-main>
+      <v-container fluid class="d-flex flex-wrap justify-center">
+        <h1>{{ data.name }}</h1>
+      </v-container>
       <!-- Hier komen de details van de serie. De cast. trailers. en meer-->
     </v-main>
     <WebsiteFooter />
@@ -20,7 +23,8 @@ export default {
     WebsiteFooter,
   },
   data: () => ({
-    url: '/tv/',
+    url: "/tv/",
+    data: [],
   }),
   methods: {
     getDetails(id) {
@@ -33,8 +37,8 @@ export default {
         },
       })
         .then((res) => {
-          //this.data = res.data;
-          console.log(res.data);
+          this.data = res.data;
+          //console.log(res.data);
         })
         .catch((err) => {
           console.log(err);
@@ -42,7 +46,7 @@ export default {
     },
   },
   mounted() {
-    this.getDetails(this.$route.params.id)
+    this.getDetails(this.$route.params.id);
   },
 };
 </script>
