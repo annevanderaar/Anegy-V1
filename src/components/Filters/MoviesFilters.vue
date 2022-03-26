@@ -15,7 +15,7 @@
           >
         </v-row>
         <v-divider></v-divider>
-        <v-list-item :to="`/movies/discover`" color="secondary"
+        <v-list-item :to="`/movies/discover`" color="secondary" class="mt-2"
           ><v-icon class="mr-3" color="secondary">fas fa-random</v-icon>
           Discover</v-list-item
         >
@@ -40,14 +40,17 @@
           >Upcoming</v-list-item
         >
         <v-list v-if="this.$route.path == '/movies/discover'">
-          <v-list-item-title><h1>Genres</h1></v-list-item-title>
-          <v-divider></v-divider>
-          <v-list-item
-            @click="addGenre(genre.id)"
-            v-for="genre in genres"
-            :key="genre.id"
-            >{{ genre.name }}</v-list-item
-          >
+          <v-list-item-group multiple>
+            <v-list-item-title><h1>Genres</h1></v-list-item-title>
+            <v-divider></v-divider>
+            <v-list-item
+              active-class="highlight"
+              @click="addGenre(genre.id)"
+              v-for="genre in genres"
+              :key="genre.id"
+              >{{ genre.name }}</v-list-item
+            >
+          </v-list-item-group>
         </v-list>
       </v-container>
     </v-navigation-drawer>
@@ -89,11 +92,14 @@ export default {
     },
     addGenre(id) {
       this.selectedGenres.push(id);
-      console.log(this.selectedGenres);
+      this.setDrawerInput(false);
     },
   },
   computed: {
     ...mapGetters(["drawer", "selectedGenres"]),
+  },
+  mounted() {
+    this.selectedGenres.splice(0);
   },
 };
 </script>

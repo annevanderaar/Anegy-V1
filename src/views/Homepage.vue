@@ -117,6 +117,11 @@ export default {
   position: fixed;
   margin: 16px;
 }
+
+.highlight {
+  background-color: #f32b2b;
+}
+
 .cards {
   margin: 8px;
   display: flex;

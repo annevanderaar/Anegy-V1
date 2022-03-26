@@ -60,7 +60,7 @@ export default {
           }
           this.currentPage = res.data.page;
           this.data = res.data;
-          console.log(res.data);
+          //console.log(res.data);
         })
         .catch((err) => {
           console.log(err);
