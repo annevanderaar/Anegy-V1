@@ -68,21 +68,21 @@ export default {
     },
   },
   mounted() {
-    this.getDiscoverSeries(this.currentPage, this.selectedGenres);
+    this.getDiscoverSeries(this.currentPage, this.selectedGenresSerie);
     this.setDrawerInput(false);
   },
   watch: {
     currentPage(val) {
-      this.getDiscoverSeries(val, this.selectedGenres);
+      this.getDiscoverSeries(val, this.selectedGenresSerie);
       window.scrollTo({ top: 0, behavior: "smooth" });
     },
-    selectedGenres(val) {
+    selectedGenresSerie(val) {
+      console.log(val)
       this.getDiscoverSeries(this.currentPage, val);
-      window.scrollTo({ top: 0, behavior: "smooth" });
     },
   },
   computed: {
-    ...mapGetters(["selectedGenres"]),
+    ...mapGetters(["selectedGenresSerie"]),
   },
 };
 </script> 

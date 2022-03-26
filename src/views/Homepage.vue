@@ -2,7 +2,7 @@
   <v-app>
     <HomeAppBar />
     <v-main>
-      <v-icon color="black" class="ml-4" style="position: fixed; top: 65px"
+      <!-- <v-icon color="black" class="ml-4" style="position: fixed; top: 65px"
         >fas fa-arrow-up</v-icon
       >
       <v-icon
@@ -11,7 +11,7 @@
         style="position: fixed; left: 37px; top: 65px"
         >fas fa-arrow-up</v-icon
       >
-      <h3 class="ml-2" style="position: fixed; top: 90px">Click here!</h3>
+      <h3 class="ml-2" style="position: fixed; top: 90px">Click here!</h3> -->
       <!-- <h1 class="titles mr-4">Anegy</h1>
       <h2 class="titles">
         With Anegy you can discover all the movies and series ever made.

@@ -88,15 +88,15 @@ export default {
       this.setDrawerInput(false);
     },
     addGenre(id) {
-      this.selectedGenres.push(id);
+      this.selectedGenresSerie.push(id);
       this.setDrawerInput(false);
     },
   },
   computed: {
-    ...mapGetters(["drawer", "selectedGenres"]),
+    ...mapGetters(["drawer", "selectedGenresSerie"]),
   },
   mounted() {
-    this.selectedGenres.splice(0);
+    this.selectedGenresSerie.splice(0);
   },
 };
 </script>

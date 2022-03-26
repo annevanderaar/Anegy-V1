@@ -15,8 +15,8 @@
               <p class="titlesP">{{ data.runtime }} min</p>
               <h4 class="titles">Status:</h4>
               <p class="titlesP">{{ data.status }}</p>
-              <h4 class="titles">Language:</h4>
-              <p class="titlesP">{{ data.original_language }}</p>
+              <h4 class="titles">Score:</h4>
+              <p class="titlesP">{{ data.vote_average }}</p>
             </div>
           </div>
         </section>

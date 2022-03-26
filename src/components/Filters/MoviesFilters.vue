@@ -91,15 +91,23 @@ export default {
       this.setDrawerInput(false);
     },
     addGenre(id) {
-      this.selectedGenres.push(id);
-      this.setDrawerInput(false);
+      if(this.selectedGenresMovie.includes(id)) {
+        let index = this.selectedGenresMovie.indexOf(id);
+        this.selectedGenresMovie.splice(index, 1);
+        //this.$delete(this.selectedGenresMovie, index);
+        this.setDrawerInput(false);
+      }
+      if(!this.selectedGenresMovie.includes(id)) {
+        this.selectedGenresMovie.push(id);
+        this.setDrawerInput(false);
+      }
     },
   },
   computed: {
-    ...mapGetters(["drawer", "selectedGenres"]),
+    ...mapGetters(["drawer", "selectedGenresMovie"]),
   },
   mounted() {
-    this.selectedGenres.splice(0);
+    this.selectedGenresMovie.splice(0);
   },
 };
 </script>
