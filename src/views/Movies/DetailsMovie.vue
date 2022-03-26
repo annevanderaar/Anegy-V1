@@ -2,8 +2,37 @@
   <v-app>
     <HomeAppBar />
     <v-main>
-      <v-container fluid class="d-flex flex-wrap justify-center">
-        <h1>{{ data.title }}</h1>
+      <v-container fluid class="d-flex flex-row justify-center">
+        <section>
+          <div class="ma-10">
+            <h1 class="titles">{{ data.title }}</h1>
+            <h3 class="titles">{{ data.tagline }}</h3>
+            <p class="titlesP">{{ data.overview }}</p>
+            <div class="d-flex flex-row flex-start">
+              <h4 class="titles">Release Date:</h4>
+              <p class="titlesP">{{ data.release_date }}</p>
+              <h4 class="titles">Runtime:</h4>
+              <p class="titlesP">{{ data.runtime }} min</p>
+              <h4 class="titles">Status:</h4>
+              <p class="titlesP">{{ data.status }}</p>
+              <h4 class="titles">Language:</h4>
+              <p class="titlesP">{{ data.original_language }}</p>
+            </div>
+          </div>
+        </section>
+        <section>
+          <v-card class="ma-10">
+            <v-img
+              :src="`https://image.tmdb.org/t/p/w500${data.poster_path}`"
+              :alt="`${data.title}`"
+            ></v-img>
+            <v-img
+              v-if="data.poster_path == null"
+              src="http://via.placeholder.com/1080x1580"
+              :alt="`${data.title}`"
+            ></v-img>
+          </v-card>
+        </section>
       </v-container>
       <!-- Hier komen de details van de film. De cast. trailers. en meer-->
     </v-main>
@@ -23,7 +52,6 @@ export default {
     WebsiteFooter,
   },
   data: () => ({
-    url: "/movie/",
     data: [],
   }),
   methods: {
@@ -32,13 +60,13 @@ export default {
         method: "post",
         url: "http://localhost/Library/Details.php",
         data: {
-          url: this.url,
+          url: "/movie/",
           id: id,
         },
       })
         .then((res) => {
           this.data = res.data;
-          //console.log(res.data);
+          console.log(res.data);
         })
         .catch((err) => {
           console.log(err);

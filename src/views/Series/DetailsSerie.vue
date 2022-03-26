@@ -23,7 +23,6 @@ export default {
     WebsiteFooter,
   },
   data: () => ({
-    url: "/tv/",
     data: [],
   }),
   methods: {
@@ -32,7 +31,7 @@ export default {
         method: "post",
         url: "http://localhost/Library/Details.php",
         data: {
-          url: this.url,
+          url: "/tv/",
           id: id,
         },
       })

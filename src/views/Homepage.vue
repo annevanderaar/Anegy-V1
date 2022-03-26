@@ -2,14 +2,21 @@
   <v-app>
     <HomeAppBar />
     <v-main>
+      <v-icon color="black" class="ml-4" style="position: fixed; top: 65px"
+        >fas fa-arrow-up</v-icon
+      >
+      <v-icon
+        color="black"
+        class="ml-7"
+        style="position: fixed; left: 37px; top: 65px"
+        >fas fa-arrow-up</v-icon
+      >
+      <h3 class="ml-2" style="position: fixed; top: 90px">Click here!</h3>
       <!-- <h1 class="titles mr-4">Anegy</h1>
       <h2 class="titles">
         With Anegy you can discover all the movies and series ever made.
       </h2> -->
-      <!-- <v-container
-        fluid
-        class="mt-10 d-flex justify-center align-center flex-row"
-      >
+      <!-- <v-container fluid class="d-flex justify-center align-center flex-row">
         <v-card class="cards" elevation="4" outlined width="100%">
           <v-card-title class="titles">First</v-card-title>
           <v-card-text class="titles">Make an account</v-card-text>
@@ -40,15 +47,17 @@
           >
         </v-card>
       </v-container> -->
-      <h1 class="titles mt-10 mb-5">Today's Trending Movies &amp; Series</h1>
-      <cards :data="data" />
-      <v-pagination
-        color="secondary"
-        v-model="currentPage"
-        :length="totalPages"
-        :total-visible="10"
-        class="my-4"
-      ></v-pagination>
+      <v-container fluid>
+        <h1 class="titles mb-5">Today's Trending Movies &amp; Series</h1>
+        <cards :data="data" />
+        <v-pagination
+          color="secondary"
+          v-model="currentPage"
+          :length="totalPages"
+          :total-visible="10"
+          class="my-4"
+        ></v-pagination>
+      </v-container>
     </v-main>
     <WebsiteFooter />
   </v-app>
@@ -108,7 +117,14 @@ export default {
 <style>
 .titles {
   font-family: "Fredoka", sans-serif;
-  font-weight: 900;
+  font-weight: 700;
+  margin: 14px;
+  text-align: center;
+}
+
+.titlesP {
+  font-family: "Fredoka", sans-serif;
+  font-weight: 400;
   margin: 14px;
   text-align: center;
 }
