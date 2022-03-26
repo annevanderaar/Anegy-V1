@@ -44,13 +44,13 @@ export default {
     openFilter() {
       this.setDrawerInput(true);
     },
-    getOnAirSeries() {
+    getOnAirSeries(page) {
       axios({
         method: "post",
         url: "http://localhost/Library/Series.php",
         data: {
           url: "/tv/on_the_air?",
-          page: this.currentPage,
+          page: page,
         },
       })
         .then((res) => {
@@ -65,7 +65,7 @@ export default {
     },
   },
   mounted() {
-    this.getOnAirSeries();
+    this.getOnAirSeries(this.currentPage);
     this.setDrawerInput(false);
   },
   watch: {

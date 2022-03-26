@@ -40,9 +40,7 @@
           >
         </v-card>
       </v-container> -->
-      <h1 class="titles mt-10 mb-5">
-        Dicover Today's Trending Movies &amp; Series
-      </h1>
+      <h1 class="titles mt-10 mb-5">Today's Trending Movies &amp; Series</h1>
       <cards :data="data" />
       <v-pagination
         color="secondary"

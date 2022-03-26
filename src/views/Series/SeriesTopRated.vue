@@ -44,13 +44,13 @@ export default {
     openFilter() {
       this.setDrawerInput(true);
     },
-    getTopRatedSeries() {
+    getTopRatedSeries(page) {
       axios({
         method: "post",
         url: "http://localhost/Library/Series.php",
         data: {
           url: "/tv/top_rated?",
-          page: this.currentPage,
+          page: page,
         },
       })
         .then((res) => {
@@ -65,7 +65,7 @@ export default {
     },
   },
   mounted() {
-    this.getTopRatedSeries();
+    this.getTopRatedSeries(this.currentPage);
     this.setDrawerInput(false);
   },
   watch: {

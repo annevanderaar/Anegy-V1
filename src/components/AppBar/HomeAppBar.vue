@@ -1,9 +1,9 @@
 <template>
   <v-app-bar app color="secondary" clipped-left>
-    <v-btn icon class="white--text" :to="`/movies/trending`"
+    <v-btn icon class="white--text" :to="`/movies/discover`"
       ><v-icon>fas fa-video</v-icon></v-btn
     >
-    <v-btn icon class="white--text" :to="`/series/trending`"
+    <v-btn icon class="white--text" :to="`/series/discover`"
       ><v-icon>fas fa-tv</v-icon></v-btn
     >
     <!-- <v-btn icon class="white--text" :to="`/`"
@@ -14,7 +14,7 @@
       <v-img
         alt="Logo Anegy"
         contain
-        src="/Naamloos-1.png"
+        src="/logo.png"
         transition="scale-transition"
         width="40px"
         height="40px"

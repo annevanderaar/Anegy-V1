@@ -44,13 +44,13 @@ export default {
     openFilter() {
       this.setDrawerInput(true);
     },
-    getPopularSeries() {
+    getPopularSeries(page) {
       axios({
         method: "post",
         url: "http://localhost/Library/Series.php",
         data: {
           url: "/tv/popular?",
-          page: this.currentPage,
+          page: page,
         },
       })
         .then((res) => {
@@ -65,7 +65,7 @@ export default {
     },
   },
   mounted() {
-    this.getPopularSeries();
+    this.getPopularSeries(this.currentPage);
     this.setDrawerInput(false);
   },
   watch: {

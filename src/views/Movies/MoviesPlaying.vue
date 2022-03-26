@@ -44,13 +44,13 @@ export default {
     openFilter() {
       this.setDrawerInput(true);
     },
-    getPlayingMovies() {
+    getPlayingMovies(page) {
       axios({
         method: "post",
         url: "http://localhost/Library/Movies.php",
         data: {
           url: "/movie/now_playing?",
-          page: this.currentPage,
+          page: page,
         },
       })
         .then((res) => {
@@ -65,7 +65,7 @@ export default {
     },
   },
   mounted() {
-    this.getPlayingMovies();
+    this.getPlayingMovies(this.currentPage);
     this.setDrawerInput(false);
   },
   watch: {
