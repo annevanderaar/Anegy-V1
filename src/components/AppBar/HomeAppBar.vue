@@ -25,10 +25,12 @@
       label="Search"
       solo
       rounded
+      clearable
       dense
       class="mt-6 shrink"
       flat
       v-if="this.show == true"
+      v-model="search"
     ></v-text-field>
     <v-btn icon class="white--text" @click="showSearch"
       ><v-icon>fas fa-search</v-icon></v-btn
@@ -58,6 +60,7 @@ export default {
   data: () => ({
     show: false,
     url: "/search/multi?",
+    search: "",
   }),
   methods: {
     openAccount() {
@@ -74,7 +77,9 @@ export default {
         this.show = false;
       }
     },
-    searchCall(search) {
+  },
+  watch: {
+    search(val) {
       if (
         this.$route.path == "/movies/trending" ||
         this.$route.path == "/movies/popular" ||
@@ -100,7 +105,7 @@ export default {
         method: "post",
         url: "http://localhost/Library/Search.php",
         data: {
-          query: search,
+          query: val,
           url: this.url,
         },
       })
