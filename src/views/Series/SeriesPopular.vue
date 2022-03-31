@@ -67,11 +67,11 @@ export default {
       //console.log(data)
       this.data = data;
       this.currentPage = data.page;
-      if(data.errors) {
+      if (data.errors) {
         this.currentPage = 1;
         this.getPopularSeries(this.currentPage);
       }
-    }
+    },
   },
   mounted() {
     this.getPopularSeries(this.currentPage);
@@ -84,4 +84,4 @@ export default {
     },
   },
 };
-</script> 
+</script>

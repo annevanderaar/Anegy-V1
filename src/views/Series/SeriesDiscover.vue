@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <HomeAppBar @watched="watched"/>
+    <HomeAppBar @watched="watched" />
     <v-main>
       <v-btn @click="openFilter" class="filterBtn">Filter</v-btn>
       <h1 class="titles">Discover Series</h1>
@@ -70,11 +70,11 @@ export default {
       //console.log(data)
       this.data = data;
       this.currentPage = data.page;
-      if(data.errors) {
+      if (data.errors) {
         this.currentPage = 1;
         this.getDiscoverSeries(this.currentPage, this.selectedGenresSerie);
       }
-    }
+    },
   },
   mounted() {
     this.getDiscoverSeries(this.currentPage, this.selectedGenresSerie);
@@ -94,4 +94,4 @@ export default {
     ...mapGetters(["selectedGenresSerie"]),
   },
 };
-</script> 
+</script>

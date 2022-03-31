@@ -7,9 +7,10 @@
         <h1>Page not found</h1>
         <div>
           <v-icon color="black" x-large class="ma-2">fas fa-sad-cry</v-icon>
-          <v-icon color="black" x-large class="ma-2">fas fa-heart-broken</v-icon>
+          <v-icon color="black" x-large class="ma-2"
+            >fas fa-heart-broken</v-icon
+          >
         </div>
-        
       </v-container>
     </v-main>
     <WebsiteFooter />

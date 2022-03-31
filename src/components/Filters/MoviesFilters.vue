@@ -91,14 +91,14 @@ export default {
       this.setDrawerInput(false);
     },
     addGenre(id) {
-      if(this.selectedGenresMovie.includes(id)) {
+      if (this.selectedGenresMovie.includes(id)) {
         let index = this.selectedGenresMovie.indexOf(id);
         this.selectedGenresMovie.splice(index, 1);
-        console.log(this.selectedGenresMovie)
+        console.log(this.selectedGenresMovie);
         //Vue.delete(this.selectedGenresMovie, index);
         this.setDrawerInput(false);
       }
-      if(!this.selectedGenresMovie.includes(id)) {
+      if (!this.selectedGenresMovie.includes(id)) {
         this.selectedGenresMovie.push(id);
         this.setDrawerInput(false);
       }

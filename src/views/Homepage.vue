@@ -105,11 +105,11 @@ export default {
       //console.log(data)
       this.data = data;
       this.currentPage = data.page;
-      if(data.errors) {
+      if (data.errors) {
         this.currentPage = 1;
         this.getTrending(this.currentPage);
       }
-    }
+    },
   },
   mounted() {
     this.getTrending(this.currentPage);
@@ -152,7 +152,7 @@ span {
 .btnText {
   font-family: "Fredoka", sans-serif;
   font-weight: 400;
-  padding: 8px; 
+  padding: 8px;
   margin: 8px;
 }
 

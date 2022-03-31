@@ -2,18 +2,28 @@
   <v-app-bar app color="secondary" clipped-left>
     <v-tooltip bottom>
       <template v-slot:activator="{ on, attrs }">
-        <v-btn v-bind="attrs" v-on="on" icon class="white--text" :to="`/movies/discover`"
+        <v-btn
+          v-bind="attrs"
+          v-on="on"
+          icon
+          class="white--text"
+          :to="`/movies/discover`"
           ><v-icon>fas fa-video</v-icon></v-btn
         >
-        </template>
+      </template>
       <span>Movies Discover</span>
     </v-tooltip>
     <v-tooltip bottom>
       <template v-slot:activator="{ on, attrs }">
-        <v-btn v-bind="attrs" v-on="on" icon class="white--text" :to="`/series/discover`"
+        <v-btn
+          v-bind="attrs"
+          v-on="on"
+          icon
+          class="white--text"
+          :to="`/series/discover`"
           ><v-icon>fas fa-tv</v-icon></v-btn
         >
-    </template>
+      </template>
       <span>Series Discover</span>
     </v-tooltip>
     <!-- <v-btn icon class="white--text" :to="`/`"
@@ -122,7 +132,7 @@ export default {
         },
       })
         .then((res) => {
-          this.$emit('watched', res.data);
+          this.$emit("watched", res.data);
         })
         .catch((err) => {
           console.log(err);

@@ -1,7 +1,7 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import Vue from "vue";
+import Vuex from "vuex";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
@@ -13,11 +13,11 @@ export default new Vuex.Store({
     setDrawerInput: (state, value) => (state.drawer = value),
   },
   actions: {
-    setDrawerInput: ({ commit }, input) => commit('setDrawerInput', input),
+    setDrawerInput: ({ commit }, input) => commit("setDrawerInput", input),
   },
   getters: {
     drawer: (state) => state.drawer,
     selectedGenresMovie: (state) => state.selectedGenresMovie,
     selectedGenresSerie: (state) => state.selectedGenresSerie,
-  }
-})
+  },
+});
