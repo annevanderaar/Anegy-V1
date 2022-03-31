@@ -8,7 +8,7 @@
             <h1 class="titles">{{ data.title }}</h1>
             <h3 class="titles">{{ data.tagline }}</h3>
             <p class="titlesP">{{ data.overview }}</p>
-            <div class="d-flex flex-row flex-start">
+            <div class="d-flex flex-row justify-center">
               <h4 class="titles">Release Date:</h4>
               <p class="titlesP">{{ data.release_date }}</p>
               <h4 class="titles">Runtime:</h4>
@@ -18,10 +18,14 @@
               <h4 class="titles">Score:</h4>
               <p class="titlesP">{{ data.vote_average }}</p>
             </div>
+            <div class="d-flex flex-row justify-center align-center">
+              <h4 class="titles">Genres:</h4>
+              <v-btn v-for="item in data.genres" :key="item.id" small rounded outlined style="padding: 3px; margin: 5px">{{item.name}}</v-btn>
+            </div>
           </div>
         </section>
         <section>
-          <v-card class="ma-10">
+          <v-card class="ma-10" :href="`https://image.tmdb.org/t/p/w500${data.poster_path}`">
             <v-img
               :src="`https://image.tmdb.org/t/p/w500${data.poster_path}`"
               :alt="`${data.title}`"

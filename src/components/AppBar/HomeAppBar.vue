@@ -1,11 +1,21 @@
 <template>
   <v-app-bar app color="secondary" clipped-left>
-    <v-btn icon class="white--text" :to="`/movies/discover`"
-      ><v-icon>fas fa-video</v-icon></v-btn
-    >
-    <v-btn icon class="white--text" :to="`/series/discover`"
-      ><v-icon>fas fa-tv</v-icon></v-btn
-    >
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn v-bind="attrs" v-on="on" icon class="white--text" :to="`/movies/discover`"
+          ><v-icon>fas fa-video</v-icon></v-btn
+        >
+        </template>
+      <span>Movies Discover</span>
+    </v-tooltip>
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn v-bind="attrs" v-on="on" icon class="white--text" :to="`/series/discover`"
+          ><v-icon>fas fa-tv</v-icon></v-btn
+        >
+    </template>
+      <span>Series Discover</span>
+    </v-tooltip>
     <!-- <v-btn icon class="white--text" :to="`/`"
       ><v-icon>fas fa-home</v-icon></v-btn
     > -->

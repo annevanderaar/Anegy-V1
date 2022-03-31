@@ -86,7 +86,7 @@ export default {
       window.scrollTo({ top: 0, behavior: "smooth" });
     },
     selectedGenresMovie(val) {
-      console.log(val)
+      //console.log(val)
       this.getDiscoverMovies(this.currentPage, val);
     },
   },

@@ -94,7 +94,8 @@ export default {
       if(this.selectedGenresMovie.includes(id)) {
         let index = this.selectedGenresMovie.indexOf(id);
         this.selectedGenresMovie.splice(index, 1);
-        //this.$delete(this.selectedGenresMovie, index);
+        console.log(this.selectedGenresMovie)
+        //Vue.delete(this.selectedGenresMovie, index);
         this.setDrawerInput(false);
       }
       if(!this.selectedGenresMovie.includes(id)) {
