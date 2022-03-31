@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <HomeAppBar />
+    <HomeAppBar @watched="watched" />
     <v-main>
       <!-- <v-icon color="black" class="ml-4" style="position: fixed; top: 65px"
         >fas fa-arrow-up</v-icon
@@ -101,6 +101,15 @@ export default {
           console.log(err);
         });
     },
+    watched(data) {
+      //console.log(data)
+      this.data = data;
+      this.currentPage = data.page;
+      if(data.errors) {
+        this.currentPage = 1;
+        this.getTrending(this.currentPage);
+      }
+    }
   },
   mounted() {
     this.getTrending(this.currentPage);

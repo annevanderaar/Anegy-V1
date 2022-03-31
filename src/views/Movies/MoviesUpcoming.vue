@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <HomeAppBar />
+    <HomeAppBar @watched="watched" />
     <v-main>
       <v-btn @click="openFilter" class="filterBtn">Filter</v-btn>
       <h1 class="titles">Upcoming Movies</h1>
@@ -63,6 +63,15 @@ export default {
           console.log(err);
         });
     },
+    watched(data) {
+      //console.log(data)
+      this.data = data;
+      this.currentPage = data.page;
+      if(data.errors) {
+        this.currentPage = 1;
+        this.getUpcomingMovies(this.currentPage);
+      }
+    }
   },
   mounted() {
     this.getUpcomingMovies(this.currentPage);

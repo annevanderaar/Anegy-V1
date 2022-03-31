@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <HomeAppBar />
+    <HomeAppBar @watched="watched"/>
     <v-main>
       <v-btn @click="openFilter" class="filterBtn">Filter</v-btn>
       <h1 class="titles">Discover Series</h1>
@@ -66,6 +66,15 @@ export default {
           console.log(err);
         });
     },
+    watched(data) {
+      //console.log(data)
+      this.data = data;
+      this.currentPage = data.page;
+      if(data.errors) {
+        this.currentPage = 1;
+        this.getDiscoverSeries(this.currentPage, this.selectedGenresSerie);
+      }
+    }
   },
   mounted() {
     this.getDiscoverSeries(this.currentPage, this.selectedGenresSerie);
@@ -77,7 +86,7 @@ export default {
       window.scrollTo({ top: 0, behavior: "smooth" });
     },
     selectedGenresSerie(val) {
-      console.log(val)
+      //console.log(val)
       this.getDiscoverSeries(this.currentPage, val);
     },
   },

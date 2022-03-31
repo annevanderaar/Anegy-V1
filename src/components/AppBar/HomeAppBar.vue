@@ -110,7 +110,7 @@ export default {
         },
       })
         .then((res) => {
-          console.log(res.data);
+          this.$emit('watched', res.data);
         })
         .catch((err) => {
           console.log(err);
