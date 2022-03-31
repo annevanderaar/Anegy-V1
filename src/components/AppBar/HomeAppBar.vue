@@ -95,7 +95,8 @@ export default {
         this.$route.path == "/movies/popular" ||
         this.$route.path == "/movies/playing" ||
         this.$route.path == "/movies/top-rated" ||
-        this.$route.path == "/movies/upcoming"
+        this.$route.path == "/movies/upcoming" ||
+        this.$route.path == "/movies/discover"
       ) {
         this.url = "/search/movie?";
       }
@@ -104,7 +105,8 @@ export default {
         this.$route.path == "/series/popular" ||
         this.$route.path == "/series/playing" ||
         this.$route.path == "/series/top-rated" ||
-        this.$route.path == "/series/upcoming"
+        this.$route.path == "/series/upcoming" ||
+        this.$route.path == "/series/discover"
       ) {
         this.url = "/search/tv?";
       }

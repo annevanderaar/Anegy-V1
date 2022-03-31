@@ -20,12 +20,17 @@
             </div>
             <div class="d-flex flex-row justify-center align-center">
               <h4 class="titles">Genres:</h4>
-              <v-btn v-for="item in data.genres" :key="item.id" small rounded outlined style="padding: 3px; margin: 5px">{{item.name}}</v-btn>
+              <v-btn v-for="item in data.genres" :key="item.id" small rounded outlined class="btnText">{{item.name}}</v-btn>
             </div>
+          </div>
+          <div style="width:100%">
+            <v-tabs>
+              <v-tab v-for="tab in tabs" :key="tab.title"><v-icon style="margin: 8px">{{tab.icon}}</v-icon>{{tab.title}}</v-tab>
+            </v-tabs>
           </div>
         </section>
         <section>
-          <v-card class="ma-10" :href="`https://image.tmdb.org/t/p/w500${data.poster_path}`">
+          <v-card class="ma-10" :href="`https://image.tmdb.org/t/p/w500${data.poster_path}`" target="_blank">
             <v-img
               :src="`https://image.tmdb.org/t/p/w500${data.poster_path}`"
               :alt="`${data.title}`"
@@ -57,6 +62,28 @@ export default {
   },
   data: () => ({
     data: [],
+    tabs: [
+      {
+        title: 'Info',
+        icon: 'mdi-information-variant',
+      },
+      {
+        title: 'Cast',
+        icon: 'mdi-account-box-multiple',
+      },
+      {
+        title: 'Crew',
+        icon: 'mdi-account-group',
+      },
+      {
+        title: 'Videos',
+        icon: 'mdi-filmstrip-box-multiple',
+      },
+      {
+        title: 'Reviews',
+        icon: 'mdi-android-messages',
+      }
+    ]
   }),
   methods: {
     getDetails(id) {

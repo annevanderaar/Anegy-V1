@@ -124,6 +124,17 @@ export default {
 </script>
 
 <style>
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span {
+  font-family: "Fredoka", sans-serif;
+}
+
 .titles {
   font-family: "Fredoka", sans-serif;
   font-weight: 700;
@@ -136,6 +147,13 @@ export default {
   font-weight: 400;
   margin: 14px;
   text-align: center;
+}
+
+.btnText {
+  font-family: "Fredoka", sans-serif;
+  font-weight: 400;
+  padding: 8px; 
+  margin: 8px;
 }
 
 .filterBtn {
