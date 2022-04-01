@@ -45,7 +45,6 @@
       label="Search"
       solo
       rounded
-      clearable
       dense
       class="mt-6 shrink"
       flat
