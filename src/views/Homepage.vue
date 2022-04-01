@@ -133,7 +133,8 @@ h4,
 h5,
 h6,
 p,
-span {
+span,
+.display-4 {
   font-family: "Fredoka", sans-serif;
 }
 
