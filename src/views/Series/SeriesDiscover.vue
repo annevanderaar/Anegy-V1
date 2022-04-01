@@ -4,7 +4,7 @@
     <v-main>
       <v-btn @click="openFilter" class="filterBtn">Filter</v-btn>
       <h1 class="titles">Discover Series</h1>
-      <SeriesFilters />
+      <SeriesFilters @genres="selectedGenresS" />
       <cards :data="data" />
       <v-pagination
         color="secondary"
@@ -23,7 +23,7 @@ import HomeAppBar from "@/components/AppBar/HomeAppBar.vue";
 import SeriesFilters from "@/components/Filters/SeriesFilters.vue";
 import WebsiteFooter from "@/components/WebsiteFooter.vue";
 import Cards from "@/components/Cards.vue";
-import { mapActions, mapGetters } from "vuex";
+import { mapActions } from "vuex";
 import axios from "axios";
 
 export default {
@@ -38,6 +38,7 @@ export default {
     data: [],
     currentPage: 1,
     totalPages: 500,
+    selectedGenresSerie: [],
   }),
   methods: {
     ...mapActions(["setDrawerInput"]),
@@ -75,6 +76,11 @@ export default {
         this.getDiscoverSeries(this.currentPage, this.selectedGenresSerie);
       }
     },
+    selectedGenresS(val) {
+      //console.log(val)
+      this.selectedGenresSerie = val;
+      this.getDiscoverSeries(this.currentPage, this.selectedGenresSerie);
+    },
   },
   mounted() {
     this.getDiscoverSeries(this.currentPage, this.selectedGenresSerie);
@@ -85,13 +91,6 @@ export default {
       this.getDiscoverSeries(val, this.selectedGenresSerie);
       window.scrollTo({ top: 0, behavior: "smooth" });
     },
-    selectedGenresSerie(val) {
-      //console.log(val)
-      this.getDiscoverSeries(this.currentPage, val);
-    },
-  },
-  computed: {
-    ...mapGetters(["selectedGenresSerie"]),
   },
 };
 </script>

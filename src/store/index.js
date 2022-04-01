@@ -6,8 +6,6 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     drawer: false,
-    selectedGenresMovie: [],
-    selectedGenresSerie: [],
   },
   mutations: {
     setDrawerInput: (state, value) => (state.drawer = value),
@@ -17,7 +15,5 @@ export default new Vuex.Store({
   },
   getters: {
     drawer: (state) => state.drawer,
-    selectedGenresMovie: (state) => state.selectedGenresMovie,
-    selectedGenresSerie: (state) => state.selectedGenresSerie,
   },
 });

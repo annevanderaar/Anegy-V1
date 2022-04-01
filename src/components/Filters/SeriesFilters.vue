@@ -81,6 +81,7 @@ export default {
       { id: 10768, name: "War & Politics" },
       { id: 37, name: "Western" },
     ],
+    selectedGenresSerie: [],
   }),
   methods: {
     ...mapActions(["setDrawerInput"]),
@@ -88,12 +89,20 @@ export default {
       this.setDrawerInput(false);
     },
     addGenre(id) {
-      this.selectedGenresSerie.push(id);
-      this.setDrawerInput(false);
+      if (this.selectedGenresSerie.includes(id)) {
+        let index = this.selectedGenresSerie.indexOf(id);
+        this.selectedGenresSerie.splice(index, 1);
+        this.$emit("genres", this.selectedGenresSerie);
+        this.setDrawerInput(false);
+      } else {
+        this.selectedGenresSerie.push(id);
+        this.$emit("genres", this.selectedGenresSerie);
+        this.setDrawerInput(false);
+      }
     },
   },
   computed: {
-    ...mapGetters(["drawer", "selectedGenresSerie"]),
+    ...mapGetters(["drawer"]),
   },
   mounted() {
     this.selectedGenresSerie.splice(0);

@@ -84,6 +84,7 @@ export default {
       { id: 10752, name: "War" },
       { id: 37, name: "Western" },
     ],
+    selectedGenresMovie: [],
   }),
   methods: {
     ...mapActions(["setDrawerInput"]),
@@ -94,18 +95,17 @@ export default {
       if (this.selectedGenresMovie.includes(id)) {
         let index = this.selectedGenresMovie.indexOf(id);
         this.selectedGenresMovie.splice(index, 1);
-        console.log(this.selectedGenresMovie);
-        //Vue.delete(this.selectedGenresMovie, index);
+        this.$emit("genres", this.selectedGenresMovie);
         this.setDrawerInput(false);
-      }
-      if (!this.selectedGenresMovie.includes(id)) {
+      } else {
         this.selectedGenresMovie.push(id);
+        this.$emit("genres", this.selectedGenresMovie);
         this.setDrawerInput(false);
       }
     },
   },
   computed: {
-    ...mapGetters(["drawer", "selectedGenresMovie"]),
+    ...mapGetters(["drawer"]),
   },
   mounted() {
     this.selectedGenresMovie.splice(0);
