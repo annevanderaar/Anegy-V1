@@ -68,6 +68,7 @@
 import HomeAppBar from "@/components/AppBar/HomeAppBar.vue";
 import WebsiteFooter from "@/components/WebsiteFooter.vue";
 import axios from "axios";
+import config from "../../Config/index.js";
 
 export default {
   name: "DetailsMovie",
@@ -104,7 +105,7 @@ export default {
     getDetails(id) {
       axios({
         method: "post",
-        url: "http://localhost/Library/Details.php",
+        url: `${config.url}/Library/Details.php`,
         data: {
           url: "/movie/",
           id: id,

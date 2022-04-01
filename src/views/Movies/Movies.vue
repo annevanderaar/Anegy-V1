@@ -42,6 +42,7 @@ import WebsiteFooter from "@/components/WebsiteFooter.vue";
 import Cards from "@/components/Cards.vue";
 import { mapActions } from "vuex";
 import axios from "axios";
+import config from "../../Config/index.js";
 
 export default {
   name: "Movies",
@@ -66,7 +67,7 @@ export default {
     getMovies(page, url, genres) {
       axios({
         method: "post",
-        url: "http://localhost/Library/Discover.php",
+        url: `${config.url}/Library/Discover.php`,
         data: {
           url: url,
           page: page,
