@@ -3,6 +3,9 @@
     <HomeAppBar @watched="watched" />
     <v-main>
       <v-btn @click="openFilter" class="filterBtn">Filter</v-btn>
+      <h1 class="titles" v-if="this.$route.path == '/movies/discover'">
+        Discover Movies
+      </h1>
       <h1 class="titles" v-if="this.$route.path == '/movies/trending'">
         Trending Movies
       </h1>
@@ -18,7 +21,7 @@
       <h1 class="titles" v-if="this.$route.path == '/movies/upcoming'">
         Upcoming Movies
       </h1>
-      <MoviesFilters />
+      <MoviesFilters @genres="selectedGenresM" />
       <cards :data="data" />
       <v-pagination
         color="secondary"
@@ -53,19 +56,21 @@ export default {
     currentPage: 1,
     totalPages: 500,
     url: "/trending/movie/day?",
+    selectedGenresMovie: [],
   }),
   methods: {
     ...mapActions(["setDrawerInput"]),
     openFilter() {
       this.setDrawerInput(true);
     },
-    getMovies(page, url) {
+    getMovies(page, url, genres) {
       axios({
         method: "post",
-        url: "http://localhost/Library/Movies.php",
+        url: "http://localhost/Library/Discover.php",
         data: {
           url: url,
           page: page,
+          genres: encodeURI(genres.join(",")),
         },
       })
         .then((res) => {
@@ -86,36 +91,46 @@ export default {
       this.currentPage = data.page;
       if (data.errors) {
         this.currentPage = 1;
-        this.getMovies(this.currentPage, this.url);
+        this.getMovies(this.currentPage, this.url, this.selectedGenresMovie);
       }
+    },
+    selectedGenresM(val) {
+      //console.log(val);
+      this.selectedGenresMovie = val;
+      this.getMovies(this.currentPage, this.url, this.selectedGenresMovie);
     },
   },
   watch: {
     $route(val) {
       console.log(val.path);
+      if (val.path == "/movies/discover") {
+        this.url = "/discover/movie?";
+        this.getMovies(this.currentPage, this.url, this.selectedGenresMovie);
+        this.setDrawerInput(false);
+      }
       if (val.path == "/movies/trending") {
         this.url = "/trending/movie/day?";
-        this.getMovies(this.currentPage, this.url);
+        this.getMovies(this.currentPage, this.url, this.selectedGenresMovie);
         this.setDrawerInput(false);
       }
       if (val.path == "/movies/popular") {
         this.url = "/movie/popular?";
-        this.getMovies(this.currentPage, this.url);
+        this.getMovies(this.currentPage, this.url, this.selectedGenresMovie);
         this.setDrawerInput(false);
       }
       if (val.path == "/movies/top-rated") {
         this.url = "/movie/top_rated?";
-        this.getMovies(this.currentPage, this.url);
+        this.getMovies(this.currentPage, this.url, this.selectedGenresMovie);
         this.setDrawerInput(false);
       }
       if (val.path == "/movies/playing") {
         this.url = "/movie/now_playing?";
-        this.getMovies(this.currentPage, this.url);
+        this.getMovies(this.currentPage, this.url, this.selectedGenresMovie);
         this.setDrawerInput(false);
       }
       if (val.path == "/movies/upcoming") {
         this.url = "/movie/upcoming?";
-        this.getMovies(this.currentPage, this.url);
+        this.getMovies(this.currentPage, this.url, this.selectedGenresMovie);
         this.setDrawerInput(false);
       }
     },
@@ -125,30 +140,35 @@ export default {
     },
   },
   mounted() {
+    if (this.$route.path == "/movies/discover") {
+      this.url = "/discover/movie?";
+      this.getMovies(this.currentPage, this.url, this.selectedGenresMovie);
+      this.setDrawerInput(false);
+    }
     if (this.$route.path == "/movies/trending") {
       this.url = "/trending/movie/day?";
-      this.getMovies(this.currentPage, this.url);
+      this.getMovies(this.currentPage, this.url, this.selectedGenresMovie);
       this.setDrawerInput(false);
     }
     if (this.$route.path == "/movies/popular") {
       this.url = "/movie/popular?";
       this.setDrawerInput(false);
-      this.getMovies(this.currentPage, this.url);
+      this.getMovies(this.currentPage, this.url, this.selectedGenresMovie);
     }
     if (this.$route.path == "/movies/top-rated") {
       this.url = "/movie/top_rated?";
       this.setDrawerInput(false);
-      this.getMovies(this.currentPage, this.url);
+      this.getMovies(this.currentPage, this.url, this.selectedGenresMovie);
     }
     if (this.$route.path == "/movies/playing") {
       this.url = "/movie/now_playing?";
       this.setDrawerInput(false);
-      this.getMovies(this.currentPage, this.url);
+      this.getMovies(this.currentPage, this.url, this.selectedGenresMovie);
     }
     if (this.$route.path == "/movies/upcoming") {
       this.url = "/movie/upcoming?";
       this.setDrawerInput(false);
-      this.getMovies(this.currentPage, this.url);
+      this.getMovies(this.currentPage, this.url, this.selectedGenresMovie);
     }
   },
 };

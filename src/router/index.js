@@ -22,9 +22,7 @@ const routes = [
     path: "/movies/discover",
     name: "Discover Movies",
     component: () =>
-      import(
-        /* webpackChunkName: "account" */ "../views/Movies/MoviesDiscover.vue"
-      ),
+      import(/* webpackChunkName: "account" */ "../views/Movies/Movies.vue"),
   },
   {
     path: "/movies/trending",
@@ -68,9 +66,7 @@ const routes = [
     path: "/series/discover",
     name: "Discover Series",
     component: () =>
-      import(
-        /* webpackChunkName: "account" */ "../views/Series/SeriesDiscover.vue"
-      ),
+      import(/* webpackChunkName: "account" */ "../views/Series/Series.vue"),
   },
   {
     path: "/series/trending",

@@ -80,15 +80,17 @@ export default {
     data: [],
     currentPage: 1,
     totalPages: 500,
+    selectedGenres: [],
   }),
   methods: {
-    getTrending(page) {
+    getTrending(page, genres) {
       axios({
         method: "post",
-        url: "http://localhost/Library/Movies.php",
+        url: "http://localhost/Library/Discover.php",
         data: {
           url: "/trending/all/day?",
           page: page,
+          genres: encodeURI(genres.join(",")),
         },
       })
         .then((res) => {
@@ -107,16 +109,16 @@ export default {
       this.currentPage = data.page;
       if (data.errors) {
         this.currentPage = 1;
-        this.getTrending(this.currentPage);
+        this.getTrending(this.currentPage, this.selectedGenres);
       }
     },
   },
   mounted() {
-    this.getTrending(this.currentPage);
+    this.getTrending(this.currentPage, this.selectedGenres);
   },
   watch: {
     currentPage(val) {
-      this.getTrending(val);
+      this.getTrending(val, this.selectedGenres);
       window.scrollTo({ top: 0, behavior: "smooth" });
     },
   },
