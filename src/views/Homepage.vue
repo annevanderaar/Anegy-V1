@@ -146,8 +146,7 @@ span,
 }
 
 .btnText {
-  padding: 8px;
-  margin: 8px;
+  margin: 4px;
 }
 
 .filterBtn {

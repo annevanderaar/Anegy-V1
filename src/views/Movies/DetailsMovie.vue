@@ -4,7 +4,7 @@
     <v-main>
       <v-container fluid style="overflow: auto">
         <v-row>
-          <v-col class="d-flex justify-center align-center">
+          <v-col class="d-flex justify-center align-center" md="4">
             <v-card
               max-width="450px"
               max-height="700px"
@@ -27,40 +27,194 @@
               ></v-img>
             </v-card>
           </v-col>
-          <v-col>
-            <h1>{{ data.title }}</h1>
-            <h3>{{ data.tagline }}</h3>
-            <p>{{ data.overview }}</p>
-            <div class="flexs">
+          <v-col md="8">
+            <v-col>
+              <h1>{{ data.title }}</h1>
+              <h3>{{ data.tagline }}</h3>
+              <p>{{ data.overview }}</p>
+            </v-col>
+            <v-row>
               <h4>Release Date:</h4>
-              <p>{{ data.release_date }}</p>
-            </div>
-            <div class="flexs">
+              <p>
+                {{
+                  new Date(data.release_date).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })
+                }}
+                ({{ data.status }})
+              </p>
+            </v-row>
+            <v-row>
+              <h4>Language:</h4>
+              <v-avatar
+                height="36"
+                :color="
+                  $vuetify.theme.dark ? 'grey darken-1' : 'grey lighten-3'
+                "
+                ><span class="text-uppercase">{{
+                  data.original_language
+                }}</span></v-avatar
+              >
+            </v-row>
+            <v-row>
               <h4>Runtime:</h4>
               <p>{{ data.runtime }} min</p>
-            </div>
-            <div class="flexs">
-              <h4>Status:</h4>
-              <p>{{ data.status }}</p>
-            </div>
-            <div class="flexs">
+            </v-row>
+            <v-row>
               <h4>Score:</h4>
-              <p>{{ data.vote_average }}</p>
-            </div>
-            <div class="flexs">
+              <v-avatar
+                rounded
+                height="36"
+                color="green white--text"
+                v-if="data.vote_average >= 7.5"
+                >{{ data.vote_average }}</v-avatar
+              >
+              <v-avatar
+                rounded
+                height="36"
+                color="orange white--text"
+                v-else-if="data.vote_average >= 5"
+                >{{ data.vote_average }}</v-avatar
+              >
+              <v-avatar rounded height="36" color="red white--text" v-else>{{
+                data.vote_average
+              }}</v-avatar>
+            </v-row>
+            <v-row>
+              <h4>Budget:</h4>
+              <p>${{ data.budget.toLocaleString() }}</p>
+            </v-row>
+            <v-row>
+              <h4>Reveneu:</h4>
+              <p>${{ data.revenue.toLocaleString() }}</p>
+            </v-row>
+            <v-row>
               <h4>Genres:</h4>
-              <v-btn
+              <v-chip
+                outlined
                 v-for="item in data.genres"
                 :key="item.id"
-                small
+                rounded
+                class="btnText"
+                >{{ item.name }}</v-chip
+              >
+            </v-row>
+            <v-row>
+              <h4>Links:</h4>
+              <v-chip
                 rounded
                 outlined
                 class="btnText"
-                >{{ item.name }}</v-btn
+                :href="`${data.homepage}`"
+                target="_blank"
+                v-if="data.homepage"
+                ><v-icon>mdi-home-circle</v-icon></v-chip
               >
-            </div>
+              <v-chip
+                outlined
+                rounded
+                class="btnText"
+                :href="`https://www.imdb.com/title/${links.imdb_id}`"
+                target="_blank"
+                v-if="links.imdb_id"
+                ><v-icon>mdi-database</v-icon></v-chip
+              >
+              <v-chip
+                outlined
+                rounded
+                class="btnText"
+                :href="`https://www.imdb.com/title/${links.twitter_id}`"
+                target="_blank"
+                v-if="links.twitter_id"
+                ><v-icon>mdi-twitter</v-icon></v-chip
+              >
+              <v-chip
+                outlined
+                rounded
+                class="btnText"
+                :href="`https://www.imdb.com/title/${links.facebook_id}`"
+                target="_blank"
+                v-if="links.facebook_id"
+                ><v-icon>mdi-facebook</v-icon></v-chip
+              >
+              <v-chip
+                outlined
+                rounded
+                class="btnText"
+                :href="`https://www.imdb.com/title/${links.instagram_id}`"
+                target="_blank"
+                v-if="links.instagram_id"
+                ><v-icon>mdi-instagram</v-icon></v-chip
+              >
+            </v-row>
+            <v-row>
+              <h4>
+                Production
+                {{
+                  data.production_companies.length > 1
+                    ? "Companies"
+                    : "Company"
+                }}:
+              </h4>
+              <v-chip
+                class="btnText"
+                outlined
+                v-for="companie in data.production_companies"
+                :key="companie.id"
+              >
+                {{ companie.name }}
+              </v-chip>
+            </v-row>
+            <v-row>
+              <h4>
+                Production
+                {{
+                  data.production_countries.length > 1
+                    ? "Countries"
+                    : "Country"
+                }}:
+              </h4>
+              <v-chip
+                class="btnText"
+                outlined
+                v-for="country in data.production_countries"
+                :key="country.iso_3166_1"
+              >
+                {{ country.iso_3166_1 }}
+                | {{ country.name }}
+              </v-chip>
+            </v-row>
+            <v-row>
+              <h4>Watch (NL):</h4>
+              <v-chip
+                class="btnText"
+                outlined
+                v-for="item in this.providers.results.NL.flatrate"
+                :key="item.provider_id"
+              >
+                {{ item.provider_name }}
+              </v-chip>
+              <v-chip
+                class="btnText"
+                outlined
+                v-for="item in this.providers.results.NL.buy"
+                :key="item.provider_id"
+              >
+                {{ item.provider_name }}
+              </v-chip>
+              <v-chip
+                class="btnText"
+                outlined
+                v-for="item in this.providers.results.NL.rent"
+                :key="item.provider_id"
+              >
+                {{ item.provider_name }}
+              </v-chip>
+            </v-row>
           </v-col>
-          <v-col>
+          <v-col md="12">
             <v-tabs
               color="accent"
               icons-and-text
@@ -72,11 +226,12 @@
                 >{{ tab.title }}<v-icon>{{ tab.icon }}</v-icon></v-tab
               >
             </v-tabs>
-            <Cast v-if="this.val == 'cast'" />
-            <Crew v-else-if="this.val == 'crew'" />
-            <Collection v-else-if="this.val == 'collection'" />
-            <Videos v-else-if="this.val == 'videos'" />
-            <Reviews v-else-if="this.val == 'reviews'" />
+            <Cast v-if="this.val == 'cast'" :id="id" />
+            <Crew v-else-if="this.val == 'crew'" :id="id" />
+            <Collection v-else-if="this.val == 'collection'" :data="data" />
+            <Videos v-else-if="this.val == 'videos'" :id="id" />
+            <Reviews v-else-if="this.val == 'reviews'" :id="id" />
+            <Similar v-else-if="this.val == 'similar'" :id="id" />
           </v-col>
         </v-row>
       </v-container>
@@ -93,6 +248,7 @@ import Crew from "@/components/Details/Crew.vue";
 import Collection from "@/components/Details/Collection.vue";
 import Videos from "@/components/Details/Videos.vue";
 import Reviews from "@/components/Details/Reviews.vue";
+import Similar from "@/components/Details/Similar.vue";
 import axios from "axios";
 import config from "../../Config/index.js";
 
@@ -106,10 +262,14 @@ export default {
     Collection,
     Videos,
     Reviews,
+    Similar,
   },
   data: () => ({
+    id: null,
     val: "cast",
     data: [],
+    providers: [],
+    links: [],
     tabs: [
       {
         title: "Cast",
@@ -136,6 +296,11 @@ export default {
         icon: "mdi-android-messages",
         val: "reviews",
       },
+      {
+        title: "Similar",
+        icon: "mdi-approximately-equal-box",
+        val: "similar",
+      },
     ],
   }),
   methods: {
@@ -144,13 +309,44 @@ export default {
         method: "post",
         url: `${config.url}/Library/Details.php`,
         data: {
-          url: "/movie/",
-          id: id,
+          url: `/movie/${id}`,
         },
       })
         .then((res) => {
           this.data = res.data;
-          console.log(res.data);
+          //console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getProviders(id) {
+      axios({
+        method: "post",
+        url: `${config.url}/Library/Details.php`,
+        data: {
+          url: `/movie/${id}/watch/providers`,
+        },
+      })
+        .then((res) => {
+          this.providers = res.data;
+          //console.log(this.providers.results.NL.flatrate);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getLinks(id) {
+      axios({
+        method: "post",
+        url: `${config.url}/Library/Details.php`,
+        data: {
+          url: `/movie/${id}/external_ids`,
+        },
+      })
+        .then((res) => {
+          this.links = res.data;
+          //console.log(this.links);
         })
         .catch((err) => {
           console.log(err);
@@ -161,7 +357,10 @@ export default {
     },
   },
   mounted() {
+    this.id = this.$route.params.id;
     this.getDetails(this.$route.params.id);
+    this.getProviders(this.$route.params.id);
+    this.getLinks(this.$route.params.id);
   },
 };
 </script>
@@ -177,5 +376,8 @@ p {
 .flexs {
   display: flex;
   flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: nowrap;
 }
 </style>
