@@ -48,7 +48,9 @@
         </v-card>
       </v-container> -->
       <v-container fluid>
-        <h1 class="titles mb-5">Today's Trending Movies &amp; Series</h1>
+        <h1 class="mb-5" style="text-align: center">
+          Today's Trending Movies &amp; Series
+        </h1>
         <cards :data="data" />
         <v-pagination
           color="secondary"
@@ -135,27 +137,15 @@ h5,
 h6,
 p,
 span,
-.display-4 {
+.display-4,
+.display-3,
+.display-2,
+.display-1 {
   font-family: "Fredoka", sans-serif;
-}
-
-.titles {
-  font-family: "Fredoka", sans-serif;
-  font-weight: 700;
-  margin: 14px;
-  text-align: center;
-}
-
-.titlesP {
-  font-family: "Fredoka", sans-serif;
-  font-weight: 400;
-  margin: 14px;
-  text-align: center;
+  margin: 8px;
 }
 
 .btnText {
-  font-family: "Fredoka", sans-serif;
-  font-weight: 400;
   padding: 8px;
   margin: 8px;
 }

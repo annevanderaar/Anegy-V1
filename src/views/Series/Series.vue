@@ -3,24 +3,12 @@
     <HomeAppBar @watched="watched" />
     <v-main>
       <v-btn @click="openFilter" class="filterBtn">Filter</v-btn>
-      <h1 class="titles" v-if="this.$route.path == '/series/discover'">
-        Discover Series
-      </h1>
-      <h1 class="titles" v-if="this.$route.path == '/series/trending'">
-        Trending Series
-      </h1>
-      <h1 class="titles" v-if="this.$route.path == '/series/popular'">
-        Popular Series
-      </h1>
-      <h1 class="titles" v-if="this.$route.path == '/series/playing'">
-        Series Playing
-      </h1>
-      <h1 class="titles" v-if="this.$route.path == '/series/top-rated'">
-        Top Rated Series
-      </h1>
-      <h1 class="titles" v-if="this.$route.path == '/series/upcoming'">
-        Upcoming Series
-      </h1>
+      <h1 v-if="this.$route.path == '/series/discover'">Discover Series</h1>
+      <h1 v-if="this.$route.path == '/series/trending'">Trending Series</h1>
+      <h1 v-if="this.$route.path == '/series/popular'">Popular Series</h1>
+      <h1 v-if="this.$route.path == '/series/playing'">Series Playing</h1>
+      <h1 v-if="this.$route.path == '/series/top-rated'">Top Rated Series</h1>
+      <h1 v-if="this.$route.path == '/series/upcoming'">Upcoming Series</h1>
       <SeriesFilters @genres="selectedGenresS" />
       <cards :data="data" />
       <v-pagination
@@ -173,3 +161,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+h1 {
+  text-align: center;
+}
+</style>

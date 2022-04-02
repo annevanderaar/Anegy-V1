@@ -3,24 +3,12 @@
     <HomeAppBar @watched="watched" />
     <v-main>
       <v-btn @click="openFilter" class="filterBtn">Filter</v-btn>
-      <h1 class="titles" v-if="this.$route.path == '/movies/discover'">
-        Discover Movies
-      </h1>
-      <h1 class="titles" v-if="this.$route.path == '/movies/trending'">
-        Trending Movies
-      </h1>
-      <h1 class="titles" v-if="this.$route.path == '/movies/popular'">
-        Popular Movies
-      </h1>
-      <h1 class="titles" v-if="this.$route.path == '/movies/playing'">
-        Movies Playing
-      </h1>
-      <h1 class="titles" v-if="this.$route.path == '/movies/top-rated'">
-        Top Rated Movies
-      </h1>
-      <h1 class="titles" v-if="this.$route.path == '/movies/upcoming'">
-        Upcoming Movies
-      </h1>
+      <h1 v-if="this.$route.path == '/movies/discover'">Discover Movies</h1>
+      <h1 v-if="this.$route.path == '/movies/trending'">Trending Movies</h1>
+      <h1 v-if="this.$route.path == '/movies/popular'">Popular Movies</h1>
+      <h1 v-if="this.$route.path == '/movies/playing'">Movies Playing</h1>
+      <h1 v-if="this.$route.path == '/movies/top-rated'">Top Rated Movies</h1>
+      <h1 v-if="this.$route.path == '/movies/upcoming'">Upcoming Movies</h1>
       <MoviesFilters @genres="selectedGenresM" />
       <cards :data="data" />
       <v-pagination
@@ -136,7 +124,7 @@ export default {
       }
     },
     currentPage(val) {
-      this.getMovies(val, this.url);
+      this.getMovies(val, this.url, this.selectedGenresMovie);
       window.scrollTo({ top: 0, behavior: "smooth" });
     },
   },
@@ -174,3 +162,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+h1 {
+  text-align: center;
+}
+</style>
