@@ -8,7 +8,7 @@
           icon
           class="white--text"
           :to="`/movies/discover`"
-          ><v-icon>fas fa-video</v-icon></v-btn
+          ><v-icon>mdi-movie-open</v-icon></v-btn
         >
       </template>
       <span>Movies Discover</span>
@@ -21,7 +21,7 @@
           icon
           class="white--text"
           :to="`/series/discover`"
-          ><v-icon>fas fa-tv</v-icon></v-btn
+          ><v-icon>mdi-television-classic</v-icon></v-btn
         >
       </template>
       <span>Series Discover</span>

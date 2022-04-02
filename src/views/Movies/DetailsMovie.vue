@@ -3,7 +3,7 @@
     <HomeAppBar />
     <v-main>
       <v-container fluid style="overflow: auto">
-        <v-row>
+        <v-row justify="center">
           <v-col>
             <v-card
               max-width="450px"

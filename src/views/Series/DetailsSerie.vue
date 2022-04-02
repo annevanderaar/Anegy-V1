@@ -2,8 +2,8 @@
   <v-app>
     <HomeAppBar />
     <v-main>
-      <v-container fluid class="d-flex flex-row justify-center">
-        <v-row>
+      <v-container fluid style="overflow: auto">
+        <v-row justify="center">
           <v-col>
             <v-card
               max-width="450px"
