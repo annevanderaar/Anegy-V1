@@ -3,8 +3,8 @@
     <HomeAppBar />
     <v-main>
       <v-container fluid style="overflow: auto">
-        <v-row justify="center">
-          <v-col>
+        <v-row>
+          <v-col class="d-flex justify-center align-center">
             <v-card
               max-width="450px"
               max-height="700px"
@@ -62,7 +62,7 @@
           </v-col>
           <v-col>
             <v-tabs
-              color="secondary"
+              color="accent"
               icons-and-text
               center-active
               fixed-tabs
@@ -74,6 +74,7 @@
             </v-tabs>
             <Cast v-if="this.val == 'cast'" />
             <Crew v-else-if="this.val == 'crew'" />
+            <Collection v-else-if="this.val == 'collection'" />
             <Videos v-else-if="this.val == 'videos'" />
             <Reviews v-else-if="this.val == 'reviews'" />
           </v-col>
@@ -89,6 +90,7 @@ import HomeAppBar from "@/components/AppBar/HomeAppBar.vue";
 import WebsiteFooter from "@/components/WebsiteFooter.vue";
 import Cast from "@/components/Details/Cast.vue";
 import Crew from "@/components/Details/Crew.vue";
+import Collection from "@/components/Details/Collection.vue";
 import Videos from "@/components/Details/Videos.vue";
 import Reviews from "@/components/Details/Reviews.vue";
 import axios from "axios";
@@ -101,6 +103,7 @@ export default {
     WebsiteFooter,
     Cast,
     Crew,
+    Collection,
     Videos,
     Reviews,
   },
@@ -117,6 +120,11 @@ export default {
         title: "Crew",
         icon: "mdi-account-group",
         val: "crew",
+      },
+      {
+        title: "Collection",
+        icon: "mdi-bookmark-box-multiple",
+        val: "collection",
       },
       {
         title: "Videos",

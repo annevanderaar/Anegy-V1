@@ -47,7 +47,7 @@
         <v-btn
           v-if="item.video == false"
           elevation="0"
-          color="secondary"
+          color="accent"
           class="ml-2"
           :to="`/movies/details/${item.id}`"
           >Know more</v-btn
@@ -55,7 +55,7 @@
         <v-btn
           v-else
           elevation="0"
-          color="secondary"
+          color="accent"
           class="ml-2"
           :to="`/series/details/${item.id}`"
           >Know more</v-btn

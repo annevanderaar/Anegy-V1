@@ -153,10 +153,11 @@ span,
 .filterBtn {
   position: fixed;
   margin: 16px;
+  font-weight: 400;
 }
 
 .highlight {
-  background-color: #f32b2b;
+  background-color: #23a9a7;
 }
 
 .cards {

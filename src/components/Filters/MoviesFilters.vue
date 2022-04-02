@@ -15,28 +15,28 @@
           >
         </v-row>
         <v-divider></v-divider>
-        <v-list-item :to="`/movies/discover`" color="secondary" class="mt-2"
-          ><v-icon class="mr-3" color="secondary">fas fa-random</v-icon>
+        <v-list-item :to="`/movies/discover`" color="accent" class="mt-2"
+          ><v-icon class="mr-3" color="accent">fas fa-random</v-icon>
           Discover</v-list-item
         >
-        <v-list-item :to="`/movies/trending`" color="secondary"
-          ><v-icon class="mr-3" color="secondary">fas fa-fire</v-icon>
+        <v-list-item :to="`/movies/trending`" color="accent"
+          ><v-icon class="mr-3" color="accent">fas fa-fire</v-icon>
           Trending</v-list-item
         >
-        <v-list-item :to="`/movies/popular`" color="secondary"
-          ><v-icon class="mr-3" color="secondary">fas fa-poll-h</v-icon>
+        <v-list-item :to="`/movies/popular`" color="accent"
+          ><v-icon class="mr-3" color="accent">fas fa-poll-h</v-icon>
           Popular</v-list-item
         >
-        <v-list-item :to="`/movies/playing`" color="secondary"
-          ><v-icon class="mr-3" color="secondary">far fa-play-circle</v-icon
+        <v-list-item :to="`/movies/playing`" color="accent"
+          ><v-icon class="mr-3" color="accent">far fa-play-circle</v-icon
           >Playing</v-list-item
         >
-        <v-list-item :to="`/movies/top-rated`" color="secondary"
-          ><v-icon class="mr-3" color="secondary">fas fa-star-of-life</v-icon
-          >Top Rated</v-list-item
+        <v-list-item :to="`/movies/top-rated`" color="accent"
+          ><v-icon class="mr-3" color="accent">fas fa-star-of-life</v-icon>Top
+          Rated</v-list-item
         >
-        <v-list-item :to="`/movies/upcoming`" color="secondary"
-          ><v-icon class="mr-3" color="secondary">far fa-calendar-alt</v-icon
+        <v-list-item :to="`/movies/upcoming`" color="accent"
+          ><v-icon class="mr-3" color="accent">far fa-calendar-alt</v-icon
           >Upcoming</v-list-item
         >
         <v-list v-if="this.$route.path == '/movies/discover'">

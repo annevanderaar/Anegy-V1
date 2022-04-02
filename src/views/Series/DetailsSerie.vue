@@ -3,8 +3,8 @@
     <HomeAppBar />
     <v-main>
       <v-container fluid style="overflow: auto">
-        <v-row justify="center">
-          <v-col>
+        <v-row>
+          <v-col class="d-flex justify-center align-center">
             <v-card
               max-width="450px"
               max-height="700px"
@@ -58,7 +58,7 @@
           </v-col>
           <v-col>
             <v-tabs
-              color="secondary"
+              color="accent"
               icons-and-text
               center-active
               fixed-tabs
