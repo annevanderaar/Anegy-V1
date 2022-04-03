@@ -186,7 +186,7 @@
                 | {{ country.name }}
               </v-chip>
             </v-row>
-            <v-row>
+            <v-row v-if="this.providers.results.NL">
               <h4>Watch (NL):</h4>
               <v-chip
                 class="btnText"
@@ -212,6 +212,19 @@
               >
                 {{ item.provider_name }}
               </v-chip>
+            </v-row>
+            <v-row v-else>
+              <h4>Watch (NL):</h4>
+              <v-chip
+                class="btnText"
+                outlined
+                v-for="item in this.iLinks"
+                :key="item.name"
+                :href="item.to"
+                target="_blank"
+              >
+                {{ item.name }}</v-chip
+              >
             </v-row>
           </v-col>
           <v-col md="12">
@@ -302,6 +315,20 @@ export default {
         val: "similar",
       },
     ],
+    iLinks: [
+      {
+        name: "123Movies",
+        to: "https://0123movie.ru/",
+      },
+      {
+        name: "Watch Series",
+        to: "https://ww.watchseriesfree.co/",
+      },
+      {
+        name: "Putlockers",
+        to: "https://www.putlockers.tv/",
+      },
+    ],
   }),
   methods: {
     getDetails(id) {
@@ -330,7 +357,7 @@ export default {
       })
         .then((res) => {
           this.providers = res.data;
-          //console.log(this.providers.results.NL.flatrate);
+          console.log(res.data.results);
         })
         .catch((err) => {
           console.log(err);
