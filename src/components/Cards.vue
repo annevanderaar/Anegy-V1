@@ -62,7 +62,7 @@
           >Know more</v-btn
         >
         <v-btn
-          v-else-if="item.media_type"
+          v-else-if="item.media_type == 'person'"
           elevation="0"
           color="accent"
           class="ml-2"
@@ -70,7 +70,7 @@
           >Know more</v-btn
         >
         <v-btn
-          v-else
+          v-else-if="item.media_type == 'tv'"
           elevation="0"
           color="accent"
           class="ml-2"

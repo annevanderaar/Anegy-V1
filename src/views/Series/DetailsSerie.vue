@@ -353,7 +353,7 @@ export default {
       })
         .then((res) => {
           this.data = res.data;
-          console.log(res.data);
+          //console.log(res.data);
         })
         .catch((err) => {
           console.log(err);
