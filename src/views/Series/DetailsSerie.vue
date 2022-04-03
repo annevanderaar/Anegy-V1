@@ -145,7 +145,7 @@
                 outlined
                 rounded
                 class="btnText"
-                :href="`https://www.imdb.com/title/${links.twitter_id}`"
+                :href="`https://twitter.com/${links.twitter_id}`"
                 target="_blank"
                 v-if="links.twitter_id"
                 ><v-icon>mdi-twitter</v-icon></v-chip
@@ -154,7 +154,7 @@
                 outlined
                 rounded
                 class="btnText"
-                :href="`https://www.imdb.com/title/${links.facebook_id}`"
+                :href="`https://www.facebook.com/${links.facebook_id}`"
                 target="_blank"
                 v-if="links.facebook_id"
                 ><v-icon>mdi-facebook</v-icon></v-chip
@@ -163,7 +163,7 @@
                 outlined
                 rounded
                 class="btnText"
-                :href="`https://www.imdb.com/title/${links.instagram_id}`"
+                :href="`https://www.instagram.com/${links.instagram_id}`"
                 target="_blank"
                 v-if="links.instagram_id"
                 ><v-icon>mdi-instagram</v-icon></v-chip
@@ -215,6 +215,16 @@
               >
                 {{ item.provider_name }}
               </v-chip>
+              <v-chip
+                class="btnText"
+                outlined
+                v-for="item in this.iLinks"
+                :key="item.name"
+                :href="item.to"
+                target="_blank"
+              >
+                {{ item.name }}</v-chip
+              >
             </v-row>
             <v-row v-else>
               <h4>Watch (NL):</h4>

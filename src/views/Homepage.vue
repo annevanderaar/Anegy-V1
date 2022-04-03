@@ -100,16 +100,19 @@ export default {
           this.currentPage = res.data.page;
           //this.totalPages = res.data.total_pages;
           this.data = res.data;
-          //console.log(res.data);
+          console.log(res.data);
         })
         .catch((err) => {
           console.log(err);
         });
     },
     watched(data) {
-      //console.log(data)
+      //console.log(data);
       this.data = data;
       this.currentPage = data.page;
+      if (data.total_pages <= 500) {
+        this.totalPages = data.total_pages;
+      }
       if (data.errors) {
         this.currentPage = 1;
         this.getTrending(this.currentPage, this.selectedGenres);
