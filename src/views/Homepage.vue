@@ -107,6 +107,7 @@ export default {
         });
     },
     watched(data) {
+      // Todo: Fix page issue with search
       //console.log(data);
       this.data = data;
       this.currentPage = data.page;
