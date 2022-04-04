@@ -5,27 +5,27 @@
 </template>
 
 <script>
-  import axios from "axios";
-  import config from "@/Config/index.js";
+import axios from "axios";
+import config from "@/Config/index.js";
 
-  export default {
-    methods: {
-      getDetails(id) {
-        axios({
-          method: "post",
-          url: `${config.url}/Library/Details.php`,
-          data: {
-            url: `/movie/${id}`,
-          },
+export default {
+  methods: {
+    getDetails(id) {
+      axios({
+        method: "post",
+        url: `${config.url}/Library/Details.php`,
+        data: {
+          url: `/movie/${id}`,
+        },
+      })
+        .then((res) => {
+          this.data = res.data;
+          //console.log(res.data);
         })
-          .then((res) => {
-            this.data = res.data;
-            //console.log(res.data);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      },
+        .catch((err) => {
+          console.log(err);
+        });
     },
-  };
+  },
+};
 </script>

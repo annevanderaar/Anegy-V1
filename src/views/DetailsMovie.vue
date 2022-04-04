@@ -254,199 +254,209 @@
 </template>
 
 <script>
-  import HomeAppBar from "@/components/AppBar/HomeAppBar.vue";
-  import WebsiteFooter from "@/components/WebsiteFooter.vue";
-  import Cast from "@/components/Details/Cast.vue";
-  import Crew from "@/components/Details/Crew.vue";
-  import Collection from "@/components/Details/Collection.vue";
-  import Videos from "@/components/Details/Videos.vue";
-  import Reviews from "@/components/Details/Reviews.vue";
-  import Similar from "@/components/Details/Similar.vue";
-  import axios from "axios";
-  import config from "@/Config/index.js";
+import HomeAppBar from "@/components/AppBar/HomeAppBar.vue";
+import WebsiteFooter from "@/components/WebsiteFooter.vue";
+import Cast from "@/components/Details/Cast.vue";
+import Crew from "@/components/Details/Crew.vue";
+import Collection from "@/components/Details/Collection.vue";
+import Videos from "@/components/Details/Videos.vue";
+import Reviews from "@/components/Details/Reviews.vue";
+import Similar from "@/components/Details/Similar.vue";
+import axios from "axios";
+import config from "@/Config/index.js";
 
-  export default {
-    name: "DetailsMovie",
-    components: {
-      HomeAppBar,
-      WebsiteFooter,
-      Cast,
-      Crew,
-      Collection,
-      Videos,
-      Reviews,
-      Similar,
+export default {
+  name: "DetailsMovie",
+  components: {
+    HomeAppBar,
+    WebsiteFooter,
+    Cast,
+    Crew,
+    Collection,
+    Videos,
+    Reviews,
+    Similar,
+  },
+  data: () => ({
+    id: null,
+    val: "cast",
+    data: [],
+    providers: [],
+    links: [],
+    credits: [],
+    similar: [],
+    reviews: [],
+    collection: [],
+    tabs: [
+      {
+        title: "Cast",
+        icon: "mdi-account-box-multiple",
+        val: "cast",
+      },
+      {
+        title: "Crew",
+        icon: "mdi-account-group",
+        val: "crew",
+      },
+      {
+        title: "Collection",
+        icon: "mdi-bookmark-box-multiple",
+        val: "collection",
+      },
+      {
+        title: "Videos",
+        icon: "mdi-filmstrip-box-multiple",
+        val: "videos",
+      },
+      {
+        title: "Reviews",
+        icon: "mdi-android-messages",
+        val: "reviews",
+      },
+      {
+        title: "Similar",
+        icon: "mdi-approximately-equal-box",
+        val: "similar",
+      },
+    ],
+    iLinks: [
+      {
+        name: "123Movies",
+        to: "https://0123movie.ru/",
+      },
+      {
+        name: "Watch Series",
+        to: "https://ww.watchseriesfree.co/",
+      },
+      {
+        name: "Putlockers",
+        to: "https://www.putlockers.tv/",
+      },
+    ],
+  }),
+  methods: {
+    show(val) {
+      this.val = val;
     },
-    data: () => ({
-      id: null,
-      val: "cast",
-      data: [],
-      providers: [],
-      links: [],
-      credits: [],
-      similar: [],
-      reviews: [],
-      collection: [],
-      tabs: [
-        {
-          title: "Cast",
-          icon: "mdi-account-box-multiple",
-          val: "cast",
+    getDetails(id) {
+      axios({
+        method: "post",
+        url: `${config.url}/Library/Details.php`,
+        data: {
+          url: `/movie/${id}`,
         },
-        {
-          title: "Crew",
-          icon: "mdi-account-group",
-          val: "crew",
-        },
-        {
-          title: "Collection",
-          icon: "mdi-bookmark-box-multiple",
-          val: "collection",
-        },
-        {
-          title: "Videos",
-          icon: "mdi-filmstrip-box-multiple",
-          val: "videos",
-        },
-        {
-          title: "Reviews",
-          icon: "mdi-android-messages",
-          val: "reviews",
-        },
-        {
-          title: "Similar",
-          icon: "mdi-approximately-equal-box",
-          val: "similar",
-        },
-      ],
-      iLinks: [
-        {
-          name: "123Movies",
-          to: "https://0123movie.ru/",
-        },
-        {
-          name: "Watch Series",
-          to: "https://ww.watchseriesfree.co/",
-        },
-        {
-          name: "Putlockers",
-          to: "https://www.putlockers.tv/",
-        },
-      ],
-    }),
-    methods: {
-      show(val) {
-        this.val = val;
-      },
-      getDetails(id) {
-        axios({
-          method: "post",
-          url: `${config.url}/Library/Details.php`,
-          data: {
-            url: `/movie/${id}`,
-          },
+      })
+        .then((res) => {
+          this.data = res.data;
         })
-          .then((res) => {
-            this.data = res.data;
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      },
-      getProviders(id) {
-        axios({
-          method: "post",
-          url: `${config.url}/Library/Details.php`,
-          data: {
-            url: `/movie/${id}/watch/providers`,
-          },
-        })
-          .then((res) => {
-            this.providers = res.data.results.NL;
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      },
-      getLinks(id) {
-        axios({
-          method: "post",
-          url: `${config.url}/Library/Details.php`,
-          data: {
-            url: `/movie/${id}/external_ids`,
-          },
-        })
-          .then((res) => {
-            this.links = res.data;
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      },
-      getCredits(id) {
-        axios({
-          method: "post",
-          url: `${config.url}/Library/Details.php`,
-          data: {
-            url: `/movie/${id}/credits`,
-          },
-        })
-          .then((res) => {
-            this.credits = res.data;
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      },
-      getSimilar(id) {
-        axios({
-          method: "post",
-          url: `${config.url}/Library/Details.php`,
-          data: {
-            url: `/movie/${id}/similar`,
-          },
-        })
-          .then((res) => {
-            this.similar = res.data;
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      },
-      getReviews(id) {
-        axios({
-          method: "post",
-          url: `${config.url}/Library/Details.php`,
-          data: {
-            url: `/movie/${id}/reviews`,
-          },
-        })
-          .then((res) => {
-            this.reviews = res.data;
-            console.log(res.data);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      },
-      getCollection(id) {
-        axios({
-          method: "post",
-          url: `${config.url}/Library/Details.php`,
-          data: {
-            url: `/collection/${id}`,
-          },
-        })
-          .then((res) => {
-            this.collection = res.data;
-            //console.log(res.data);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      },
+        .catch((err) => {
+          console.log(err);
+        });
     },
-    mounted() {
+    getProviders(id) {
+      axios({
+        method: "post",
+        url: `${config.url}/Library/Details.php`,
+        data: {
+          url: `/movie/${id}/watch/providers`,
+        },
+      })
+        .then((res) => {
+          this.providers = res.data.results.NL;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getLinks(id) {
+      axios({
+        method: "post",
+        url: `${config.url}/Library/Details.php`,
+        data: {
+          url: `/movie/${id}/external_ids`,
+        },
+      })
+        .then((res) => {
+          this.links = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getCredits(id) {
+      axios({
+        method: "post",
+        url: `${config.url}/Library/Details.php`,
+        data: {
+          url: `/movie/${id}/credits`,
+        },
+      })
+        .then((res) => {
+          this.credits = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getSimilar(id) {
+      axios({
+        method: "post",
+        url: `${config.url}/Library/Details.php`,
+        data: {
+          url: `/movie/${id}/similar`,
+        },
+      })
+        .then((res) => {
+          this.similar = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getReviews(id) {
+      axios({
+        method: "post",
+        url: `${config.url}/Library/Details.php`,
+        data: {
+          url: `/movie/${id}/reviews`,
+        },
+      })
+        .then((res) => {
+          this.reviews = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getCollection(id) {
+      axios({
+        method: "post",
+        url: `${config.url}/Library/Details.php`,
+        data: {
+          url: `/collection/${id}`,
+        },
+      })
+        .then((res) => {
+          this.collection = res.data;
+          //console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
+  mounted() {
+    this.id = this.$route.params.id;
+    this.getDetails(this.$route.params.id);
+    this.getProviders(this.$route.params.id);
+    this.getLinks(this.$route.params.id);
+    this.getCredits(this.$route.params.id);
+    this.getSimilar(this.$route.params.id);
+    this.getReviews(this.$route.params.id);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  },
+  watch: {
+    $route() {
       this.id = this.$route.params.id;
       this.getDetails(this.$route.params.id);
       this.getProviders(this.$route.params.id);
@@ -456,34 +466,23 @@
       this.getReviews(this.$route.params.id);
       window.scrollTo({ top: 0, behavior: "smooth" });
     },
-    watch: {
-      $route() {
-        this.id = this.$route.params.id;
-        this.getDetails(this.$route.params.id);
-        this.getProviders(this.$route.params.id);
-        this.getLinks(this.$route.params.id);
-        this.getCredits(this.$route.params.id);
-        this.getSimilar(this.$route.params.id);
-        this.getReviews(this.$route.params.id);
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      },
-    },
-  };
+  },
+};
 </script>
 
 <style scoped>
-  h1,
-  h2,
-  h3,
-  h4,
-  p {
-    text-align: center;
-  }
-  .flexs {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: flex-start;
-    flex-wrap: nowrap;
-  }
+h1,
+h2,
+h3,
+h4,
+p {
+  text-align: center;
+}
+.flexs {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+}
 </style>

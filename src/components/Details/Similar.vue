@@ -5,12 +5,12 @@
 </template>
 
 <script>
-  import Cards from "@/components/Cards.vue";
+import Cards from "@/components/Cards.vue";
 
-  export default {
-    props: ["similar"],
-    components: {
-      Cards,
-    },
-  };
+export default {
+  props: ["similar"],
+  components: {
+    Cards,
+  },
+};
 </script>

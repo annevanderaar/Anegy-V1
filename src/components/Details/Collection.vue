@@ -8,7 +8,7 @@
 </template>
 
 <script>
-  export default {
-    props: ["collection"],
-  };
+export default {
+  props: ["collection"],
+};
 </script>

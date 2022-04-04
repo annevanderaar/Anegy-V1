@@ -58,6 +58,10 @@
               </p>
             </v-row>
             <v-row>
+              <h4>Age:</h4>
+              <p>{{ this.getAge(data.birthday) }}</p>
+            </v-row>
+            <v-row>
               <h4>Place of Birth:</h4>
               <p>{{ data.place_of_birth }}</p>
             </v-row>
@@ -114,65 +118,76 @@
 </template>
 
 <script>
-  import HomeAppBar from "@/components/AppBar/HomeAppBar.vue";
-  import WebsiteFooter from "@/components/WebsiteFooter.vue";
-  import axios from "axios";
-  import config from "@/Config/index.js";
+import HomeAppBar from "@/components/AppBar/HomeAppBar.vue";
+import WebsiteFooter from "@/components/WebsiteFooter.vue";
+import axios from "axios";
+import config from "@/Config/index.js";
 
-  export default {
-    components: {
-      HomeAppBar,
-      WebsiteFooter,
-    },
-    data: () => ({
-      data: [],
-      links: [],
-    }),
-    methods: {
-      getDetails(id) {
-        axios({
-          method: "post",
-          url: `${config.url}/Library/Details.php`,
-          data: {
-            url: `/person/${id}`,
-          },
+export default {
+  components: {
+    HomeAppBar,
+    WebsiteFooter,
+  },
+  data: () => ({
+    data: [],
+    links: [],
+  }),
+  methods: {
+    getDetails(id) {
+      axios({
+        method: "post",
+        url: `${config.url}/Library/Details.php`,
+        data: {
+          url: `/person/${id}`,
+        },
+      })
+        .then((res) => {
+          this.data = res.data;
+          console.log(res.data);
         })
-          .then((res) => {
-            this.data = res.data;
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      },
-      getLinks(id) {
-        axios({
-          method: "post",
-          url: `${config.url}/Library/Details.php`,
-          data: {
-            url: `/person/${id}/external_ids`,
-          },
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getLinks(id) {
+      axios({
+        method: "post",
+        url: `${config.url}/Library/Details.php`,
+        data: {
+          url: `/person/${id}/external_ids`,
+        },
+      })
+        .then((res) => {
+          this.links = res.data;
         })
-          .then((res) => {
-            this.links = res.data;
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      },
+        .catch((err) => {
+          console.log(err);
+        });
     },
-    mounted() {
-      this.getDetails(this.$route.params.id);
-      this.getLinks(this.$route.params.id);
+    getAge(dateString) {
+      var today = new Date();
+      var birthDate = new Date(dateString);
+      var age = today.getFullYear() - birthDate.getFullYear();
+      var m = today.getMonth() - birthDate.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+      return age;
     },
-  };
+  },
+  mounted() {
+    this.getDetails(this.$route.params.id);
+    this.getLinks(this.$route.params.id);
+  },
+};
 </script>
 
 <style scoped>
-  h1,
-  h2,
-  h3,
-  h4,
-  p {
-    text-align: center;
-  }
+h1,
+h2,
+h3,
+h4,
+p {
+  text-align: center;
+}
 </style>

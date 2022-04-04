@@ -5,6 +5,7 @@
       :key="crew.id"
       width="300px"
       class="cards"
+      :to="`/people/${crew.id}`"
     >
       <v-avatar size="128" class="ma-2">
         <v-img
@@ -18,7 +19,7 @@
 </template>
 
 <script>
-  export default {
-    props: ["credits"],
-  };
+export default {
+  props: ["credits"],
+};
 </script>

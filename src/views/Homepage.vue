@@ -66,170 +66,170 @@
 </template>
 
 <script>
-  import HomeAppBar from "@/components/AppBar/HomeAppBar.vue";
-  import WebsiteFooter from "@/components/WebsiteFooter.vue";
-  import Cards from "@/components/Cards.vue";
-  import axios from "axios";
-  import config from "@/Config/index.js";
+import HomeAppBar from "@/components/AppBar/HomeAppBar.vue";
+import WebsiteFooter from "@/components/WebsiteFooter.vue";
+import Cards from "@/components/Cards.vue";
+import axios from "axios";
+import config from "@/Config/index.js";
 
-  export default {
-    name: "Homepage",
-    components: {
-      HomeAppBar,
-      WebsiteFooter,
-      Cards,
-    },
-    data: () => ({
-      data: [],
-      currentPage: 1,
-      totalPages: 500,
-      selectedGenres: [],
-    }),
-    methods: {
-      getTrending(page, genres) {
-        axios({
-          method: "post",
-          url: `${config.url}/Library/Discover.php`,
-          data: {
-            url: "/trending/all/day?",
-            page: page,
-            genres: encodeURI(genres.join(",")),
-          },
+export default {
+  name: "Homepage",
+  components: {
+    HomeAppBar,
+    WebsiteFooter,
+    Cards,
+  },
+  data: () => ({
+    data: [],
+    currentPage: 1,
+    totalPages: 500,
+    selectedGenres: [],
+  }),
+  methods: {
+    getTrending(page, genres) {
+      axios({
+        method: "post",
+        url: `${config.url}/Library/Discover.php`,
+        data: {
+          url: "/trending/all/day?",
+          page: page,
+          genres: encodeURI(genres.join(",")),
+        },
+      })
+        .then((res) => {
+          this.currentPage = res.data.page;
+          if (res.data.total_pages <= 500) {
+            this.totalPages = res.data.total_pages;
+          }
+          this.data = res.data;
         })
-          .then((res) => {
-            this.currentPage = res.data.page;
-            if (res.data.total_pages <= 500) {
-              this.totalPages = res.data.total_pages;
-            }
-            this.data = res.data;
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      },
-      watched(data) {
-        // Todo: Fix page issue with search
-        console.log(data);
-        this.data = data;
-        this.currentPage = data.page;
-        if (data.total_pages <= 500) {
-          this.totalPages = data.total_pages;
-        }
-        if (data.errors) {
-          this.currentPage = 1;
-          this.getTrending(this.currentPage, this.selectedGenres);
-        }
-      },
+        .catch((err) => {
+          console.log(err);
+        });
     },
-    mounted() {
-      this.getTrending(this.currentPage, this.selectedGenres);
+    watched(data) {
+      // Todo: Fix page issue with search
+      console.log(data);
+      this.data = data;
+      this.currentPage = data.page;
+      if (data.total_pages <= 500) {
+        this.totalPages = data.total_pages;
+      }
+      if (data.errors) {
+        this.currentPage = 1;
+        this.getTrending(this.currentPage, this.selectedGenres);
+      }
     },
-    watch: {
-      currentPage(val) {
-        this.getTrending(val, this.selectedGenres);
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      },
+  },
+  mounted() {
+    this.getTrending(this.currentPage, this.selectedGenres);
+  },
+  watch: {
+    currentPage(val) {
+      this.getTrending(val, this.selectedGenres);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     },
-  };
+  },
+};
 </script>
 
 <style>
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  p,
-  span,
-  .display-4,
-  .display-3,
-  .display-2,
-  .display-1 {
-    font-family: "Fredoka", sans-serif;
-    margin: 8px;
-  }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+.display-4,
+.display-3,
+.display-2,
+.display-1 {
+  font-family: "Fredoka", sans-serif;
+  margin: 8px;
+}
 
-  .btnText {
-    margin: 4px;
-  }
+.btnText {
+  margin: 4px;
+}
 
-  .filterBtn {
-    position: fixed;
-    margin: 16px;
-    font-weight: 400;
-  }
+.filterBtn {
+  position: fixed;
+  margin: 16px;
+  font-weight: 400;
+}
 
-  .highlight {
-    background-color: #23a9a7;
-  }
+.highlight {
+  background-color: #23a9a7;
+}
 
-  .cards {
-    margin: 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-  .movie {
-    width: 300px;
-    margin: 1rem;
-    border-radius: 3px;
-    position: relative;
-    overflow: hidden;
-  }
+.cards {
+  margin: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.movie {
+  width: 300px;
+  margin: 1rem;
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+}
 
-  .movie .v-img {
-    width: 100%;
-    height: 100%;
-  }
+.movie .v-img {
+  width: 100%;
+  height: 100%;
+}
 
-  .overview {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    max-height: 100%;
-    padding: 1rem;
-    transform: translateY(101%);
-    transition: transform 0.3s ease-in;
-    overflow: auto;
-  }
+.overview {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-height: 100%;
+  padding: 1rem;
+  transform: translateY(101%);
+  transition: transform 0.3s ease-in;
+  overflow: auto;
+}
 
-  .overview::-webkit-scrollbar {
-    width: 10px;
-  }
+.overview::-webkit-scrollbar {
+  width: 10px;
+}
 
-  .movie:hover .overview {
-    transform: translateY(0);
-  }
+.movie:hover .overview {
+  transform: translateY(0);
+}
 
-  .movie-info .v-avatar {
-    padding: 0.25rem 0.5rem;
-    border-radius: 3px;
-    font-weight: bold;
-  }
+.movie-info .v-avatar {
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  font-weight: bold;
+}
 
-  .serie {
-    width: 300px;
-    margin: 1rem;
-    border-radius: 3px;
-    position: relative;
-    overflow: hidden;
-  }
+.serie {
+  width: 300px;
+  margin: 1rem;
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+}
 
-  .serie .v-img {
-    width: 100%;
-    height: 100%;
-  }
+.serie .v-img {
+  width: 100%;
+  height: 100%;
+}
 
-  .serie:hover .overview {
-    transform: translateY(0);
-  }
+.serie:hover .overview {
+  transform: translateY(0);
+}
 
-  .serie-info .v-avatar {
-    padding: 0.25rem 0.5rem;
-    border-radius: 3px;
-    font-weight: bold;
-  }
+.serie-info .v-avatar {
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  font-weight: bold;
+}
 </style>
