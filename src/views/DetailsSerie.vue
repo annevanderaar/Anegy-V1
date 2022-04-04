@@ -37,7 +37,7 @@
               <h4>First Air Date:</h4>
               <p>
                 {{
-                  new Date(data.first_air_date).toLocaleDateString("en-US", {
+                  new Date(data.first_air_date).toLocaleDateString("nl-NL", {
                     year: "numeric",
                     month: "long",
                     day: "numeric",
@@ -50,7 +50,7 @@
               <h4>Last Air Date:</h4>
               <p>
                 {{
-                  new Date(data.last_air_date).toLocaleDateString("en-US", {
+                  new Date(data.last_air_date).toLocaleDateString("nl-NL", {
                     year: "numeric",
                     month: "long",
                     day: "numeric",
@@ -452,6 +452,19 @@
       this.getCredits(this.$route.params.id);
       this.getSimilar(this.$route.params.id);
       this.getReviews(this.$route.params.id);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    },
+    watch: {
+      $route() {
+        this.id = this.$route.params.id;
+        this.getDetails(this.$route.params.id);
+        this.getProviders(this.$route.params.id);
+        this.getLinks(this.$route.params.id);
+        this.getCredits(this.$route.params.id);
+        this.getSimilar(this.$route.params.id);
+        this.getReviews(this.$route.params.id);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      },
     },
   };
 </script>

@@ -37,7 +37,7 @@
               <h4>Date of Birth:</h4>
               <p>
                 {{
-                  new Date(data.birthday).toLocaleDateString("en-US", {
+                  new Date(data.birthday).toLocaleDateString("nl-NL", {
                     year: "numeric",
                     month: "long",
                     day: "numeric",
@@ -49,7 +49,7 @@
               <h4>Date of Death:</h4>
               <p>
                 {{
-                  new Date(data.birthday).toLocaleDateString("en-US", {
+                  new Date(data.birthday).toLocaleDateString("nl-NL", {
                     year: "numeric",
                     month: "long",
                     day: "numeric",

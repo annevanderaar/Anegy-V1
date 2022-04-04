@@ -37,7 +37,7 @@
               <h4>Release Date:</h4>
               <p>
                 {{
-                  new Date(data.release_date).toLocaleDateString("en-US", {
+                  new Date(data.release_date).toLocaleDateString("nl-NL", {
                     year: "numeric",
                     month: "long",
                     day: "numeric",
@@ -348,7 +348,6 @@
         })
           .then((res) => {
             this.data = res.data;
-            console.log(res.data);
           })
           .catch((err) => {
             console.log(err);
@@ -394,7 +393,6 @@
         })
           .then((res) => {
             this.credits = res.data;
-            //console.log(res.data);
           })
           .catch((err) => {
             console.log(err);
@@ -410,7 +408,6 @@
         })
           .then((res) => {
             this.similar = res.data;
-            //console.log(res.data);
           })
           .catch((err) => {
             console.log(err);
@@ -442,7 +439,7 @@
         })
           .then((res) => {
             this.collection = res.data;
-            console.log(res.data);
+            //console.log(res.data);
           })
           .catch((err) => {
             console.log(err);
@@ -457,6 +454,19 @@
       this.getCredits(this.$route.params.id);
       this.getSimilar(this.$route.params.id);
       this.getReviews(this.$route.params.id);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    },
+    watch: {
+      $route() {
+        this.id = this.$route.params.id;
+        this.getDetails(this.$route.params.id);
+        this.getProviders(this.$route.params.id);
+        this.getLinks(this.$route.params.id);
+        this.getCredits(this.$route.params.id);
+        this.getSimilar(this.$route.params.id);
+        this.getReviews(this.$route.params.id);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      },
     },
   };
 </script>

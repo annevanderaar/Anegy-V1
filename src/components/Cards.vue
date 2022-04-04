@@ -19,8 +19,12 @@
         :src="`https://image.tmdb.org/t/p/w500${item.poster_path}`"
       ></v-img>
       <div class="movie-info d-flex justify-space-between">
-        <v-card-title v-if="item.title">{{ item.title }}</v-card-title>
-        <v-card-title v-if="item.name">{{ item.name }}</v-card-title>
+        <v-card-title v-if="item.title" style="word-break: normal">{{
+          item.title
+        }}</v-card-title>
+        <v-card-title v-if="item.name" style="word-break: normal">{{
+          item.name
+        }}</v-card-title>
         <v-avatar
           class="ma-2"
           color="green white--text"
@@ -33,7 +37,10 @@
           v-else-if="item.vote_average >= 5"
           >{{ item.vote_average }}</v-avatar
         >
-        <v-avatar class="ma-2" color="grey" v-else-if="!item.vote_average"
+        <v-avatar
+          class="ma-2"
+          color="accent white--text"
+          v-else-if="!item.vote_average"
           >P</v-avatar
         >
         <v-avatar class="ma-2" color="red white--text" v-else>{{
@@ -43,16 +50,28 @@
       <v-card class="overview">
         <v-card-subtitle v-if="item.release_date"
           ><strong>Release Date:</strong>
-          {{ item.release_date }}</v-card-subtitle
+          {{
+            new Date(item.release_date).toLocaleDateString("nl-NL", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })
+          }}</v-card-subtitle
         >
         <v-card-subtitle v-if="item.first_air_date"
           ><strong>First Air Date:</strong>
-          {{ item.first_air_date }}</v-card-subtitle
+          {{
+            new Date(item.first_air_date).toLocaleDateString("nl-NL", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })
+          }}</v-card-subtitle
         >
-        <v-card-text v-if="item.overview">{{ item.overview }}</v-card-text>
-        <v-card-text v-else
+        <v-card-text v-if="item.media_type == 'person'"
           >Occupation: {{ item.known_for_department }}</v-card-text
         >
+        <v-card-text v-if="item.overview">{{ item.overview }}</v-card-text>
         <v-btn
           v-if="item.video == false"
           elevation="0"

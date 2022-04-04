@@ -109,7 +109,7 @@
       },
       watched(data) {
         // Todo: Fix page issue with search
-        //console.log(data);
+        console.log(data);
         this.data = data;
         this.currentPage = data.page;
         if (data.total_pages <= 500) {
