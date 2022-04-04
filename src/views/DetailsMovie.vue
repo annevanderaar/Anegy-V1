@@ -230,17 +230,18 @@
               center-active
               fixed-tabs
               centered
+              hide-slider
             >
               <v-tab v-for="tab in tabs" :key="tab.title" @click="show(tab.val)"
                 >{{ tab.title }}<v-icon>{{ tab.icon }}</v-icon></v-tab
               >
             </v-tabs>
-            <Cast v-if="this.val == 'cast'" :id="id" />
-            <Crew v-else-if="this.val == 'crew'" :id="id" />
+            <Cast v-if="this.val == 'cast'" :credits="credits" />
+            <Crew v-else-if="this.val == 'crew'" :credits="credits" />
             <Collection v-else-if="this.val == 'collection'" :data="data" />
-            <Videos v-else-if="this.val == 'videos'" :id="id" />
-            <Reviews v-else-if="this.val == 'reviews'" :id="id" />
-            <Similar v-else-if="this.val == 'similar'" :id="id" />
+            <Videos v-else-if="this.val == 'videos'" />
+            <Reviews v-else-if="this.val == 'reviews'" />
+            <Similar v-else-if="this.val == 'similar'" :similar="similar" />
           </v-col>
         </v-row>
       </v-container>
@@ -279,6 +280,8 @@
       data: [],
       providers: [],
       links: [],
+      credits: [],
+      similar: [],
       tabs: [
         {
           title: "Cast",
@@ -337,6 +340,7 @@
         })
           .then((res) => {
             this.data = res.data;
+            //console.log(res.data);
           })
           .catch((err) => {
             console.log(err);
@@ -372,6 +376,38 @@
             console.log(err);
           });
       },
+      getCredits(id) {
+        axios({
+          method: "post",
+          url: `${config.url}/Library/Details.php`,
+          data: {
+            url: `/movie/${id}/credits`,
+          },
+        })
+          .then((res) => {
+            this.credits = res.data;
+            //console.log(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      },
+      getSimilar(id) {
+        axios({
+          method: "post",
+          url: `${config.url}/Library/Details.php`,
+          data: {
+            url: `/movie/${id}/similar`,
+          },
+        })
+          .then((res) => {
+            this.similar = res.data;
+            console.log(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      },
       show(val) {
         this.val = val;
       },
@@ -381,6 +417,8 @@
       this.getDetails(this.$route.params.id);
       this.getProviders(this.$route.params.id);
       this.getLinks(this.$route.params.id);
+      this.getCredits(this.$route.params.id);
+      this.getSimilar(this.$route.params.id);
     },
   };
 </script>

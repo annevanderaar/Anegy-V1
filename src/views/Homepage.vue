@@ -165,7 +165,7 @@
   }
 
   .cards {
-    margin: 8px;
+    margin: 16px;
     display: flex;
     justify-content: center;
     align-items: center;

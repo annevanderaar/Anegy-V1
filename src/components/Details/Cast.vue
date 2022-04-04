@@ -1,32 +1,25 @@
 <template>
-  <div>
-    <h1>Cast</h1>
+  <div class="d-flex flex-wrap justify-center">
+    <v-card
+      v-for="cast in this.credits.cast"
+      :key="cast.id"
+      width="300px"
+      class="cards"
+    >
+      <v-avatar size="128" class="ma-2">
+        <v-img
+          :src="`https://image.tmdb.org/t/p/w500${cast.profile_path}`"
+        ></v-img>
+      </v-avatar>
+      <v-card-title>{{ cast.name }}</v-card-title>
+      <v-card-subtitle>as</v-card-subtitle>
+      <v-card-text style="text-align: center">{{ cast.character }}</v-card-text>
+    </v-card>
   </div>
 </template>
 
 <script>
-  import axios from "axios";
-  import config from "@/Config/index.js";
-
   export default {
-    props: ["id"],
-    methods: {
-      getDetails(id) {
-        axios({
-          method: "post",
-          url: `${config.url}/Library/Details.php`,
-          data: {
-            url: `/movie/${id}`,
-          },
-        })
-          .then((res) => {
-            this.data = res.data;
-            //console.log(res.data);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      },
-    },
+    props: ["credits"],
   };
 </script>

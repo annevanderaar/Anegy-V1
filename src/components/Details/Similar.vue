@@ -1,32 +1,16 @@
 <template>
   <div>
-    <h1>Similar</h1>
+    <cards :data="similar" />
   </div>
 </template>
 
 <script>
-  import axios from "axios";
-  import config from "@/Config/index.js";
+  import Cards from "@/components/Cards.vue";
 
   export default {
-    props: ["id"],
-    methods: {
-      getDetails(id) {
-        axios({
-          method: "post",
-          url: `${config.url}/Library/Details.php`,
-          data: {
-            url: `/movie/${id}`,
-          },
-        })
-          .then((res) => {
-            this.data = res.data;
-            //console.log(res.data);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      },
+    props: ["similar"],
+    components: {
+      Cards,
     },
   };
 </script>

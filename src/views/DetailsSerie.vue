@@ -253,11 +253,11 @@
               >
             </v-tabs>
             <Seasons v-if="this.val == 'seasons'" />
-            <Cast v-else-if="this.val == 'cast'" />
-            <Crew v-else-if="this.val == 'crew'" />
+            <Cast v-else-if="this.val == 'cast'" :credits="credits" />
+            <Crew v-else-if="this.val == 'crew'" :credits="credits" />
             <Videos v-else-if="this.val == 'videos'" />
             <Reviews v-else-if="this.val == 'reviews'" />
-            <Similar v-else-if="this.val == 'similar'" />
+            <Similar v-else-if="this.val == 'similar'" :similar="similar" />
           </v-col>
         </v-row>
       </v-container>
@@ -296,6 +296,8 @@
       data: [],
       providers: [],
       links: [],
+      credits: [],
+      similar: [],
       tabs: [
         {
           title: "Seasons",
@@ -389,6 +391,38 @@
             console.log(err);
           });
       },
+      getCredits(id) {
+        axios({
+          method: "post",
+          url: `${config.url}/Library/Details.php`,
+          data: {
+            url: `/tv/${id}/credits`,
+          },
+        })
+          .then((res) => {
+            this.credits = res.data;
+            //console.log(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      },
+      getSimilar(id) {
+        axios({
+          method: "post",
+          url: `${config.url}/Library/Details.php`,
+          data: {
+            url: `/tv/${id}/similar`,
+          },
+        })
+          .then((res) => {
+            this.similar = res.data;
+            console.log(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      },
       show(val) {
         this.val = val;
       },
@@ -398,6 +432,8 @@
       this.getDetails(this.$route.params.id);
       this.getProviders(this.$route.params.id);
       this.getLinks(this.$route.params.id);
+      this.getCredits(this.$route.params.id);
+      this.getSimilar(this.$route.params.id);
     },
   };
 </script>

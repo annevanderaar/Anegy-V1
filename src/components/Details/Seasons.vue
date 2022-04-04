@@ -9,7 +9,6 @@
   import config from "@/Config/index.js";
 
   export default {
-    props: ["id"],
     methods: {
       getDetails(id) {
         axios({

@@ -1,32 +1,24 @@
 <template>
-  <div>
-    <h1>Crew</h1>
+  <div class="d-flex flex-wrap justify-center">
+    <v-card
+      v-for="crew in this.credits.crew"
+      :key="crew.id"
+      width="300px"
+      class="cards"
+    >
+      <v-avatar size="128" class="ma-2">
+        <v-img
+          :src="`https://image.tmdb.org/t/p/w500${crew.profile_path}`"
+        ></v-img>
+      </v-avatar>
+      <v-card-title>{{ crew.name }}</v-card-title>
+      <v-card-text style="text-align: center">{{ crew.job }}</v-card-text>
+    </v-card>
   </div>
 </template>
 
 <script>
-  import axios from "axios";
-  import config from "@/Config/index.js";
-
   export default {
-    props: ["id"],
-    methods: {
-      getDetails(id) {
-        axios({
-          method: "post",
-          url: `${config.url}/Library/Details.php`,
-          data: {
-            url: `/movie/${id}`,
-          },
-        })
-          .then((res) => {
-            this.data = res.data;
-            //console.log(res.data);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      },
-    },
+    props: ["credits"],
   };
 </script>
