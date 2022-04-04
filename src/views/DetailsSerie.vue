@@ -252,9 +252,9 @@
                 >{{ tab.title }}<v-icon>{{ tab.icon }}</v-icon></v-tab
               >
             </v-tabs>
-            <Seasons v-if="this.val == 'seasons'" />
-            <Cast v-else-if="this.val == 'cast'" :credits="credits" />
+            <Cast v-if="this.val == 'cast'" :credits="credits" />
             <Crew v-else-if="this.val == 'crew'" :credits="credits" />
+            <Seasons v-else-if="this.val == 'seasons'" />
             <Videos v-else-if="this.val == 'videos'" />
             <Reviews v-else-if="this.val == 'reviews'" :reviews="reviews" />
             <Similar v-else-if="this.val == 'similar'" :similar="similar" />
@@ -292,7 +292,7 @@
     },
     data: () => ({
       id: null,
-      val: "seasons",
+      val: "cast",
       data: [],
       providers: [],
       links: [],
@@ -300,11 +300,6 @@
       similar: [],
       reviews: [],
       tabs: [
-        {
-          title: "Seasons",
-          icon: "mdi-cards-variant",
-          val: "seasons",
-        },
         {
           title: "Cast",
           icon: "mdi-account-box-multiple",
@@ -314,6 +309,11 @@
           title: "Crew",
           icon: "mdi-account-group",
           val: "crew",
+        },
+        {
+          title: "Seasons",
+          icon: "mdi-cards-variant",
+          val: "seasons",
         },
         {
           title: "Videos",
