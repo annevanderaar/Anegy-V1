@@ -256,7 +256,7 @@
             <Cast v-else-if="this.val == 'cast'" :credits="credits" />
             <Crew v-else-if="this.val == 'crew'" :credits="credits" />
             <Videos v-else-if="this.val == 'videos'" />
-            <Reviews v-else-if="this.val == 'reviews'" />
+            <Reviews v-else-if="this.val == 'reviews'" :reviews="reviews" />
             <Similar v-else-if="this.val == 'similar'" :similar="similar" />
           </v-col>
         </v-row>
@@ -298,6 +298,7 @@
       links: [],
       credits: [],
       similar: [],
+      reviews: [],
       tabs: [
         {
           title: "Seasons",
@@ -417,6 +418,22 @@
         })
           .then((res) => {
             this.similar = res.data;
+            //console.log(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      },
+      getReviews(id) {
+        axios({
+          method: "post",
+          url: `${config.url}/Library/Details.php`,
+          data: {
+            url: `/tv/${id}/reviews`,
+          },
+        })
+          .then((res) => {
+            this.reviews = res.data;
             console.log(res.data);
           })
           .catch((err) => {
@@ -434,6 +451,7 @@
       this.getLinks(this.$route.params.id);
       this.getCredits(this.$route.params.id);
       this.getSimilar(this.$route.params.id);
+      this.getReviews(this.$route.params.id);
     },
   };
 </script>
