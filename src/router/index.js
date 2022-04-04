@@ -15,88 +15,88 @@ const routes = [
     name: "Movie Details",
     component: () =>
       import(
-        /* webpackChunkName: "account" */ "../views/Movies/DetailsMovie.vue"
+        /* webpackChunkName: "account" */ "../views/DetailsMovie.vue"
       ),
   },
   {
     path: "/movies/discover",
     name: "Discover Movies",
     component: () =>
-      import(/* webpackChunkName: "account" */ "../views/Movies/Movies.vue"),
+      import(/* webpackChunkName: "account" */ "../views/Movies.vue"),
   },
   {
     path: "/movies/trending",
     name: "Trending Movies",
     component: () =>
-      import(/* webpackChunkName: "account" */ "../views/Movies/Movies.vue"),
+      import(/* webpackChunkName: "account" */ "../views/Movies.vue"),
   },
   {
     path: "/movies/popular",
     name: "Popular Movies",
     component: () =>
-      import(/* webpackChunkName: "account" */ "../views/Movies/Movies.vue"),
+      import(/* webpackChunkName: "account" */ "../views/Movies.vue"),
   },
   {
     path: "/movies/playing",
     name: "Playing Movies",
     component: () =>
-      import(/* webpackChunkName: "account" */ "../views/Movies/Movies.vue"),
+      import(/* webpackChunkName: "account" */ "../views/Movies.vue"),
   },
   {
     path: "/movies/top-rated",
     name: "Top Rated Movies",
     component: () =>
-      import(/* webpackChunkName: "account" */ "../views/Movies/Movies.vue"),
+      import(/* webpackChunkName: "account" */ "../views/Movies.vue"),
   },
   {
     path: "/movies/upcoming",
     name: "Upcoming Movies",
     component: () =>
-      import(/* webpackChunkName: "account" */ "../views/Movies/Movies.vue"),
+      import(/* webpackChunkName: "account" */ "../views/Movies.vue"),
   },
   {
     path: "/series/details/:id",
     name: "Serie Details",
     component: () =>
       import(
-        /* webpackChunkName: "account" */ "../views/Series/DetailsSerie.vue"
+        /* webpackChunkName: "account" */ "../views/DetailsSerie.vue"
       ),
   },
   {
     path: "/series/discover",
     name: "Discover Series",
     component: () =>
-      import(/* webpackChunkName: "account" */ "../views/Series/Series.vue"),
+      import(/* webpackChunkName: "account" */ "../views/Series.vue"),
   },
   {
     path: "/series/trending",
     name: "Trending Series",
     component: () =>
-      import(/* webpackChunkName: "account" */ "../views/Series/Series.vue"),
+      import(/* webpackChunkName: "account" */ "../views/Series.vue"),
   },
   {
     path: "/series/popular",
     name: "Popular Series",
     component: () =>
-      import(/* webpackChunkName: "account" */ "../views/Series/Series.vue"),
+      import(/* webpackChunkName: "account" */ "../views/Series.vue"),
   },
   {
     path: "/series/playing",
     name: "Playing Series",
     component: () =>
-      import(/* webpackChunkName: "account" */ "../views/Series/Series.vue"),
+      import(/* webpackChunkName: "account" */ "../views/Series.vue"),
   },
   {
     path: "/series/top-rated",
     name: "Top Rated Series",
     component: () =>
-      import(/* webpackChunkName: "account" */ "../views/Series/Series.vue"),
+      import(/* webpackChunkName: "account" */ "../views/Series.vue"),
   },
   {
     path: "/series/upcoming",
     name: "Upcoming Series",
     component: () =>
-      import(/* webpackChunkName: "account" */ "../views/Series/Series.vue"),
+      import(/* webpackChunkName: "account" */ "../views/Series.vue"),
   },
   {
     path: "/people/:id",

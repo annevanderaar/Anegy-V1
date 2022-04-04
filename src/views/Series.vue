@@ -30,7 +30,7 @@ import WebsiteFooter from "@/components/WebsiteFooter.vue";
 import Cards from "@/components/Cards.vue";
 import { mapActions } from "vuex";
 import axios from "axios";
-import config from "../../Config/index.js";
+import config from "../Config/index.js";
 
 export default {
   name: "Series",

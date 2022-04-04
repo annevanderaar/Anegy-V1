@@ -29,33 +29,21 @@
           </v-col>
           <v-col md="8">
             <v-col>
-              <h1>{{ data.name }}</h1>
+              <h1>{{ data.title }}</h1>
               <h3>{{ data.tagline }}</h3>
               <p>{{ data.overview }}</p>
             </v-col>
             <v-row>
-              <h4>First Air Date:</h4>
+              <h4>Release Date:</h4>
               <p>
                 {{
-                  new Date(data.first_air_date).toLocaleDateString("en-US", {
+                  new Date(data.release_date).toLocaleDateString("en-US", {
                     year: "numeric",
                     month: "long",
                     day: "numeric",
                   })
                 }}
-                ({{ data.type }})
-              </p>
-            </v-row>
-            <v-row>
-              <h4>Last Air Date:</h4>
-              <p>
-                {{
-                  new Date(data.last_air_date).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })
-                }}
+                ({{ data.status }})
               </p>
             </v-row>
             <v-row>
@@ -71,24 +59,8 @@
               >
             </v-row>
             <v-row>
-              <h4>Seasons:</h4>
-              <v-avatar
-                height="36"
-                :color="
-                  $vuetify.theme.dark ? 'grey darken-1' : 'grey lighten-3'
-                "
-                ><span>{{ data.number_of_seasons }}</span></v-avatar
-              >
-            </v-row>
-            <v-row>
-              <h4>Episodes:</h4>
-              <v-avatar
-                height="36"
-                :color="
-                  $vuetify.theme.dark ? 'grey darken-1' : 'grey lighten-3'
-                "
-                ><span>{{ data.number_of_episodes }}</span></v-avatar
-              >
+              <h4>Runtime:</h4>
+              <p>{{ data.runtime }} min</p>
             </v-row>
             <v-row>
               <h4>Score:</h4>
@@ -111,12 +83,20 @@
               }}</v-avatar>
             </v-row>
             <v-row>
+              <h4>Budget:</h4>
+              <p>${{ data.budget.toLocaleString() }}</p>
+            </v-row>
+            <v-row>
+              <h4>Reveneu:</h4>
+              <p>${{ data.revenue.toLocaleString() }}</p>
+            </v-row>
+            <v-row>
               <h4>Genres:</h4>
               <v-chip
+                outlined
                 v-for="item in data.genres"
                 :key="item.id"
                 rounded
-                outlined
                 class="btnText"
                 >{{ item.name }}</v-chip
               >
@@ -170,23 +150,40 @@
               >
             </v-row>
             <v-row>
-              <h4>Networks:</h4>
+              <h4>
+                Production
+                {{
+                  data.production_companies.length > 1
+                    ? "Companies"
+                    : "Company"
+                }}:
+              </h4>
               <v-chip
                 class="btnText"
                 outlined
-                v-for="item in this.data.networks"
-                :key="item.id"
-                >{{ item.name }}
+                v-for="companie in data.production_companies"
+                :key="companie.id"
+              >
+                {{ companie.name }}
               </v-chip>
             </v-row>
             <v-row>
-              <h4>Created By:</h4>
+              <h4>
+                Production
+                {{
+                  data.production_countries.length > 1
+                    ? "Countries"
+                    : "Country"
+                }}:
+              </h4>
               <v-chip
                 class="btnText"
                 outlined
-                v-for="item in this.data.created_by"
-                :key="item.id"
-                >{{ item.name }}
+                v-for="country in data.production_countries"
+                :key="country.iso_3166_1"
+              >
+                {{ country.iso_3166_1 }}
+                | {{ country.name }}
               </v-chip>
             </v-row>
             <v-row v-if="this.providers.results.NL">
@@ -252,12 +249,12 @@
                 >{{ tab.title }}<v-icon>{{ tab.icon }}</v-icon></v-tab
               >
             </v-tabs>
-            <Seasons v-if="this.val == 'seasons'" />
-            <Cast v-else-if="this.val == 'cast'" />
-            <Crew v-else-if="this.val == 'crew'" />
-            <Videos v-else-if="this.val == 'videos'" />
-            <Reviews v-else-if="this.val == 'reviews'" />
-            <Similar v-else-if="this.val == 'similar'" />
+            <Cast v-if="this.val == 'cast'" :id="id" />
+            <Crew v-else-if="this.val == 'crew'" :id="id" />
+            <Collection v-else-if="this.val == 'collection'" :data="data" />
+            <Videos v-else-if="this.val == 'videos'" :id="id" />
+            <Reviews v-else-if="this.val == 'reviews'" :id="id" />
+            <Similar v-else-if="this.val == 'similar'" :id="id" />
           </v-col>
         </v-row>
       </v-container>
@@ -269,38 +266,34 @@
 <script>
 import HomeAppBar from "@/components/AppBar/HomeAppBar.vue";
 import WebsiteFooter from "@/components/WebsiteFooter.vue";
-import Seasons from "@/components/Details/Seasons.vue";
 import Cast from "@/components/Details/Cast.vue";
 import Crew from "@/components/Details/Crew.vue";
+import Collection from "@/components/Details/Collection.vue";
 import Videos from "@/components/Details/Videos.vue";
 import Reviews from "@/components/Details/Reviews.vue";
 import Similar from "@/components/Details/Similar.vue";
 import axios from "axios";
-import config from "../../Config/index.js";
+import config from "../Config/index.js";
 
 export default {
-  name: "DetailsSerie",
+  name: "DetailsMovie",
   components: {
     HomeAppBar,
     WebsiteFooter,
-    Seasons,
     Cast,
     Crew,
+    Collection,
     Videos,
     Reviews,
     Similar,
   },
   data: () => ({
-    val: "seasons",
+    id: null,
+    val: "cast",
     data: [],
     providers: [],
     links: [],
     tabs: [
-      {
-        title: "Seasons",
-        icon: "mdi-cards-variant",
-        val: "seasons",
-      },
       {
         title: "Cast",
         icon: "mdi-account-box-multiple",
@@ -310,6 +303,11 @@ export default {
         title: "Crew",
         icon: "mdi-account-group",
         val: "crew",
+      },
+      {
+        title: "Collection",
+        icon: "mdi-bookmark-box-multiple",
+        val: "collection",
       },
       {
         title: "Videos",
@@ -348,7 +346,7 @@ export default {
         method: "post",
         url: `${config.url}/Library/Details.php`,
         data: {
-          url: `/tv/${id}`,
+          url: `/movie/${id}`,
         },
       })
         .then((res) => {
@@ -364,12 +362,12 @@ export default {
         method: "post",
         url: `${config.url}/Library/Details.php`,
         data: {
-          url: `/tv/${id}/watch/providers`,
+          url: `/movie/${id}/watch/providers`,
         },
       })
         .then((res) => {
           this.providers = res.data;
-          //console.log(this.providers.results.NL.flatrate);
+          //console.log(res.data.results);
         })
         .catch((err) => {
           console.log(err);
@@ -380,7 +378,7 @@ export default {
         method: "post",
         url: `${config.url}/Library/Details.php`,
         data: {
-          url: `/tv/${id}/external_ids`,
+          url: `/movie/${id}/external_ids`,
         },
       })
         .then((res) => {
@@ -396,6 +394,7 @@ export default {
     },
   },
   mounted() {
+    this.id = this.$route.params.id;
     this.getDetails(this.$route.params.id);
     this.getProviders(this.$route.params.id);
     this.getLinks(this.$route.params.id);
@@ -414,5 +413,8 @@ p {
 .flexs {
   display: flex;
   flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: nowrap;
 }
 </style>
