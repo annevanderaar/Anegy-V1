@@ -347,6 +347,9 @@
       ],
     }),
     methods: {
+      show(val) {
+        this.val = val;
+      },
       getDetails(id) {
         axios({
           method: "post",
@@ -439,9 +442,6 @@
           .catch((err) => {
             console.log(err);
           });
-      },
-      show(val) {
-        this.val = val;
       },
     },
     mounted() {

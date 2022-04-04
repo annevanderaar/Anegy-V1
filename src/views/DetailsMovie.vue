@@ -238,7 +238,10 @@
             </v-tabs>
             <Cast v-if="this.val == 'cast'" :credits="credits" />
             <Crew v-else-if="this.val == 'crew'" :credits="credits" />
-            <Collection v-else-if="this.val == 'collection'" :data="data" />
+            <Collection
+              v-else-if="this.val == 'collection'"
+              :collection="collection"
+            />
             <Videos v-else-if="this.val == 'videos'" />
             <Reviews v-else-if="this.val == 'reviews'" :reviews="reviews" />
             <Similar v-else-if="this.val == 'similar'" :similar="similar" />
@@ -283,6 +286,7 @@
       credits: [],
       similar: [],
       reviews: [],
+      collection: [],
       tabs: [
         {
           title: "Cast",
@@ -331,6 +335,9 @@
       ],
     }),
     methods: {
+      show(val) {
+        this.val = val;
+      },
       getDetails(id) {
         axios({
           method: "post",
@@ -341,7 +348,7 @@
         })
           .then((res) => {
             this.data = res.data;
-            //console.log(res.data);
+            console.log(res.data);
           })
           .catch((err) => {
             console.log(err);
@@ -425,8 +432,21 @@
             console.log(err);
           });
       },
-      show(val) {
-        this.val = val;
+      getCollection(id) {
+        axios({
+          method: "post",
+          url: `${config.url}/Library/Details.php`,
+          data: {
+            url: `/collection/${id}`,
+          },
+        })
+          .then((res) => {
+            this.collection = res.data;
+            console.log(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       },
     },
     mounted() {
