@@ -189,12 +189,12 @@
                 >{{ item.name }}
               </v-chip>
             </v-row>
-            <v-row v-if="this.providers.results.NL">
+            <v-row v-if="this.providers">
               <h4>Watch (NL):</h4>
               <v-chip
                 class="btnText"
                 outlined
-                v-for="item in this.providers.results.NL.flatrate"
+                v-for="item in this.providers.flatrate"
                 :key="item.provider_id"
               >
                 {{ item.provider_name }}
@@ -202,7 +202,7 @@
               <v-chip
                 class="btnText"
                 outlined
-                v-for="item in this.providers.results.NL.buy"
+                v-for="item in this.providers.buy"
                 :key="item.provider_id"
               >
                 {{ item.provider_name }}
@@ -210,7 +210,7 @@
               <v-chip
                 class="btnText"
                 outlined
-                v-for="item in this.providers.results.NL.rent"
+                v-for="item in this.providers.rent"
                 :key="item.provider_id"
               >
                 {{ item.provider_name }}
@@ -267,152 +267,151 @@
 </template>
 
 <script>
-import HomeAppBar from "@/components/AppBar/HomeAppBar.vue";
-import WebsiteFooter from "@/components/WebsiteFooter.vue";
-import Seasons from "@/components/Details/Seasons.vue";
-import Cast from "@/components/Details/Cast.vue";
-import Crew from "@/components/Details/Crew.vue";
-import Videos from "@/components/Details/Videos.vue";
-import Reviews from "@/components/Details/Reviews.vue";
-import Similar from "@/components/Details/Similar.vue";
-import axios from "axios";
-import config from "../Config/index.js";
+  import HomeAppBar from "@/components/AppBar/HomeAppBar.vue";
+  import WebsiteFooter from "@/components/WebsiteFooter.vue";
+  import Seasons from "@/components/Details/Seasons.vue";
+  import Cast from "@/components/Details/Cast.vue";
+  import Crew from "@/components/Details/Crew.vue";
+  import Videos from "@/components/Details/Videos.vue";
+  import Reviews from "@/components/Details/Reviews.vue";
+  import Similar from "@/components/Details/Similar.vue";
+  import axios from "axios";
+  import config from "@/Config/index.js";
 
-export default {
-  name: "DetailsSerie",
-  components: {
-    HomeAppBar,
-    WebsiteFooter,
-    Seasons,
-    Cast,
-    Crew,
-    Videos,
-    Reviews,
-    Similar,
-  },
-  data: () => ({
-    val: "seasons",
-    data: [],
-    providers: [],
-    links: [],
-    tabs: [
-      {
-        title: "Seasons",
-        icon: "mdi-cards-variant",
-        val: "seasons",
-      },
-      {
-        title: "Cast",
-        icon: "mdi-account-box-multiple",
-        val: "cast",
-      },
-      {
-        title: "Crew",
-        icon: "mdi-account-group",
-        val: "crew",
-      },
-      {
-        title: "Videos",
-        icon: "mdi-filmstrip-box-multiple",
-        val: "videos",
-      },
-      {
-        title: "Reviews",
-        icon: "mdi-android-messages",
-        val: "reviews",
-      },
-      {
-        title: "Similar",
-        icon: "mdi-approximately-equal-box",
-        val: "similar",
-      },
-    ],
-    iLinks: [
-      {
-        name: "123Movies",
-        to: "https://0123movie.ru/",
-      },
-      {
-        name: "Watch Series",
-        to: "https://ww.watchseriesfree.co/",
-      },
-      {
-        name: "Putlockers",
-        to: "https://www.putlockers.tv/",
-      },
-    ],
-  }),
-  methods: {
-    getDetails(id) {
-      axios({
-        method: "post",
-        url: `${config.url}/Library/Details.php`,
-        data: {
-          url: `/tv/${id}`,
+  export default {
+    name: "DetailsSerie",
+    components: {
+      HomeAppBar,
+      WebsiteFooter,
+      Seasons,
+      Cast,
+      Crew,
+      Videos,
+      Reviews,
+      Similar,
+    },
+    data: () => ({
+      id: null,
+      val: "seasons",
+      data: [],
+      providers: [],
+      links: [],
+      tabs: [
+        {
+          title: "Seasons",
+          icon: "mdi-cards-variant",
+          val: "seasons",
         },
-      })
-        .then((res) => {
-          this.data = res.data;
-          //console.log(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-    getProviders(id) {
-      axios({
-        method: "post",
-        url: `${config.url}/Library/Details.php`,
-        data: {
-          url: `/tv/${id}/watch/providers`,
+        {
+          title: "Cast",
+          icon: "mdi-account-box-multiple",
+          val: "cast",
         },
-      })
-        .then((res) => {
-          this.providers = res.data;
-          //console.log(this.providers.results.NL.flatrate);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-    getLinks(id) {
-      axios({
-        method: "post",
-        url: `${config.url}/Library/Details.php`,
-        data: {
-          url: `/tv/${id}/external_ids`,
+        {
+          title: "Crew",
+          icon: "mdi-account-group",
+          val: "crew",
         },
-      })
-        .then((res) => {
-          this.links = res.data;
-          //console.log(this.links);
+        {
+          title: "Videos",
+          icon: "mdi-filmstrip-box-multiple",
+          val: "videos",
+        },
+        {
+          title: "Reviews",
+          icon: "mdi-android-messages",
+          val: "reviews",
+        },
+        {
+          title: "Similar",
+          icon: "mdi-approximately-equal-box",
+          val: "similar",
+        },
+      ],
+      iLinks: [
+        {
+          name: "123Movies",
+          to: "https://0123movie.ru/",
+        },
+        {
+          name: "Watch Series",
+          to: "https://ww.watchseriesfree.co/",
+        },
+        {
+          name: "Putlockers",
+          to: "https://www.putlockers.tv/",
+        },
+      ],
+    }),
+    methods: {
+      getDetails(id) {
+        axios({
+          method: "post",
+          url: `${config.url}/Library/Details.php`,
+          data: {
+            url: `/tv/${id}`,
+          },
         })
-        .catch((err) => {
-          console.log(err);
-        });
+          .then((res) => {
+            this.data = res.data;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      },
+      getProviders(id) {
+        axios({
+          method: "post",
+          url: `${config.url}/Library/Details.php`,
+          data: {
+            url: `/tv/${id}/watch/providers`,
+          },
+        })
+          .then((res) => {
+            this.providers = res.data.results.NL;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      },
+      getLinks(id) {
+        axios({
+          method: "post",
+          url: `${config.url}/Library/Details.php`,
+          data: {
+            url: `/tv/${id}/external_ids`,
+          },
+        })
+          .then((res) => {
+            this.links = res.data;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      },
+      show(val) {
+        this.val = val;
+      },
     },
-    show(val) {
-      this.val = val;
+    mounted() {
+      this.id = this.$route.params.id;
+      this.getDetails(this.$route.params.id);
+      this.getProviders(this.$route.params.id);
+      this.getLinks(this.$route.params.id);
     },
-  },
-  mounted() {
-    this.getDetails(this.$route.params.id);
-    this.getProviders(this.$route.params.id);
-    this.getLinks(this.$route.params.id);
-  },
-};
+  };
 </script>
 
 <style scoped>
-h1,
-h2,
-h3,
-h4,
-p {
-  text-align: center;
-}
-.flexs {
-  display: flex;
-  flex-direction: row;
-}
+  h1,
+  h2,
+  h3,
+  h4,
+  p {
+    text-align: center;
+  }
+  .flexs {
+    display: flex;
+    flex-direction: row;
+  }
 </style>

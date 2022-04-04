@@ -72,71 +72,72 @@
 </template>
 
 <script>
-import axios from "axios";
+  import axios from "axios";
+  import config from "@/Config/index.js";
 
-export default {
-  name: "AppBar",
-  data: () => ({
-    show: false,
-    url: "/search/multi?",
-    search: "",
-  }),
-  methods: {
-    openAccount() {
-      this.$router.push({ path: `/account` });
+  export default {
+    name: "AppBar",
+    data: () => ({
+      show: false,
+      url: "/search/multi?",
+      search: "",
+    }),
+    methods: {
+      openAccount() {
+        this.$router.push({ path: `/account` });
+      },
+      darkMode() {
+        this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
+        localStorage.setItem("dark_theme", this.$vuetify.theme.dark.toString());
+      },
+      showSearch() {
+        if (this.show == false) {
+          this.show = true;
+        } else {
+          this.show = false;
+        }
+      },
     },
-    darkMode() {
-      this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
-      localStorage.setItem("dark_theme", this.$vuetify.theme.dark.toString());
-    },
-    showSearch() {
-      if (this.show == false) {
-        this.show = true;
-      } else {
-        this.show = false;
-      }
-    },
-  },
-  watch: {
-    search(val) {
-      if (
-        this.$route.path == "/movies/trending" ||
-        this.$route.path == "/movies/popular" ||
-        this.$route.path == "/movies/playing" ||
-        this.$route.path == "/movies/top-rated" ||
-        this.$route.path == "/movies/upcoming" ||
-        this.$route.path == "/movies/discover"
-      ) {
-        this.url = "/search/movie?";
-      }
-      if (
-        this.$route.path == "/series/trending" ||
-        this.$route.path == "/series/popular" ||
-        this.$route.path == "/series/playing" ||
-        this.$route.path == "/series/top-rated" ||
-        this.$route.path == "/series/upcoming" ||
-        this.$route.path == "/series/discover"
-      ) {
-        this.url = "/search/tv?";
-      }
-      if (this.$route.path == "/") {
-        this.url = "/search/multi?";
-      }
-      axios({
-        method: "post",
-        url: "http://localhost/Library/Search.php",
-        data: {
-          query: val,
-          url: this.url,
-        },
-      })
-        .then((res) => {
-          this.$emit("watched", res.data);
+    watch: {
+      search(val) {
+        if (
+          this.$route.path == "/movies/trending" ||
+          this.$route.path == "/movies/popular" ||
+          this.$route.path == "/movies/playing" ||
+          this.$route.path == "/movies/top-rated" ||
+          this.$route.path == "/movies/upcoming" ||
+          this.$route.path == "/movies/discover"
+        ) {
+          this.url = "/search/movie?";
+        }
+        if (
+          this.$route.path == "/series/trending" ||
+          this.$route.path == "/series/popular" ||
+          this.$route.path == "/series/playing" ||
+          this.$route.path == "/series/top-rated" ||
+          this.$route.path == "/series/upcoming" ||
+          this.$route.path == "/series/discover"
+        ) {
+          this.url = "/search/tv?";
+        }
+        if (this.$route.path == "/") {
+          this.url = "/search/multi?";
+        }
+        axios({
+          method: "post",
+          url: `${config.url}/Library/Search.php`,
+          data: {
+            query: val,
+            url: this.url,
+          },
         })
-        .catch((err) => {
-          console.log(err);
-        });
+          .then((res) => {
+            this.$emit("watched", res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      },
     },
-  },
-};
+  };
 </script>

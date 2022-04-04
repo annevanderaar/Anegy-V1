@@ -84,11 +84,11 @@
             </v-row>
             <v-row>
               <h4>Budget:</h4>
-              <p>${{ data.budget.toLocaleString() }}</p>
+              <p>${{ data.budget }}</p>
             </v-row>
             <v-row>
               <h4>Reveneu:</h4>
-              <p>${{ data.revenue.toLocaleString() }}</p>
+              <p>${{ data.revenue }}</p>
             </v-row>
             <v-row>
               <h4>Genres:</h4>
@@ -150,14 +150,7 @@
               >
             </v-row>
             <v-row>
-              <h4>
-                Production
-                {{
-                  data.production_companies.length > 1
-                    ? "Companies"
-                    : "Company"
-                }}:
-              </h4>
+              <h4>Production Companie(s)</h4>
               <v-chip
                 class="btnText"
                 outlined
@@ -168,14 +161,7 @@
               </v-chip>
             </v-row>
             <v-row>
-              <h4>
-                Production
-                {{
-                  data.production_countries.length > 1
-                    ? "Countries"
-                    : "Country"
-                }}:
-              </h4>
+              <h4>Production Countrie(s)</h4>
               <v-chip
                 class="btnText"
                 outlined
@@ -186,12 +172,12 @@
                 | {{ country.name }}
               </v-chip>
             </v-row>
-            <v-row v-if="this.providers.results.NL">
+            <v-row v-if="this.providers">
               <h4>Watch (NL):</h4>
               <v-chip
                 class="btnText"
                 outlined
-                v-for="item in this.providers.results.NL.flatrate"
+                v-for="item in this.providers.flatrate"
                 :key="item.provider_id"
               >
                 {{ item.provider_name }}
@@ -199,7 +185,7 @@
               <v-chip
                 class="btnText"
                 outlined
-                v-for="item in this.providers.results.NL.buy"
+                v-for="item in this.providers.buy"
                 :key="item.provider_id"
               >
                 {{ item.provider_name }}
@@ -207,7 +193,7 @@
               <v-chip
                 class="btnText"
                 outlined
-                v-for="item in this.providers.results.NL.rent"
+                v-for="item in this.providers.rent"
                 :key="item.provider_id"
               >
                 {{ item.provider_name }}
@@ -264,157 +250,154 @@
 </template>
 
 <script>
-import HomeAppBar from "@/components/AppBar/HomeAppBar.vue";
-import WebsiteFooter from "@/components/WebsiteFooter.vue";
-import Cast from "@/components/Details/Cast.vue";
-import Crew from "@/components/Details/Crew.vue";
-import Collection from "@/components/Details/Collection.vue";
-import Videos from "@/components/Details/Videos.vue";
-import Reviews from "@/components/Details/Reviews.vue";
-import Similar from "@/components/Details/Similar.vue";
-import axios from "axios";
-import config from "../Config/index.js";
+  import HomeAppBar from "@/components/AppBar/HomeAppBar.vue";
+  import WebsiteFooter from "@/components/WebsiteFooter.vue";
+  import Cast from "@/components/Details/Cast.vue";
+  import Crew from "@/components/Details/Crew.vue";
+  import Collection from "@/components/Details/Collection.vue";
+  import Videos from "@/components/Details/Videos.vue";
+  import Reviews from "@/components/Details/Reviews.vue";
+  import Similar from "@/components/Details/Similar.vue";
+  import axios from "axios";
+  import config from "@/Config/index.js";
 
-export default {
-  name: "DetailsMovie",
-  components: {
-    HomeAppBar,
-    WebsiteFooter,
-    Cast,
-    Crew,
-    Collection,
-    Videos,
-    Reviews,
-    Similar,
-  },
-  data: () => ({
-    id: null,
-    val: "cast",
-    data: [],
-    providers: [],
-    links: [],
-    tabs: [
-      {
-        title: "Cast",
-        icon: "mdi-account-box-multiple",
-        val: "cast",
-      },
-      {
-        title: "Crew",
-        icon: "mdi-account-group",
-        val: "crew",
-      },
-      {
-        title: "Collection",
-        icon: "mdi-bookmark-box-multiple",
-        val: "collection",
-      },
-      {
-        title: "Videos",
-        icon: "mdi-filmstrip-box-multiple",
-        val: "videos",
-      },
-      {
-        title: "Reviews",
-        icon: "mdi-android-messages",
-        val: "reviews",
-      },
-      {
-        title: "Similar",
-        icon: "mdi-approximately-equal-box",
-        val: "similar",
-      },
-    ],
-    iLinks: [
-      {
-        name: "123Movies",
-        to: "https://0123movie.ru/",
-      },
-      {
-        name: "Watch Series",
-        to: "https://ww.watchseriesfree.co/",
-      },
-      {
-        name: "Putlockers",
-        to: "https://www.putlockers.tv/",
-      },
-    ],
-  }),
-  methods: {
-    getDetails(id) {
-      axios({
-        method: "post",
-        url: `${config.url}/Library/Details.php`,
-        data: {
-          url: `/movie/${id}`,
+  export default {
+    name: "DetailsMovie",
+    components: {
+      HomeAppBar,
+      WebsiteFooter,
+      Cast,
+      Crew,
+      Collection,
+      Videos,
+      Reviews,
+      Similar,
+    },
+    data: () => ({
+      id: null,
+      val: "cast",
+      data: [],
+      providers: [],
+      links: [],
+      tabs: [
+        {
+          title: "Cast",
+          icon: "mdi-account-box-multiple",
+          val: "cast",
         },
-      })
-        .then((res) => {
-          this.data = res.data;
-          //console.log(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-    getProviders(id) {
-      axios({
-        method: "post",
-        url: `${config.url}/Library/Details.php`,
-        data: {
-          url: `/movie/${id}/watch/providers`,
+        {
+          title: "Crew",
+          icon: "mdi-account-group",
+          val: "crew",
         },
-      })
-        .then((res) => {
-          this.providers = res.data;
-          //console.log(res.data.results);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-    getLinks(id) {
-      axios({
-        method: "post",
-        url: `${config.url}/Library/Details.php`,
-        data: {
-          url: `/movie/${id}/external_ids`,
+        {
+          title: "Collection",
+          icon: "mdi-bookmark-box-multiple",
+          val: "collection",
         },
-      })
-        .then((res) => {
-          this.links = res.data;
-          //console.log(this.links);
+        {
+          title: "Videos",
+          icon: "mdi-filmstrip-box-multiple",
+          val: "videos",
+        },
+        {
+          title: "Reviews",
+          icon: "mdi-android-messages",
+          val: "reviews",
+        },
+        {
+          title: "Similar",
+          icon: "mdi-approximately-equal-box",
+          val: "similar",
+        },
+      ],
+      iLinks: [
+        {
+          name: "123Movies",
+          to: "https://0123movie.ru/",
+        },
+        {
+          name: "Watch Series",
+          to: "https://ww.watchseriesfree.co/",
+        },
+        {
+          name: "Putlockers",
+          to: "https://www.putlockers.tv/",
+        },
+      ],
+    }),
+    methods: {
+      getDetails(id) {
+        axios({
+          method: "post",
+          url: `${config.url}/Library/Details.php`,
+          data: {
+            url: `/movie/${id}`,
+          },
         })
-        .catch((err) => {
-          console.log(err);
-        });
+          .then((res) => {
+            this.data = res.data;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      },
+      getProviders(id) {
+        axios({
+          method: "post",
+          url: `${config.url}/Library/Details.php`,
+          data: {
+            url: `/movie/${id}/watch/providers`,
+          },
+        })
+          .then((res) => {
+            this.providers = res.data.results.NL;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      },
+      getLinks(id) {
+        axios({
+          method: "post",
+          url: `${config.url}/Library/Details.php`,
+          data: {
+            url: `/movie/${id}/external_ids`,
+          },
+        })
+          .then((res) => {
+            this.links = res.data;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      },
+      show(val) {
+        this.val = val;
+      },
     },
-    show(val) {
-      this.val = val;
+    mounted() {
+      this.id = this.$route.params.id;
+      this.getDetails(this.$route.params.id);
+      this.getProviders(this.$route.params.id);
+      this.getLinks(this.$route.params.id);
     },
-  },
-  mounted() {
-    this.id = this.$route.params.id;
-    this.getDetails(this.$route.params.id);
-    this.getProviders(this.$route.params.id);
-    this.getLinks(this.$route.params.id);
-  },
-};
+  };
 </script>
 
 <style scoped>
-h1,
-h2,
-h3,
-h4,
-p {
-  text-align: center;
-}
-.flexs {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
-  flex-wrap: nowrap;
-}
+  h1,
+  h2,
+  h3,
+  h4,
+  p {
+    text-align: center;
+  }
+  .flexs {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+  }
 </style>

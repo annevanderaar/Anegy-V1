@@ -70,7 +70,7 @@
           >Know more</v-btn
         >
         <v-btn
-          v-else-if="item.media_type == 'tv'"
+          v-else
           elevation="0"
           color="accent"
           class="ml-2"
@@ -85,7 +85,7 @@
 </template>
 
 <script>
-export default {
-  props: ["data"],
-};
+  export default {
+    props: ["data"],
+  };
 </script>

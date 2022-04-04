@@ -114,67 +114,65 @@
 </template>
 
 <script>
-import HomeAppBar from "@/components/AppBar/HomeAppBar.vue";
-import WebsiteFooter from "@/components/WebsiteFooter.vue";
-import axios from "axios";
-import config from "../Config/index.js";
+  import HomeAppBar from "@/components/AppBar/HomeAppBar.vue";
+  import WebsiteFooter from "@/components/WebsiteFooter.vue";
+  import axios from "axios";
+  import config from "@/Config/index.js";
 
-export default {
-  components: {
-    HomeAppBar,
-    WebsiteFooter,
-  },
-  data: () => ({
-    data: [],
-    links: [],
-  }),
-  methods: {
-    getDetails(id) {
-      axios({
-        method: "post",
-        url: `${config.url}/Library/Details.php`,
-        data: {
-          url: `/person/${id}`,
-        },
-      })
-        .then((res) => {
-          this.data = res.data;
-          console.log(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+  export default {
+    components: {
+      HomeAppBar,
+      WebsiteFooter,
     },
-    getLinks(id) {
-      axios({
-        method: "post",
-        url: `${config.url}/Library/Details.php`,
-        data: {
-          url: `/person/${id}/external_ids`,
-        },
-      })
-        .then((res) => {
-          this.links = res.data;
-          //console.log(this.links);
+    data: () => ({
+      data: [],
+      links: [],
+    }),
+    methods: {
+      getDetails(id) {
+        axios({
+          method: "post",
+          url: `${config.url}/Library/Details.php`,
+          data: {
+            url: `/person/${id}`,
+          },
         })
-        .catch((err) => {
-          console.log(err);
-        });
+          .then((res) => {
+            this.data = res.data;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      },
+      getLinks(id) {
+        axios({
+          method: "post",
+          url: `${config.url}/Library/Details.php`,
+          data: {
+            url: `/person/${id}/external_ids`,
+          },
+        })
+          .then((res) => {
+            this.links = res.data;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      },
     },
-  },
-  mounted() {
-    this.getDetails(this.$route.params.id);
-    this.getLinks(this.$route.params.id);
-  },
-};
+    mounted() {
+      this.getDetails(this.$route.params.id);
+      this.getLinks(this.$route.params.id);
+    },
+  };
 </script>
 
 <style scoped>
-h1,
-h2,
-h3,
-h4,
-p {
-  text-align: center;
-}
+  h1,
+  h2,
+  h3,
+  h4,
+  p {
+    text-align: center;
+  }
 </style>
