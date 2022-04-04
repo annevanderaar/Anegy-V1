@@ -71,6 +71,10 @@
               <p v-if="data.gender == 2">Male</p>
             </v-row>
             <v-row>
+              <h4>Known for:</h4>
+              <p>{{ data.known_for_department }}</p>
+            </v-row>
+            <v-row>
               <h4>Links:</h4>
               <v-chip
                 outlined
@@ -143,7 +147,6 @@ export default {
       })
         .then((res) => {
           this.data = res.data;
-          console.log(res.data);
         })
         .catch((err) => {
           console.log(err);

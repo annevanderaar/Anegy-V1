@@ -69,7 +69,7 @@
           }}</v-card-subtitle
         >
         <v-card-text v-if="item.media_type == 'person'"
-          >Occupation: {{ item.known_for_department }}</v-card-text
+          >Known for: {{ item.known_for_department }}</v-card-text
         >
         <v-card-text v-if="item.overview">{{ item.overview }}</v-card-text>
         <v-btn
@@ -104,7 +104,7 @@
 </template>
 
 <script>
-  export default {
-    props: ["data"],
-  };
+export default {
+  props: ["data"],
+};
 </script>
