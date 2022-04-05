@@ -10,7 +10,7 @@
       <h1 v-if="this.$route.path == '/movies/top-rated'">Top Rated Movies</h1>
       <h1 v-if="this.$route.path == '/movies/upcoming'">Upcoming Movies</h1>
       <MoviesFilters @genres="selectedGenresM" />
-      <cards :data="data" />
+      <cards :data="data.results" />
       <v-pagination
         color="secondary"
         v-model="currentPage"
@@ -44,7 +44,7 @@ export default {
     data: [],
     currentPage: 1,
     totalPages: 500,
-    url: "/trending/movie/day?",
+    url: "/discover/movie?",
     selectedGenresMovie: [],
   }),
   methods: {
@@ -91,36 +91,14 @@ export default {
   },
   watch: {
     $route(val) {
-      if (val.path == "/movies/discover") {
-        this.url = "/discover/movie?";
-        this.getMovies(this.currentPage, this.url, this.selectedGenresMovie);
-        this.setDrawerInput(false);
-      }
-      if (val.path == "/movies/trending") {
-        this.url = "/trending/movie/day?";
-        this.getMovies(this.currentPage, this.url, this.selectedGenresMovie);
-        this.setDrawerInput(false);
-      }
-      if (val.path == "/movies/popular") {
-        this.url = "/movie/popular?";
-        this.getMovies(this.currentPage, this.url, this.selectedGenresMovie);
-        this.setDrawerInput(false);
-      }
-      if (val.path == "/movies/top-rated") {
-        this.url = "/movie/top_rated?";
-        this.getMovies(this.currentPage, this.url, this.selectedGenresMovie);
-        this.setDrawerInput(false);
-      }
-      if (val.path == "/movies/playing") {
-        this.url = "/movie/now_playing?";
-        this.getMovies(this.currentPage, this.url, this.selectedGenresMovie);
-        this.setDrawerInput(false);
-      }
-      if (val.path == "/movies/upcoming") {
-        this.url = "/movie/upcoming?";
-        this.getMovies(this.currentPage, this.url, this.selectedGenresMovie);
-        this.setDrawerInput(false);
-      }
+      if (val.path == "/movies/discover") this.url = "/discover/movie?";
+      if (val.path == "/movies/trending") this.url = "/trending/movie/day?";
+      if (val.path == "/movies/popular") this.url = "/movie/popular?";
+      if (val.path == "/movies/top-rated") this.url = "/movie/top_rated?";
+      if (val.path == "/movies/playing") this.url = "/movie/now_playing?";
+      if (val.path == "/movies/upcoming") this.url = "/movie/upcoming?";
+      this.getMovies(this.currentPage, this.url, this.selectedGenresMovie);
+      this.setDrawerInput(false);
     },
     currentPage(val) {
       this.getMovies(val, this.url, this.selectedGenresMovie);
@@ -128,36 +106,15 @@ export default {
     },
   },
   mounted() {
-    if (this.$route.path == "/movies/discover") {
-      this.url = "/discover/movie?";
-      this.getMovies(this.currentPage, this.url, this.selectedGenresMovie);
-      this.setDrawerInput(false);
-    }
-    if (this.$route.path == "/movies/trending") {
+    if (this.$route.path == "/movies/discover") this.url = "/discover/movie?";
+    if (this.$route.path == "/movies/trending")
       this.url = "/trending/movie/day?";
-      this.getMovies(this.currentPage, this.url, this.selectedGenresMovie);
-      this.setDrawerInput(false);
-    }
-    if (this.$route.path == "/movies/popular") {
-      this.url = "/movie/popular?";
-      this.setDrawerInput(false);
-      this.getMovies(this.currentPage, this.url, this.selectedGenresMovie);
-    }
-    if (this.$route.path == "/movies/top-rated") {
-      this.url = "/movie/top_rated?";
-      this.setDrawerInput(false);
-      this.getMovies(this.currentPage, this.url, this.selectedGenresMovie);
-    }
-    if (this.$route.path == "/movies/playing") {
-      this.url = "/movie/now_playing?";
-      this.setDrawerInput(false);
-      this.getMovies(this.currentPage, this.url, this.selectedGenresMovie);
-    }
-    if (this.$route.path == "/movies/upcoming") {
-      this.url = "/movie/upcoming?";
-      this.setDrawerInput(false);
-      this.getMovies(this.currentPage, this.url, this.selectedGenresMovie);
-    }
+    if (this.$route.path == "/movies/popular") this.url = "/movie/popular?";
+    if (this.$route.path == "/movies/top-rated") this.url = "/movie/top_rated?";
+    if (this.$route.path == "/movies/playing") this.url = "/movie/now_playing?";
+    if (this.$route.path == "/movies/upcoming") this.url = "/movie/upcoming?";
+    this.getMovies(this.currentPage, this.url, this.selectedGenresMovie);
+    this.setDrawerInput(false);
   },
 };
 </script>

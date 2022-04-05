@@ -10,7 +10,7 @@
       <h1 v-if="this.$route.path == '/series/top-rated'">Top Rated Series</h1>
       <h1 v-if="this.$route.path == '/series/upcoming'">Upcoming Series</h1>
       <SeriesFilters @genres="selectedGenresS" />
-      <cards :data="data" />
+      <cards :data="data.results" />
       <v-pagination
         color="secondary"
         v-model="currentPage"
@@ -44,7 +44,7 @@ export default {
     data: [],
     currentPage: 1,
     totalPages: 500,
-    url: "/trending/tv/day?",
+    url: "/discover/tv?",
     selectedGenresSerie: [],
   }),
   methods: {
@@ -91,36 +91,14 @@ export default {
   },
   watch: {
     $route(val) {
-      if (val.path == "/series/discover") {
-        this.url = "/discover/tv?";
-        this.getSeries(this.currentPage, this.url, this.selectedGenresSerie);
-        this.setDrawerInput(false);
-      }
-      if (val.path == "/series/trending") {
-        this.url = "/trending/tv/day?";
-        this.getSeries(this.currentPage, this.url, this.selectedGenresSerie);
-        this.setDrawerInput(false);
-      }
-      if (val.path == "/series/popular") {
-        this.url = "/tv/popular?";
-        this.getSeries(this.currentPage, this.url, this.selectedGenresSerie);
-        this.setDrawerInput(false);
-      }
-      if (val.path == "/series/top-rated") {
-        this.url = "/tv/top_rated?";
-        this.getSeries(this.currentPage, this.url, this.selectedGenresSerie);
-        this.setDrawerInput(false);
-      }
-      if (val.path == "/series/playing") {
-        this.url = "/tv/on_the_air?";
-        this.getSeries(this.currentPage, this.url, this.selectedGenresSerie);
-        this.setDrawerInput(false);
-      }
-      if (val.path == "/series/upcoming") {
-        this.url = "/tv/airing_today?";
-        this.getSeries(this.currentPage, this.url, this.selectedGenresSerie);
-        this.setDrawerInput(false);
-      }
+      if (val.path == "/series/discover") this.url = "/discover/tv?";
+      if (val.path == "/series/trending") this.url = "/trending/tv/day?";
+      if (val.path == "/series/popular") this.url = "/tv/popular?";
+      if (val.path == "/series/top-rated") this.url = "/tv/top_rated?";
+      if (val.path == "/series/playing") this.url = "/tv/on_the_air?";
+      if (val.path == "/series/upcoming") this.url = "/tv/airing_today?";
+      this.getSeries(this.currentPage, this.url, this.selectedGenresSerie);
+      this.setDrawerInput(false);
     },
     currentPage(val) {
       this.getSeries(val, this.url, this.selectedGenresSerie);
@@ -128,36 +106,14 @@ export default {
     },
   },
   mounted() {
-    if (this.$route.path == "/series/discover") {
-      this.url = "/discover/tv?";
-      this.getSeries(this.currentPage, this.url, this.selectedGenresSerie);
-      this.setDrawerInput(false);
-    }
-    if (this.$route.path == "/series/trending") {
-      this.url = "/trending/tv/day?";
-      this.getSeries(this.currentPage, this.url, this.selectedGenresSerie);
-      this.setDrawerInput(false);
-    }
-    if (this.$route.path == "/series/popular") {
-      this.url = "/tv/popular?";
-      this.setDrawerInput(false);
-      this.getSeries(this.currentPage, this.url, this.selectedGenresSerie);
-    }
-    if (this.$route.path == "/series/top-rated") {
-      this.url = "/tv/top_rated?";
-      this.setDrawerInput(false);
-      this.getSeries(this.currentPage, this.url, this.selectedGenresSerie);
-    }
-    if (this.$route.path == "/series/playing") {
-      this.url = "/tv/on_the_air?";
-      this.setDrawerInput(false);
-      this.getSeries(this.currentPage, this.url, this.selectedGenresSerie);
-    }
-    if (this.$route.path == "/series/upcoming") {
-      this.url = "/tv/airing_today?";
-      this.setDrawerInput(false);
-      this.getSeries(this.currentPage, this.url, this.selectedGenresSerie);
-    }
+    if (this.$route.path == "/series/discover") this.url = "/discover/tv?";
+    if (this.$route.path == "/series/trending") this.url = "/trending/tv/day?";
+    if (this.$route.path == "/series/popular") this.url = "/tv/popular?";
+    if (this.$route.path == "/series/top-rated") this.url = "/tv/top_rated?";
+    if (this.$route.path == "/series/playing") this.url = "/tv/on_the_air?";
+    if (this.$route.path == "/series/upcoming") this.url = "/tv/airing_today?";
+    this.getSeries(this.currentPage, this.url, this.selectedGenresSerie);
+    this.setDrawerInput(false);
   },
 };
 </script>

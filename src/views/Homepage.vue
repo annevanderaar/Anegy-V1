@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <HomeAppBar @watched="watched" />
+    <HomeAppBar @watched="watched" :currentSearchPage="currentSearchPage" />
     <v-main>
       <!-- <v-icon color="black" class="ml-4" style="position: fixed; top: 65px"
         >fas fa-arrow-up</v-icon
@@ -59,6 +59,14 @@
           :total-visible="10"
           class="my-4"
         ></v-pagination>
+        <v-pagination
+          v-if="watched"
+          color="secondary"
+          v-model="currentSearchPage"
+          :length="totalSearchPages"
+          :total-visible="8"
+          class="my-4"
+        ></v-pagination>
       </v-container>
     </v-main>
     <WebsiteFooter />
@@ -83,6 +91,8 @@ export default {
     data: [],
     currentPage: 1,
     totalPages: 500,
+    currentSearchPage: 1,
+    totalSearchPages: 500,
     selectedGenres: [],
   }),
   methods: {
@@ -101,7 +111,7 @@ export default {
           if (res.data.total_pages <= 500) {
             this.totalPages = res.data.total_pages;
           }
-          this.data = res.data;
+          this.data = res.data.results;
         })
         .catch((err) => {
           console.log(err);
@@ -110,10 +120,10 @@ export default {
     watched(data) {
       // Todo: Fix page issue with search
       console.log(data);
-      this.data = data;
-      this.currentPage = data.page;
+      this.data = data.results;
+      this.currentSearchPage = data.page;
       if (data.total_pages <= 500) {
-        this.totalPages = data.total_pages;
+        this.totalSearchPages = data.total_pages;
       }
       if (data.errors) {
         this.currentPage = 1;
@@ -127,6 +137,11 @@ export default {
   watch: {
     currentPage(val) {
       this.getTrending(val, this.selectedGenres);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    },
+    currentSearchPage() {
+      //Stuurt niet het veranderde pagina nummer door.
+      console.log(this.currentSearchPage);
       window.scrollTo({ top: 0, behavior: "smooth" });
     },
   },

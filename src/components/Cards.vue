@@ -2,7 +2,7 @@
   <div class="d-flex flex-wrap justify-center">
     <v-card
       class="movie ma-4"
-      v-for="item in data.results"
+      v-for="item in data"
       :key="item.id"
       elevation="4"
     >
@@ -29,22 +29,22 @@
           class="ma-2"
           color="green white--text"
           v-if="item.vote_average >= 7.5"
-          >{{ item.vote_average }}</v-avatar
+          >{{ item.vote_average.toFixed(1) }}</v-avatar
         >
         <v-avatar
           class="ma-2"
           color="orange white--text"
           v-else-if="item.vote_average >= 5"
-          >{{ item.vote_average }}</v-avatar
+          >{{ item.vote_average.toFixed(1) }}</v-avatar
         >
         <v-avatar
           class="ma-2"
           color="accent white--text"
-          v-else-if="!item.vote_average"
+          v-else-if="item.vote_average == null"
           >P</v-avatar
         >
         <v-avatar class="ma-2" color="red white--text" v-else>{{
-          item.vote_average
+          item.vote_average.toFixed(1)
         }}</v-avatar>
       </div>
       <v-card class="overview">

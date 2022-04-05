@@ -4,7 +4,7 @@
     <v-main>
       <v-container fluid style="overflow: auto">
         <v-row>
-          <v-col class="d-flex justify-center align-center" md="4">
+          <v-col class="d-flex justify-center" md="4">
             <v-card
               max-width="450px"
               max-height="700px"
@@ -97,17 +97,17 @@
                 height="36"
                 color="green white--text"
                 v-if="data.vote_average >= 7.5"
-                >{{ data.vote_average }}</v-avatar
+                >{{ data.vote_average.toFixed(1) }}</v-avatar
               >
               <v-avatar
                 rounded
                 height="36"
                 color="orange white--text"
                 v-else-if="data.vote_average >= 5"
-                >{{ data.vote_average }}</v-avatar
+                >{{ data.vote_average.toFixed(1) }}</v-avatar
               >
               <v-avatar rounded height="36" color="red white--text" v-else>{{
-                data.vote_average
+                data.vote_average.toFixed(1)
               }}</v-avatar>
             </v-row>
             <v-row>

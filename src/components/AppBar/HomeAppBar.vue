@@ -77,6 +77,7 @@ import config from "@/Config/index.js";
 
 export default {
   name: "AppBar",
+  props: ["currentSearchPage"],
   data: () => ({
     show: false,
     url: "/search/multi?",
@@ -127,12 +128,14 @@ export default {
         method: "post",
         url: `${config.url}/Library/Search.php`,
         data: {
+          page: this.currentSearchPage,
           query: val,
           url: this.url,
         },
       })
         .then((res) => {
           this.$emit("watched", res.data);
+          console.log(this.currentSearchPage);
         })
         .catch((err) => {
           console.log(err);

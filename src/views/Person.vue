@@ -4,7 +4,7 @@
     <v-main>
       <v-container fluid style="overflow: auto">
         <v-row>
-          <v-col class="d-flex justify-center align-center" md="4">
+          <v-col class="d-flex justify-center" md="4">
             <v-card
               max-width="450px"
               max-height="700px"
@@ -114,6 +114,27 @@
               >
             </v-row>
           </v-col>
+          <v-col md="12">
+            <v-tabs
+              color="accent"
+              icons-and-text
+              center-active
+              fixed-tabs
+              centered
+            >
+              <v-tab v-for="tab in tabs" :key="tab.title" @click="show(tab.val)"
+                >{{ tab.title }}<v-icon>{{ tab.icon }}</v-icon></v-tab
+              >
+            </v-tabs>
+            <PersonMovies
+              v-if="this.val == 'movies'"
+              :personMovies="personMovies"
+            />
+            <PersonSeries
+              v-if="this.val == 'series'"
+              :personSeries="personSeries"
+            />
+          </v-col>
         </v-row>
       </v-container>
     </v-main>
@@ -124,6 +145,8 @@
 <script>
 import HomeAppBar from "@/components/AppBar/HomeAppBar.vue";
 import WebsiteFooter from "@/components/WebsiteFooter.vue";
+import PersonMovies from "@/components/Details/PersonMovies.vue";
+import PersonSeries from "@/components/Details/PersonSeries.vue";
 import axios from "axios";
 import config from "@/Config/index.js";
 
@@ -131,12 +154,32 @@ export default {
   components: {
     HomeAppBar,
     WebsiteFooter,
+    PersonMovies,
+    PersonSeries,
   },
   data: () => ({
+    val: "movies",
     data: [],
     links: [],
+    personSeries: [],
+    personMovies: [],
+    tabs: [
+      {
+        title: "Movies",
+        icon: "mdi-movie-open",
+        val: "movies",
+      },
+      {
+        title: "Series",
+        icon: "mdi-television-classic",
+        val: "series",
+      },
+    ],
   }),
   methods: {
+    show(val) {
+      this.val = val;
+    },
     getDetails(id) {
       axios({
         method: "post",
@@ -177,10 +220,44 @@ export default {
       }
       return age;
     },
+    getPersonMovies(id) {
+      axios({
+        method: "post",
+        url: `${config.url}/Library/Details.php`,
+        data: {
+          url: `/person/${id}/movie_credits`,
+        },
+      })
+        .then((res) => {
+          this.personMovies = res.data;
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getPersonSeries(id) {
+      axios({
+        method: "post",
+        url: `${config.url}/Library/Details.php`,
+        data: {
+          url: `/person/${id}/tv_credits`,
+        },
+      })
+        .then((res) => {
+          this.personSeries = res.data;
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
   mounted() {
     this.getDetails(this.$route.params.id);
     this.getLinks(this.$route.params.id);
+    this.getPersonMovies(this.$route.params.id);
+    this.getPersonSeries(this.$route.params.id);
   },
 };
 </script>

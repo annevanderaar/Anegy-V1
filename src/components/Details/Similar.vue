@@ -1,6 +1,6 @@
 <template>
   <div>
-    <cards :data="similar" />
+    <cards :data="similar.results" />
   </div>
 </template>
 
