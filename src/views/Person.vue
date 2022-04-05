@@ -258,6 +258,7 @@ export default {
     this.getLinks(this.$route.params.id);
     this.getPersonMovies(this.$route.params.id);
     this.getPersonSeries(this.$route.params.id);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   },
 };
 </script>

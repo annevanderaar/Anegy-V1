@@ -74,16 +74,20 @@
 <script>
 import axios from "axios";
 import config from "@/Config/index.js";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "AppBar",
   props: ["currentSearchPage"],
   data: () => ({
-    show: false,
     url: "/search/multi?",
     search: "",
   }),
+  computed: {
+    ...mapGetters(["show"]),
+  },
   methods: {
+    ...mapActions(["setShow"]),
     openAccount() {
       this.$router.push({ path: `/account` });
     },
@@ -93,14 +97,32 @@ export default {
     },
     showSearch() {
       if (this.show == false) {
-        this.show = true;
+        this.setShow(true);
       } else {
-        this.show = false;
+        this.setShow(false);
       }
+    },
+    getSearch(page, val, url) {
+      axios({
+        method: "post",
+        url: `${config.url}/Library/Search.php`,
+        data: {
+          page: page,
+          query: val,
+          url: url,
+        },
+      })
+        .then((res) => {
+          this.$emit("watched", res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
   watch: {
     search(val) {
+      this.search = val;
       if (
         this.$route.path == "/movies/trending" ||
         this.$route.path == "/movies/popular" ||
@@ -124,22 +146,10 @@ export default {
       if (this.$route.path == "/") {
         this.url = "/search/multi?";
       }
-      axios({
-        method: "post",
-        url: `${config.url}/Library/Search.php`,
-        data: {
-          page: this.currentSearchPage,
-          query: val,
-          url: this.url,
-        },
-      })
-        .then((res) => {
-          this.$emit("watched", res.data);
-          console.log(this.currentSearchPage);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      this.getSearch(this.currentSearchPage, this.search, this.url);
+    },
+    currentSearchPage(val) {
+      this.getSearch(val, this.search, this.url);
     },
   },
 };

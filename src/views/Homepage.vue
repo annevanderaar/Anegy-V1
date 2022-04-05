@@ -53,6 +53,7 @@
         </h1>
         <cards :data="data" />
         <v-pagination
+          v-if="this.show == false"
           color="secondary"
           v-model="currentPage"
           :length="totalPages"
@@ -60,11 +61,11 @@
           class="my-4"
         ></v-pagination>
         <v-pagination
-          v-if="watched"
+          v-if="this.show == true"
           color="secondary"
           v-model="currentSearchPage"
           :length="totalSearchPages"
-          :total-visible="8"
+          :total-visible="10"
           class="my-4"
         ></v-pagination>
       </v-container>
@@ -79,6 +80,7 @@ import WebsiteFooter from "@/components/WebsiteFooter.vue";
 import Cards from "@/components/Cards.vue";
 import axios from "axios";
 import config from "@/Config/index.js";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "Homepage",
@@ -95,7 +97,11 @@ export default {
     totalSearchPages: 500,
     selectedGenres: [],
   }),
+  computed: {
+    ...mapGetters(["show"]),
+  },
   methods: {
+    ...mapActions(["setShow"]),
     getTrending(page, genres) {
       axios({
         method: "post",
@@ -118,8 +124,6 @@ export default {
         });
     },
     watched(data) {
-      // Todo: Fix page issue with search
-      console.log(data);
       this.data = data.results;
       this.currentSearchPage = data.page;
       if (data.total_pages <= 500) {
@@ -127,12 +131,16 @@ export default {
       }
       if (data.errors) {
         this.currentPage = 1;
+        this.currentSearchPage = 1;
+        this.setShow(false);
         this.getTrending(this.currentPage, this.selectedGenres);
       }
     },
   },
   mounted() {
     this.getTrending(this.currentPage, this.selectedGenres);
+    this.setShow(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   },
   watch: {
     currentPage(val) {
@@ -140,8 +148,6 @@ export default {
       window.scrollTo({ top: 0, behavior: "smooth" });
     },
     currentSearchPage() {
-      //Stuurt niet het veranderde pagina nummer door.
-      console.log(this.currentSearchPage);
       window.scrollTo({ top: 0, behavior: "smooth" });
     },
   },

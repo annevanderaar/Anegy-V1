@@ -1,23 +1,34 @@
 <template>
   <v-app>
-    <HomeAppBar @watched="watched" />
+    <HomeAppBar @watched="watched" :currentSearchPage="currentSearchPage" />
     <v-main>
-      <v-btn @click="openFilter" class="filterBtn">Filter</v-btn>
-      <h1 v-if="this.$route.path == '/series/discover'">Discover Series</h1>
-      <h1 v-if="this.$route.path == '/series/trending'">Trending Series</h1>
-      <h1 v-if="this.$route.path == '/series/popular'">Popular Series</h1>
-      <h1 v-if="this.$route.path == '/series/playing'">Series Playing</h1>
-      <h1 v-if="this.$route.path == '/series/top-rated'">Top Rated Series</h1>
-      <h1 v-if="this.$route.path == '/series/upcoming'">Upcoming Series</h1>
-      <SeriesFilters @genres="selectedGenresS" />
-      <cards :data="data.results" />
-      <v-pagination
-        color="secondary"
-        v-model="currentPage"
-        :length="totalPages"
-        :total-visible="10"
-        class="my-4"
-      ></v-pagination>
+      <v-container fluid>
+        <v-btn @click="openFilter" class="filterBtn">Filter</v-btn>
+        <h1 v-if="this.$route.path == '/series/discover'">Discover Series</h1>
+        <h1 v-if="this.$route.path == '/series/trending'">Trending Series</h1>
+        <h1 v-if="this.$route.path == '/series/popular'">Popular Series</h1>
+        <h1 v-if="this.$route.path == '/series/playing'">Series Playing</h1>
+        <h1 v-if="this.$route.path == '/series/top-rated'">Top Rated Series</h1>
+        <h1 v-if="this.$route.path == '/series/upcoming'">Upcoming Series</h1>
+        <SeriesFilters @genres="selectedGenresS" />
+        <cards :data="data.results" />
+        <v-pagination
+          v-if="this.show == false"
+          color="secondary"
+          v-model="currentPage"
+          :length="totalPages"
+          :total-visible="10"
+          class="my-4"
+        ></v-pagination>
+        <v-pagination
+          v-if="this.show == true"
+          color="secondary"
+          v-model="currentSearchPage"
+          :length="totalSearchPages"
+          :total-visible="10"
+          class="my-4"
+        ></v-pagination>
+      </v-container>
     </v-main>
     <WebsiteFooter />
   </v-app>
@@ -28,9 +39,9 @@ import HomeAppBar from "@/components/AppBar/HomeAppBar.vue";
 import SeriesFilters from "@/components/Filters/SeriesFilters.vue";
 import WebsiteFooter from "@/components/WebsiteFooter.vue";
 import Cards from "@/components/Cards.vue";
-import { mapActions } from "vuex";
 import axios from "axios";
 import config from "@/Config/index.js";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "Series",
@@ -44,11 +55,16 @@ export default {
     data: [],
     currentPage: 1,
     totalPages: 500,
+    currentSearchPage: 1,
+    totalSearchPages: 500,
     url: "/discover/tv?",
     selectedGenresSerie: [],
   }),
+  computed: {
+    ...mapGetters(["show"]),
+  },
   methods: {
-    ...mapActions(["setDrawerInput"]),
+    ...mapActions(["setDrawerInput", "setShow"]),
     openFilter() {
       this.setDrawerInput(true);
     },
@@ -75,12 +91,14 @@ export default {
     },
     watched(data) {
       this.data = data;
-      this.currentPage = data.page;
+      this.currentSearchPage = data.page;
       if (data.total_pages <= 500) {
-        this.totalPages = data.total_pages;
+        this.totalSearchPages = data.total_pages;
       }
       if (data.errors) {
         this.currentPage = 1;
+        this.currentSearchPage = 1;
+        this.setShow(false);
         this.getSeries(this.currentPage, this.url, this.selectedGenresSerie);
       }
     },
@@ -99,9 +117,14 @@ export default {
       if (val.path == "/series/upcoming") this.url = "/tv/airing_today?";
       this.getSeries(this.currentPage, this.url, this.selectedGenresSerie);
       this.setDrawerInput(false);
+      this.setShow(false);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     },
     currentPage(val) {
       this.getSeries(val, this.url, this.selectedGenresSerie);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    },
+    currentSearchPage() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     },
   },
@@ -114,6 +137,8 @@ export default {
     if (this.$route.path == "/series/upcoming") this.url = "/tv/airing_today?";
     this.getSeries(this.currentPage, this.url, this.selectedGenresSerie);
     this.setDrawerInput(false);
+    this.setShow(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   },
 };
 </script>
