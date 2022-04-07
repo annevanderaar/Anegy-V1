@@ -127,6 +127,10 @@ export default {
     currentSearchPage() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     },
+    show(val) {
+      if (val == false)
+        this.getMovies(this.currentPage, this.url, this.selectedGenresMovie);
+    },
   },
   mounted() {
     if (this.$route.path == "/movies/discover") this.url = "/discover/movie?";

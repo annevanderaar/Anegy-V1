@@ -4,7 +4,7 @@
     <v-main>
       <v-container fluid style="overflow: auto">
         <v-row>
-          <v-col class="d-flex justify-center" md="4">
+          <v-col class="d-flex justify-center" lg="4">
             <v-card
               max-width="450px"
               max-height="700px"
@@ -27,7 +27,7 @@
               ></v-img>
             </v-card>
           </v-col>
-          <v-col md="8">
+          <v-col lg="8">
             <v-col>
               <h1>{{ data.title }}</h1>
               <h3>{{ data.tagline }}</h3>
@@ -223,7 +223,7 @@
               >
             </v-row>
           </v-col>
-          <v-col md="12">
+          <v-col xs="12">
             <v-tabs
               color="accent"
               icons-and-text
@@ -455,7 +455,6 @@ export default {
       })
         .then((res) => {
           this.videos = res.data;
-          console.log(res.data);
         })
         .catch((err) => {
           console.log(err);

@@ -127,6 +127,10 @@ export default {
     currentSearchPage() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     },
+    show(val) {
+      if (val == false)
+        this.getSeries(this.currentPage, this.url, this.selectedGenresMovie);
+    },
   },
   mounted() {
     if (this.$route.path == "/series/discover") this.url = "/discover/tv?";

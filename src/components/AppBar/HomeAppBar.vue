@@ -42,6 +42,7 @@
     </v-btn>
     <v-spacer></v-spacer>
     <v-text-field
+      ref="textField"
       label="Search"
       solo
       rounded

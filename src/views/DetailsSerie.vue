@@ -4,7 +4,7 @@
     <v-main>
       <v-container fluid style="overflow: auto">
         <v-row>
-          <v-col class="d-flex justify-center" md="4">
+          <v-col class="d-flex justify-center" lg="4">
             <v-card
               max-width="450px"
               max-height="700px"
@@ -27,7 +27,7 @@
               ></v-img>
             </v-card>
           </v-col>
-          <v-col md="8">
+          <v-col lg="8">
             <v-col>
               <h1>{{ data.name }}</h1>
               <h3>{{ data.tagline }}</h3>
@@ -240,7 +240,7 @@
               >
             </v-row>
           </v-col>
-          <v-col md="12">
+          <v-col xs="12">
             <v-tabs
               color="accent"
               icons-and-text
@@ -254,7 +254,11 @@
             </v-tabs>
             <Cast v-if="this.val == 'cast'" :credits="credits" />
             <Crew v-else-if="this.val == 'crew'" :credits="credits" />
-            <Seasons v-else-if="this.val == 'seasons'" />
+            <Seasons
+              v-else-if="this.val == 'seasons'"
+              :seasons="seasons"
+              :data="data"
+            />
             <Videos v-else-if="this.val == 'videos'" :videos="videos" />
             <Reviews v-else-if="this.val == 'reviews'" :reviews="reviews" />
             <Similar v-else-if="this.val == 'similar'" :similar="similar" />
@@ -299,6 +303,7 @@ export default {
     credits: [],
     similar: [],
     reviews: [],
+    seasons: [],
     videos: [],
     tabs: [
       {
@@ -361,6 +366,7 @@ export default {
       })
         .then((res) => {
           this.data = res.data;
+          console.log(res.data);
         })
         .catch((err) => {
           console.log(err);
@@ -411,6 +417,22 @@ export default {
           console.log(err);
         });
     },
+    getSeasons(id) {
+      axios({
+        method: "post",
+        url: `${config.url}/Library/Details.php`,
+        data: {
+          url: `/tv/${id}/season/1`,
+        },
+      })
+        .then((res) => {
+          this.seasons = res.data;
+          //console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
     getSimilar(id) {
       axios({
         method: "post",
@@ -451,7 +473,6 @@ export default {
       })
         .then((res) => {
           this.videos = res.data;
-          console.log(res.data);
         })
         .catch((err) => {
           console.log(err);
@@ -467,6 +488,7 @@ export default {
     this.getSimilar(this.$route.params.id);
     this.getReviews(this.$route.params.id);
     this.getVideos(this.$route.params.id);
+    this.getSeasons(this.$route.params.id);
     window.scrollTo({ top: 0, behavior: "smooth" });
   },
   watch: {
@@ -479,6 +501,7 @@ export default {
       this.getSimilar(this.$route.params.id);
       this.getReviews(this.$route.params.id);
       this.getVideos(this.$route.params.id);
+      this.getSeasons(this.$route.params.id);
       window.scrollTo({ top: 0, behavior: "smooth" });
     },
   },

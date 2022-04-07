@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-btn-toggle mandatory tile group color="accent" v-model="value">
+    <v-btn-toggle mandatory tile group color="accent" v-model="values">
       <v-btn>Cast</v-btn>
       <v-btn>Crew</v-btn>
     </v-btn-toggle>
@@ -11,17 +11,17 @@
 
 <script>
 import Cards from "@/components/Cards.vue";
-//Fout in toggle
 export default {
   data: () => ({
     value: "cast",
+    values: "",
   }),
   props: ["personMovies"],
   components: {
     Cards,
   },
   watch: {
-    value(val) {
+    values(val) {
       if (val == 0) {
         this.value = "cast";
       }

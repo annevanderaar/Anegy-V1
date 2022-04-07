@@ -1,10 +1,11 @@
 <template>
   <div>
-    <v-btn-toggle mandatory tile group color="accent" v-model="value">
+    <v-btn-toggle mandatory tile group color="accent" v-model="values">
       <v-btn>Cast</v-btn>
       <v-btn>Crew</v-btn>
     </v-btn-toggle>
-    <cards :data="personS" />
+    <cards v-if="this.value == 'cast'" :data="personSeries.cast" />
+    <cards v-if="this.value == 'crew'" :data="personSeries.crew" />
   </div>
 </template>
 
@@ -14,27 +15,21 @@ import Cards from "@/components/Cards.vue";
 export default {
   data: () => ({
     value: "",
-    personS: [],
+    values: "",
   }),
   props: ["personSeries"],
   components: {
     Cards,
   },
   watch: {
-    value(val) {
+    values(val) {
       if (val == 0) {
         this.value = "cast";
-        this.personS = this.personSeries.cast;
       }
       if (val == 1) {
         this.value = "crew";
-        this.personS = this.personSeries.crew;
       }
     },
-  },
-  mounted() {
-    this.personS = this.personSeries;
-    this.value = "cast";
   },
 };
 </script>

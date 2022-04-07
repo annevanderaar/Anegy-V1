@@ -134,6 +134,23 @@
               v-if="this.val == 'series'"
               :personSeries="personSeries"
             />
+            <div
+              v-if="this.val == 'images'"
+              class="d-flex flex-wrap justify-center"
+            >
+              <v-card
+                v-for="image in images.profiles"
+                :key="image.id"
+                class="cards"
+                :href="`https://image.tmdb.org/t/p/w500${image.file_path}`"
+                target="_blank"
+              >
+                <v-img
+                  width="300px"
+                  :src="`https://image.tmdb.org/t/p/w500${image.file_path}`"
+                ></v-img>
+              </v-card>
+            </div>
           </v-col>
         </v-row>
       </v-container>
@@ -163,6 +180,7 @@ export default {
     links: [],
     personSeries: [],
     personMovies: [],
+    images: [],
     tabs: [
       {
         title: "Movies",
@@ -173,6 +191,11 @@ export default {
         title: "Series",
         icon: "mdi-television-classic",
         val: "series",
+      },
+      {
+        title: "Images",
+        icon: "mdi-image-multiple",
+        val: "images",
       },
     ],
   }),
@@ -190,6 +213,7 @@ export default {
       })
         .then((res) => {
           this.data = res.data;
+          console.log(res.data);
         })
         .catch((err) => {
           console.log(err);
@@ -230,7 +254,6 @@ export default {
       })
         .then((res) => {
           this.personMovies = res.data;
-          console.log(res.data);
         })
         .catch((err) => {
           console.log(err);
@@ -246,6 +269,21 @@ export default {
       })
         .then((res) => {
           this.personSeries = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getImages(id) {
+      axios({
+        method: "post",
+        url: `${config.url}/Library/Details.php`,
+        data: {
+          url: `/person/${id}/images`,
+        },
+      })
+        .then((res) => {
+          this.images = res.data;
           console.log(res.data);
         })
         .catch((err) => {
@@ -258,6 +296,7 @@ export default {
     this.getLinks(this.$route.params.id);
     this.getPersonMovies(this.$route.params.id);
     this.getPersonSeries(this.$route.params.id);
+    this.getImages(this.$route.params.id);
     window.scrollTo({ top: 0, behavior: "smooth" });
   },
 };

@@ -150,6 +150,9 @@ export default {
     currentSearchPage() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     },
+    show(val) {
+      if (val == false) this.getTrending(this.currentPage, this.selectedGenres);
+    },
   },
 };
 </script>
