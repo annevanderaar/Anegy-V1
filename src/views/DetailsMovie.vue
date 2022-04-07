@@ -84,11 +84,11 @@
             </v-row>
             <v-row>
               <h4>Budget:</h4>
-              <p>${{ data.budget }}</p>
+              <p>${{ data.budget.toLocaleString() }}</p>
             </v-row>
             <v-row>
               <h4>Reveneu:</h4>
-              <p>${{ data.revenue }}</p>
+              <p>${{ data.revenue.toLocaleString() }}</p>
             </v-row>
             <v-row>
               <h4>Genres:</h4>
