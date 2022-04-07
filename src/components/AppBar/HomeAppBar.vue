@@ -34,7 +34,7 @@
       <v-img
         alt="Logo Anegy"
         contain
-        src="/logo.png"
+        src="/Anegy-logo.png"
         transition="scale-transition"
         width="40px"
         height="40px"
