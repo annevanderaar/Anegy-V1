@@ -348,6 +348,7 @@ export default {
       })
         .then((res) => {
           this.data = res.data;
+          this.getCollection(res.data.belongs_to_collection.id);
         })
         .catch((err) => {
           console.log(err);
@@ -438,7 +439,6 @@ export default {
       })
         .then((res) => {
           this.collection = res.data;
-          //console.log(res.data);
         })
         .catch((err) => {
           console.log(err);

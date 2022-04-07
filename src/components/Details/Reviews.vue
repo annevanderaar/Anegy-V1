@@ -1,10 +1,9 @@
 <template>
   <div>
-    <v-card
-      v-for="review in this.reviews.results"
-      :key="review.id"
-      class="ma-8"
-    >
+    <h2 v-if="!reviews.results.length" style="text-align: center">
+      No reviews
+    </h2>
+    <v-card v-for="review in reviews.results" :key="review.id" class="ma-8">
       <v-row class="ml-4">
         <v-icon large v-if="review.author_details.avatar_path == null"
           >fas fa-user-circle</v-icon
