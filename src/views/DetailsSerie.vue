@@ -255,7 +255,7 @@
             <Cast v-if="this.val == 'cast'" :credits="credits" />
             <Crew v-else-if="this.val == 'crew'" :credits="credits" />
             <Seasons v-else-if="this.val == 'seasons'" />
-            <Videos v-else-if="this.val == 'videos'" />
+            <Videos v-else-if="this.val == 'videos'" :videos="videos" />
             <Reviews v-else-if="this.val == 'reviews'" :reviews="reviews" />
             <Similar v-else-if="this.val == 'similar'" :similar="similar" />
           </v-col>
@@ -299,6 +299,7 @@ export default {
     credits: [],
     similar: [],
     reviews: [],
+    videos: [],
     tabs: [
       {
         title: "Cast",
@@ -440,6 +441,22 @@ export default {
           console.log(err);
         });
     },
+    getVideos(id) {
+      axios({
+        method: "post",
+        url: `${config.url}/Library/Details.php`,
+        data: {
+          url: `/tv/${id}/videos`,
+        },
+      })
+        .then((res) => {
+          this.videos = res.data;
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
   mounted() {
     this.id = this.$route.params.id;
@@ -449,6 +466,7 @@ export default {
     this.getCredits(this.$route.params.id);
     this.getSimilar(this.$route.params.id);
     this.getReviews(this.$route.params.id);
+    this.getVideos(this.$route.params.id);
     window.scrollTo({ top: 0, behavior: "smooth" });
   },
   watch: {
@@ -460,6 +478,7 @@ export default {
       this.getCredits(this.$route.params.id);
       this.getSimilar(this.$route.params.id);
       this.getReviews(this.$route.params.id);
+      this.getVideos(this.$route.params.id);
       window.scrollTo({ top: 0, behavior: "smooth" });
     },
   },

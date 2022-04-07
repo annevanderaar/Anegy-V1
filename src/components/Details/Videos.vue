@@ -1,31 +1,21 @@
 <template>
-  <div>
-    <h1>Videos</h1>
+  <div class="d-flex flex-wrap justify-center">
+    <h2 v-if="!videos.results.length" style="text-align: center">No videos</h2>
+    <v-card v-for="video in videos.results" :key="video.id" class="cards">
+      <h4>{{ video.name }}</h4>
+      <iframe
+        allowfullscreen
+        width="560"
+        height="315"
+        :src="`https://www.youtube.com/embed/${video.key}`"
+        frameborder="0"
+      ></iframe>
+    </v-card>
   </div>
 </template>
 
 <script>
-import axios from "axios";
-import config from "@/Config/index.js";
-
 export default {
-  methods: {
-    getDetails(id) {
-      axios({
-        method: "post",
-        url: `${config.url}/Library/Details.php`,
-        data: {
-          url: `/movie/${id}`,
-        },
-      })
-        .then((res) => {
-          this.data = res.data;
-          //console.log(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-  },
+  props: ["videos"],
 };
 </script>
