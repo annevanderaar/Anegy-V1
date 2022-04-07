@@ -213,7 +213,6 @@ export default {
       })
         .then((res) => {
           this.data = res.data;
-          console.log(res.data);
         })
         .catch((err) => {
           console.log(err);
@@ -284,7 +283,6 @@ export default {
       })
         .then((res) => {
           this.images = res.data;
-          console.log(res.data);
         })
         .catch((err) => {
           console.log(err);

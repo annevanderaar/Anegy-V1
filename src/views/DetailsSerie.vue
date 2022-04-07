@@ -254,14 +254,11 @@
             </v-tabs>
             <Cast v-if="this.val == 'cast'" :credits="credits" />
             <Crew v-else-if="this.val == 'crew'" :credits="credits" />
-            <Seasons
-              v-else-if="this.val == 'seasons'"
-              :seasons="seasons"
-              :data="data"
-            />
+
             <Videos v-else-if="this.val == 'videos'" :videos="videos" />
             <Reviews v-else-if="this.val == 'reviews'" :reviews="reviews" />
             <Similar v-else-if="this.val == 'similar'" :similar="similar" />
+            <Seasons v-else-if="this.val == 'seasons'" :season="season" />
           </v-col>
         </v-row>
       </v-container>
@@ -297,13 +294,14 @@ export default {
   data: () => ({
     id: null,
     val: "cast",
+    sShow: false,
     data: [],
     providers: [],
     links: [],
     credits: [],
     similar: [],
     reviews: [],
-    seasons: [],
+    season: [],
     videos: [],
     tabs: [
       {
@@ -366,7 +364,9 @@ export default {
       })
         .then((res) => {
           this.data = res.data;
-          console.log(res.data);
+          for (let season = 1; season <= res.data.number_of_seasons; season++) {
+            this.getSeason(this.$route.params.id, season);
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -417,22 +417,6 @@ export default {
           console.log(err);
         });
     },
-    getSeasons(id) {
-      axios({
-        method: "post",
-        url: `${config.url}/Library/Details.php`,
-        data: {
-          url: `/tv/${id}/season/1`,
-        },
-      })
-        .then((res) => {
-          this.seasons = res.data;
-          //console.log(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
     getSimilar(id) {
       axios({
         method: "post",
@@ -478,6 +462,21 @@ export default {
           console.log(err);
         });
     },
+    getSeason(id, num) {
+      axios({
+        method: "post",
+        url: `${config.url}/Library/Details.php`,
+        data: {
+          url: `/tv/${id}/season/${num}`,
+        },
+      })
+        .then((res) => {
+          this.season.push(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
   mounted() {
     this.id = this.$route.params.id;
@@ -488,7 +487,6 @@ export default {
     this.getSimilar(this.$route.params.id);
     this.getReviews(this.$route.params.id);
     this.getVideos(this.$route.params.id);
-    this.getSeasons(this.$route.params.id);
     window.scrollTo({ top: 0, behavior: "smooth" });
   },
   watch: {
@@ -501,7 +499,6 @@ export default {
       this.getSimilar(this.$route.params.id);
       this.getReviews(this.$route.params.id);
       this.getVideos(this.$route.params.id);
-      this.getSeasons(this.$route.params.id);
       window.scrollTo({ top: 0, behavior: "smooth" });
     },
   },
