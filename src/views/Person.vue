@@ -112,6 +112,18 @@
                 v-if="links.instagram_id"
                 ><v-icon>mdi-instagram</v-icon></v-chip
               >
+              <v-chip
+                outlined
+                rounded
+                class="btnText"
+                :href="`https://www.whosdatedwho.com/dating/${data.name.replace(
+                  /\s/g,
+                  '-'
+                )}`"
+                target="_blank"
+              >
+                <v-icon>mdi-cloud</v-icon>
+              </v-chip>
             </v-row>
           </v-col>
           <v-col md="12">
