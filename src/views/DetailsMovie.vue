@@ -335,6 +335,17 @@ export default {
       },
     ],
   }),
+  metaInfo() {
+    return {
+      title:
+        this.data.title +
+        " " +
+        new Date(this.data.release_date).toLocaleDateString("nl-NL", {
+          year: "numeric",
+        }) +
+        " - Anegy",
+    };
+  },
   methods: {
     show(val) {
       this.val = val;
