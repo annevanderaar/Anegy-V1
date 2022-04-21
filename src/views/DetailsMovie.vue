@@ -263,7 +263,7 @@ import Videos from "@/components/Details/Videos.vue";
 import Reviews from "@/components/Details/Reviews.vue";
 import Similar from "@/components/Details/Similar.vue";
 import axios from "axios";
-import config from "@/Config/index.js";
+import config from "@/config/index.js";
 
 export default {
   name: "DetailsMovie",
