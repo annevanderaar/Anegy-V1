@@ -52,7 +52,17 @@
       v-if="this.show == true"
       v-model="search"
     ></v-text-field>
-    <v-btn icon class="white--text" @click="showSearch"
+    <v-btn
+      disabled
+      icon
+      class="white--text"
+      v-if="
+        this.$route.path == `/movies/details/${this.$route.params.id}` ||
+        this.$route.path == `/series/details/${this.$route.params.id}`
+      "
+      ><v-icon></v-icon
+    ></v-btn>
+    <v-btn icon class="white--text" @click="showSearch" v-else
       ><v-icon>fas fa-search</v-icon></v-btn
     >
     <!-- <v-btn icon class="white--text" @click="openAccount"

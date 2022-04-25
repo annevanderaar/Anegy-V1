@@ -254,7 +254,6 @@
             </v-tabs>
             <Cast v-if="this.val == 'cast'" :credits="credits" />
             <Crew v-else-if="this.val == 'crew'" :credits="credits" />
-
             <Videos v-else-if="this.val == 'videos'" :videos="videos" />
             <Reviews v-else-if="this.val == 'reviews'" :reviews="reviews" />
             <Similar v-else-if="this.val == 'similar'" :similar="similar" />
@@ -278,6 +277,7 @@ import Reviews from "@/components/Details/Reviews.vue";
 import Similar from "@/components/Details/Similar.vue";
 import axios from "axios";
 import config from "@/config/index.js";
+import { mapActions } from "vuex";
 
 export default {
   name: "DetailsSerie",
@@ -362,6 +362,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["setShow"]),
     show(val) {
       this.val = val;
     },
@@ -498,6 +499,7 @@ export default {
     this.getSimilar(this.$route.params.id);
     this.getReviews(this.$route.params.id);
     this.getVideos(this.$route.params.id);
+    this.setShow(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
   },
   watch: {
@@ -511,6 +513,7 @@ export default {
       this.getReviews(this.$route.params.id);
       this.getVideos(this.$route.params.id);
       window.scrollTo({ top: 0, behavior: "smooth" });
+      history.go(0);
     },
   },
 };
