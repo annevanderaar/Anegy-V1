@@ -79,7 +79,7 @@ import HomeAppBar from "@/components/AppBar/HomeAppBar.vue";
 import WebsiteFooter from "@/components/WebsiteFooter.vue";
 import Cards from "@/components/Cards.vue";
 import axios from "axios";
-import config from "@/config/index.js";
+import config from "@/Config/index.js";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -180,7 +180,7 @@ span,
 
 .filterBtn {
   position: fixed;
-  margin: 16px;
+  margin: 4px;
   font-weight: 400;
 }
 

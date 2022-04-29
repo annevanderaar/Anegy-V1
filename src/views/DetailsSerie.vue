@@ -2,7 +2,7 @@
   <v-app>
     <HomeAppBar />
     <v-main>
-      <v-container fluid style="overflow: auto">
+      <v-container fluid style="overflow: hidden">
         <v-row>
           <v-col class="d-flex justify-center" lg="4">
             <v-card
@@ -276,7 +276,7 @@ import Videos from "@/components/Details/Videos.vue";
 import Reviews from "@/components/Details/Reviews.vue";
 import Similar from "@/components/Details/Similar.vue";
 import axios from "axios";
-import config from "@/config/index.js";
+import config from "@/Config/index.js";
 import { mapActions } from "vuex";
 
 export default {
