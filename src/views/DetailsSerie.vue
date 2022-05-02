@@ -242,11 +242,27 @@
           </v-col>
           <v-col xs="12">
             <v-tabs
+              v-if="this.$vuetify.breakpoint.xs"
               color="accent"
               icons-and-text
               center-active
               fixed-tabs
               centered
+              hide-slider
+              show-arrows
+            >
+              <v-tab v-for="tab in tabs" :key="tab.title" @click="show(tab.val)"
+                >{{ tab.title }}<v-icon>{{ tab.icon }}</v-icon></v-tab
+              >
+            </v-tabs>
+            <v-tabs
+              v-else
+              color="accent"
+              icons-and-text
+              center-active
+              fixed-tabs
+              centered
+              hide-slider
             >
               <v-tab v-for="tab in tabs" :key="tab.title" @click="show(tab.val)"
                 >{{ tab.title }}<v-icon>{{ tab.icon }}</v-icon></v-tab
