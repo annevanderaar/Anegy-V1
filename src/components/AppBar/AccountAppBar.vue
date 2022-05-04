@@ -12,6 +12,7 @@
       ></v-img>
     </v-btn>
     <v-spacer></v-spacer>
+    <v-btn icon class="white--text"><v-icon>fas fa-heart</v-icon></v-btn>
     <v-btn
       icon
       class="white--text"

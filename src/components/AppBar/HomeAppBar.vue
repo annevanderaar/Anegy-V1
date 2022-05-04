@@ -68,7 +68,6 @@
     <v-btn icon class="white--text" @click="openAccount"
       ><v-icon>fas fa-user-astronaut</v-icon></v-btn
     >
-    <!-- <v-btn icon class="white--text"><v-icon>fas fa-heart</v-icon></v-btn> -->
     <v-btn
       icon
       class="white--text"
@@ -84,7 +83,7 @@
 
 <script>
 import axios from "axios";
-import config from "@/Config/index.js";
+import config from "@/config/index.js";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
