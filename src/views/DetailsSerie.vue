@@ -2,7 +2,7 @@
   <v-app>
     <HomeAppBar />
     <v-main>
-      <v-container fluid style="overflow: auto">
+      <v-container fluid style="overflow: hidden">
         <v-row>
           <v-col class="d-flex justify-center" lg="4">
             <v-card
@@ -242,11 +242,27 @@
           </v-col>
           <v-col xs="12">
             <v-tabs
+              v-if="this.$vuetify.breakpoint.xs"
               color="accent"
               icons-and-text
               center-active
               fixed-tabs
               centered
+              hide-slider
+              show-arrows
+            >
+              <v-tab v-for="tab in tabs" :key="tab.title" @click="show(tab.val)"
+                >{{ tab.title }}<v-icon>{{ tab.icon }}</v-icon></v-tab
+              >
+            </v-tabs>
+            <v-tabs
+              v-else
+              color="accent"
+              icons-and-text
+              center-active
+              fixed-tabs
+              centered
+              hide-slider
             >
               <v-tab v-for="tab in tabs" :key="tab.title" @click="show(tab.val)"
                 >{{ tab.title }}<v-icon>{{ tab.icon }}</v-icon></v-tab
@@ -276,7 +292,7 @@ import Videos from "@/components/Details/Videos.vue";
 import Reviews from "@/components/Details/Reviews.vue";
 import Similar from "@/components/Details/Similar.vue";
 import axios from "axios";
-import config from "@/config/index.js";
+import config from "@/Config/index.js";
 import { mapActions } from "vuex";
 
 export default {

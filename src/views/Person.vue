@@ -177,7 +177,7 @@ import WebsiteFooter from "@/components/WebsiteFooter.vue";
 import PersonMovies from "@/components/Details/PersonMovies.vue";
 import PersonSeries from "@/components/Details/PersonSeries.vue";
 import axios from "axios";
-import config from "@/config/index.js";
+import config from "@/Config/index.js";
 
 export default {
   components: {

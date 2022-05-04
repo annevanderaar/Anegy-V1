@@ -3,7 +3,15 @@
     <HomeAppBar @watched="watched" :currentSearchPage="currentSearchPage" />
     <v-main>
       <v-container fluid>
-        <v-btn @click="openFilter" class="filterBtn">Filter</v-btn>
+        <v-btn
+          @click="openFilter"
+          icon
+          color="btnFilterColor"
+          class="filterBtn"
+          v-if="this.$vuetify.breakpoint.xs"
+          ><v-icon class="ma-2 mr-8">fas fa-filter</v-icon></v-btn
+        >
+        <v-btn @click="openFilter" class="filterBtn" v-else>Filter</v-btn>
         <h1 v-if="this.$route.path == '/series/discover'">Discover Series</h1>
         <h1 v-if="this.$route.path == '/series/trending'">Trending Series</h1>
         <h1 v-if="this.$route.path == '/series/popular'">Popular Series</h1>
@@ -40,7 +48,7 @@ import SeriesFilters from "@/components/Filters/SeriesFilters.vue";
 import WebsiteFooter from "@/components/WebsiteFooter.vue";
 import Cards from "@/components/Cards.vue";
 import axios from "axios";
-import config from "@/config/index.js";
+import config from "@/Config/index.js";
 import { mapActions, mapGetters } from "vuex";
 
 export default {

@@ -10,11 +10,13 @@ export default new Vuetify({
         primary: "#e0dfdf",
         secondary: "#f32b2b",
         accent: "#23a9a7",
+        btnFilterColor: "#000000",
       },
       dark: {
         primary: "#1b1b1f",
         secondary: "#8B0000",
         accent: "#23a9a7",
+        btnFilterColor: "#FFFFFF",
       },
     },
   },

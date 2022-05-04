@@ -10,7 +10,7 @@
       <v-container>
         <v-row>
           <v-col><h1 class="ml-2">Filter</h1></v-col>
-          <v-btn class="ma-2" color="black" icon @click="closeFilter"
+          <v-btn class="ma-2" color="btnFilterColor" icon @click="closeFilter"
             ><v-icon>fas fa-times</v-icon></v-btn
           >
         </v-row>
