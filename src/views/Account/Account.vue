@@ -14,7 +14,7 @@
 <script>
 import AccountAppBar from "@/components/AppBar/AccountAppBar.vue";
 import axios from "axios";
-import config from "@/Config/index.js";
+import config from "@/config/index.js";
 
 export default {
   name: "Account",
@@ -32,7 +32,7 @@ export default {
       })
         .then((res) => {
           this.data = res.data[0];
-          console.log(res.data);
+          //console.log(res.data);
         })
         .catch((err) => {
           console.log(err);
@@ -44,21 +44,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-span,
-.display-4,
-.display-3,
-.display-2,
-.display-1 {
-  font-family: sans-serif;
-  margin: 8px;
-}
-</style>
