@@ -211,6 +211,11 @@ export default {
       },
     ],
   }),
+  metaInfo() {
+    return {
+      title: this.data.name + " - Anegy",
+    };
+  },
   methods: {
     show(val) {
       this.val = val;
