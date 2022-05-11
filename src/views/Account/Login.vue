@@ -6,7 +6,7 @@
           dark
           class="ma-8"
           color="#919395"
-          style="border-radius: 20px; min-height: 500px; width: 40%"
+          style="border-radius: 20px; min-height: 500px; width: 80%"
         >
           <v-img
             alt="Logo Anegy"
@@ -38,7 +38,7 @@
             ></v-text-field>
           </div>
           <div class="d-flex justify-center flex-column">
-            <v-btn class="ma-2">Login</v-btn>
+            <v-btn class="ma-2" @click="login">Login</v-btn>
             <a href="">Forgot password?</a>
           </div>
         </v-card>
@@ -48,6 +48,9 @@
 </template>
 
 <script>
+import axios from "axios";
+import config from "@/config/index.js";
+
 export default {
   name: "Login",
   data: () => ({
@@ -60,5 +63,23 @@ export default {
       emailMatch: () => `The email and password you entered don't match`,
     },
   }),
+  methods: {
+    login() {
+      axios({
+        method: "post",
+        url: `${config.url}/Library/Account.php`,
+        data: {
+          email: this.email,
+          password: this.password,
+        },
+      })
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
 };
 </script>

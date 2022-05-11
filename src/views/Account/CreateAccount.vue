@@ -6,7 +6,7 @@
           dark
           class="ma-8"
           color="#919395"
-          style="border-radius: 20px; min-height: 500px; width: 40%"
+          style="border-radius: 20px; min-height: 500px; width: 80%"
         >
           <v-img
             alt="Logo Anegy"
