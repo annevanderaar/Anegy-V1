@@ -48,7 +48,7 @@ import MoviesFilters from "@/components/Filters/MoviesFilters.vue";
 import WebsiteFooter from "@/components/WebsiteFooter.vue";
 import Cards from "@/components/Cards.vue";
 import axios from "axios";
-import config from "@/Config/index.js";
+import config from "@/config/index.js";
 import { mapActions, mapGetters } from "vuex";
 
 export default {

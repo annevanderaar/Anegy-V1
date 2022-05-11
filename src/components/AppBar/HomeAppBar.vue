@@ -84,7 +84,7 @@
 
 <script>
 import axios from "axios";
-import config from "@/Config/index.js";
+import config from "@/config/index.js";
 import { mapActions, mapGetters } from "vuex";
 
 export default {

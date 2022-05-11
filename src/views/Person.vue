@@ -177,7 +177,7 @@ import WebsiteFooter from "@/components/WebsiteFooter.vue";
 import PersonMovies from "@/components/Details/PersonMovies.vue";
 import PersonSeries from "@/components/Details/PersonSeries.vue";
 import axios from "axios";
-import config from "@/Config/index.js";
+import config from "@/config/index.js";
 
 export default {
   components: {
@@ -211,6 +211,11 @@ export default {
       },
     ],
   }),
+  metaInfo() {
+    return {
+      title: this.data.name + " - Anegy",
+    };
+  },
   methods: {
     show(val) {
       this.val = val;
@@ -308,6 +313,7 @@ export default {
     this.getPersonSeries(this.$route.params.id);
     this.getImages(this.$route.params.id);
     window.scrollTo({ top: 0, behavior: "smooth" });
+    console.log(this.data.name);
   },
 };
 </script>

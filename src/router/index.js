@@ -145,7 +145,7 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "account" */ "../views/Person.vue"),
     meta: {
-      title: "Details Person - Anegy",
+      title: "Details ... - Anegy",
     },
   },
   {
