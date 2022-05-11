@@ -6,7 +6,7 @@
           dark
           class="ma-8"
           color="#919395"
-          style="border-radius: 20px; min-height: 500px; width: 80%"
+          style="border-radius: 20px; min-height: 400px; width: 80%"
         >
           <v-img
             alt="Logo Anegy"
@@ -37,10 +37,9 @@
               @click:append="show = !show"
             ></v-text-field>
           </div>
-          <div class="d-flex justify-center flex-column">
-            <v-btn class="ma-2" @click="login">Login</v-btn>
-            <a href="">Forgot password?</a>
-          </div>
+          <v-btn class="ma-2" @click="login">Login</v-btn>
+          <a class="ma-2" href="">Forgot password?</a>
+          <a class="ma-2" href="#/create-account">Don't have an account?</a>
         </v-card>
       </v-container>
     </v-main>

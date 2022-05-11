@@ -6,7 +6,7 @@
           dark
           class="ma-8"
           color="#919395"
-          style="border-radius: 20px; min-height: 500px; width: 80%"
+          style="border-radius: 20px; min-height: 450px; width: 80%"
         >
           <v-img
             alt="Logo Anegy"
@@ -42,10 +42,8 @@
               @click:append="show = !show"
             ></v-text-field>
           </div>
-          <div class="d-flex justify-center flex-column">
-            <v-btn class="ma-2">Create</v-btn>
-            <a href="#/login" class="ma-2">Already have an account?</a>
-          </div>
+          <v-btn class="ma-2" @click="register">Create</v-btn>
+          <a href="#/login" class="ma-2">Already have an account?</a>
         </v-card>
       </v-container>
     </v-main>
@@ -53,6 +51,9 @@
 </template>
 
 <script>
+import axios from "axios";
+import config from "@/config/index.js";
+
 export default {
   name: "CreateAccount",
   data: () => ({
@@ -66,5 +67,24 @@ export default {
       emailMatch: () => `The email and password you entered don't match`,
     },
   }),
+  methods: {
+    register() {
+      axios({
+        method: "post",
+        url: `${config.url}/Library/Account.php`,
+        data: {
+          name: this.name,
+          email: this.email,
+          password: this.password,
+        },
+      })
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
 };
 </script>
