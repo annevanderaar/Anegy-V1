@@ -6,7 +6,7 @@
           dark
           class="ma-8"
           color="#919395"
-          style="border-radius: 20px; min-height: 450px; width: 80%"
+          style="border-radius: 20px; min-height: 450px; width: 400px"
         >
           <v-img
             alt="Logo Anegy"
@@ -28,12 +28,12 @@
               v-model="name"
             ></v-text-field>
             <v-text-field
-              :rules="[rules.required]"
+              :rules="[rules.required, rules.emailRules]"
               label="Email"
               v-model="email"
             ></v-text-field>
             <v-text-field
-              :rules="[rules.required, rules.min]"
+              :rules="[rules.required, rules.min, rules.passwordRules]"
               :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
               :type="show ? 'text' : 'password'"
               label="Password"
@@ -63,27 +63,51 @@ export default {
     show: false,
     rules: {
       required: (value) => !!value || "Required.",
-      min: (v) => v.length >= 8 || "Min 8 characters",
-      emailMatch: () => `The email and password you entered don't match`,
+      min: (v) => v.length >= 8 || "Min 8 characters.",
+      emailRules: (v) =>
+        /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()\\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+          v
+        ) || "E-mail must be valid",
+      passwordRules: (v) =>
+        /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/.test(v) ||
+        "Password must contain at least lowercase letter, one number, a special character and one uppercase letter.",
     },
   }),
   methods: {
     register() {
-      axios({
-        method: "post",
-        url: `${config.url}/Library/Account.php`,
-        data: {
-          name: this.name,
-          email: this.email,
-          password: this.password,
-        },
-      })
-        .then((res) => {
-          console.log(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
+      if (this.name == "" || this.email == "" || this.password == "") {
+        this.$toast.warning("You forgot something, try again.", {
+          timeout: 2000,
         });
+      } else {
+        axios({
+          method: "post",
+          url: `${config.url}/Library/Account.php`,
+          data: {
+            name: this.name,
+            email: this.email,
+            password: this.password,
+          },
+        })
+          .then((res) => {
+            console.log(res.data);
+            if (res.data == "succes") {
+              this.$toast.success(
+                "Account successfully made. You will be redirected.",
+                {
+                  timeout: 2000,
+                }
+              );
+            } else if (res.data == "error") {
+              this.$toast.error("Something went wrong. Try again.", {
+                timeout: 2000,
+              });
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
     },
   },
 };

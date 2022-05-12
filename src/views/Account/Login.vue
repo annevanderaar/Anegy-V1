@@ -6,7 +6,7 @@
           dark
           class="ma-8"
           color="#919395"
-          style="border-radius: 20px; min-height: 400px; width: 80%"
+          style="border-radius: 20px; min-height: 400px; width: width: 400px"
         >
           <v-img
             alt="Logo Anegy"
@@ -25,7 +25,7 @@
             <v-text-field
               label="Email"
               v-model="email"
-              :rules="[rules.required]"
+              :rules="[rules.required, rules.emailRules]"
             ></v-text-field>
             <v-text-field
               :rules="[rules.required, rules.min]"
@@ -59,6 +59,10 @@ export default {
     rules: {
       required: (value) => !!value || "Required.",
       min: (v) => v.length >= 8 || "Min 8 characters",
+      emailRules: (v) =>
+        /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()\\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+          v
+        ) || "E-mail must be valid",
       emailMatch: () => `The email and password you entered don't match`,
     },
   }),
@@ -74,6 +78,15 @@ export default {
       })
         .then((res) => {
           console.log(res.data);
+          if (res.data == "succes") {
+            this.$toast.success("Successfull login. You will be redirected.", {
+              timeout: 2000,
+            });
+          } else if (res.data == "invalid") {
+            this.$toast.error("Invalid email or password.", {
+              timeout: 2000,
+            });
+          }
         })
         .catch((err) => {
           console.log(err);
