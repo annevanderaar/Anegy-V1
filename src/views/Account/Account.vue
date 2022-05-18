@@ -3,9 +3,9 @@
     <AccountAppBar />
     <v-main>
       <h1>
-        Welkom {{ data.name }}. Dit is je account van Anegy. Hier kan je al je
-        favoriete films en series opslaan. En je kan alles afstrepen wat je hebt
-        gekeken.
+        Welkom {{ data.firstname }}. Dit is je account van Anegy. Hier kan je al
+        je favoriete films en series opslaan. En je kan alles afstrepen wat je
+        hebt gekeken.
       </h1>
     </v-main>
   </v-app>

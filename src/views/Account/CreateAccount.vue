@@ -6,7 +6,7 @@
           dark
           class="ma-8"
           color="#919395"
-          style="border-radius: 20px; min-height: 450px; width: 400px"
+          style="border-radius: 20px; min-height: 500px; width: 400px"
         >
           <v-img
             alt="Logo Anegy"
@@ -24,8 +24,13 @@
           <div class="ma-2">
             <v-text-field
               :rules="[rules.required]"
-              label="Name"
-              v-model="name"
+              label="First name"
+              v-model="firstname"
+            ></v-text-field>
+            <v-text-field
+              :rules="[rules.required]"
+              label="Last name"
+              v-model="lastname"
             ></v-text-field>
             <v-text-field
               :rules="[rules.required, rules.emailRules]"
@@ -57,7 +62,8 @@ import config from "@/config/index.js";
 export default {
   name: "CreateAccount",
   data: () => ({
-    name: "",
+    firstname: "",
+    lastname: "",
     email: "",
     password: "",
     show: false,
@@ -84,24 +90,28 @@ export default {
           method: "post",
           url: `${config.url}/Library/Account.php`,
           data: {
-            name: this.name,
+            firstname: this.firstname,
+            lastname: this.lastname,
             email: this.email,
             password: this.password,
           },
         })
           .then((res) => {
             console.log(res.data);
-            if (res.data == "succes") {
+            if (res.data == "error") {
+              this.$toast.error("Something went wrong. Try again.", {
+                timeout: 2000,
+              });
+            } else {
               this.$toast.success(
                 "Account successfully made. You will be redirected.",
                 {
                   timeout: 2000,
                 }
               );
-            } else if (res.data == "error") {
-              this.$toast.error("Something went wrong. Try again.", {
-                timeout: 2000,
-              });
+              // setTimeout(() => {
+              //   this.$router.push({ path: `/account` });
+              // }, 2000);
             }
           })
           .catch((err) => {

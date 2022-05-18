@@ -6,7 +6,7 @@
           dark
           class="ma-8"
           color="#919395"
-          style="border-radius: 20px; min-height: 400px; width: width: 400px"
+          style="border-radius: 20px; min-height: 360px; width: width: 400px"
         >
           <v-img
             alt="Logo Anegy"
@@ -78,14 +78,17 @@ export default {
       })
         .then((res) => {
           console.log(res.data);
-          if (res.data == "succes") {
-            this.$toast.success("Successfull login. You will be redirected.", {
-              timeout: 2000,
-            });
-          } else if (res.data == "invalid") {
+          if (res.data == "invalid") {
             this.$toast.error("Invalid email or password.", {
               timeout: 2000,
             });
+          } else {
+            this.$toast.success("Successfull login. You will be redirected.", {
+              timeout: 2000,
+            });
+            setTimeout(() => {
+              this.$router.push({ path: `/account` });
+            }, 2000);
           }
         })
         .catch((err) => {
