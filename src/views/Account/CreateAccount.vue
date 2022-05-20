@@ -103,15 +103,17 @@ export default {
                 timeout: 2000,
               });
             } else {
+              this.$session.start();
+              this.$session.set("id", res.data);
               this.$toast.success(
                 "Account successfully made. You will be redirected.",
                 {
                   timeout: 2000,
                 }
               );
-              // setTimeout(() => {
-              //   this.$router.push({ path: `/account` });
-              // }, 2000);
+              setTimeout(() => {
+                this.$router.push({ path: `/account` });
+              }, 2000);
             }
           })
           .catch((err) => {

@@ -6,7 +6,7 @@
           dark
           class="ma-8"
           color="#919395"
-          style="border-radius: 20px; min-height: 360px; width: width: 400px"
+          style="border-radius: 20px; min-height: 360px; width: 500px"
         >
           <v-img
             alt="Logo Anegy"
@@ -38,7 +38,7 @@
             ></v-text-field>
           </div>
           <v-btn class="ma-2" @click="login">Login</v-btn>
-          <a class="ma-2" href="">Forgot password?</a>
+          <a class="ma-2" href="#/reset">Forgot password?</a>
           <a class="ma-2" href="#/create-account">Don't have an account?</a>
         </v-card>
       </v-container>
@@ -83,6 +83,8 @@ export default {
               timeout: 2000,
             });
           } else {
+            this.$session.start();
+            this.$session.set("id", res.data);
             this.$toast.success("Successfull login. You will be redirected.", {
               timeout: 2000,
             });

@@ -1,5 +1,31 @@
 <template>
   <v-app-bar app color="secondary" clipped-left>
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          v-bind="attrs"
+          v-on="on"
+          icon
+          class="white--text"
+          :to="`/movies/discover`"
+          ><v-icon>mdi-movie-open</v-icon></v-btn
+        >
+      </template>
+      <span>Movies Discover</span>
+    </v-tooltip>
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          v-bind="attrs"
+          v-on="on"
+          icon
+          class="white--text"
+          :to="`/series/discover`"
+          ><v-icon>mdi-television-classic</v-icon></v-btn
+        >
+      </template>
+      <span>Series Discover</span>
+    </v-tooltip>
     <v-spacer></v-spacer>
     <v-btn plain depressed icon :to="`/`">
       <v-img

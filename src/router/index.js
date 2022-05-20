@@ -178,6 +178,15 @@ const routes = [
     },
   },
   {
+    path: "/reset",
+    name: "Reset Password",
+    component: () =>
+      import(/* webpackChunkName: "login" */ "../views/Account/Reset.vue"),
+    meta: {
+      title: "Reset Password - Anegy",
+    },
+  },
+  {
     path: "*",
     name: "404",
     component: () => import(/* webpackChunkName: "login" */ "../views/404.vue"),

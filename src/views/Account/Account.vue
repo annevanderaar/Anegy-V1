@@ -25,10 +25,13 @@ export default {
     data: [],
   }),
   methods: {
-    getAccount() {
+    getAccount(id) {
       axios({
-        method: "get",
+        method: "post",
         url: `${config.url}/Library/Account.php`,
+        data: {
+          id: id,
+        },
       })
         .then((res) => {
           this.data = res.data[0];
@@ -40,7 +43,11 @@ export default {
     },
   },
   mounted() {
-    this.getAccount();
+    if (!this.$session.exists()) {
+      this.$router.push({ path: `/login` });
+    } else {
+      this.getAccount(this.$session.get("id"));
+    }
   },
 };
 </script>
