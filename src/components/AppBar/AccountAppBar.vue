@@ -38,7 +38,35 @@
       ></v-img>
     </v-btn>
     <v-spacer></v-spacer>
-    <v-btn icon class="white--text"><v-icon>fas fa-heart</v-icon></v-btn>
+    <v-btn icon class="white--text" @click="openAccount"
+      ><v-icon>fas fa-user-astronaut</v-icon></v-btn
+    >
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          v-bind="attrs"
+          v-on="on"
+          icon
+          class="white--text"
+          :to="`/account/watched`"
+          ><v-icon>mdi-clipboard-list-outline</v-icon></v-btn
+        >
+      </template>
+      <span>Watchlist</span>
+    </v-tooltip>
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          v-bind="attrs"
+          v-on="on"
+          icon
+          class="white--text"
+          :to="`/account/favorites`"
+          ><v-icon>fas fa-heart</v-icon></v-btn
+        >
+      </template>
+      <span>Favorites</span>
+    </v-tooltip>
     <v-btn
       icon
       class="white--text"
@@ -55,10 +83,11 @@
 <script>
 export default {
   name: "AppBar",
-  data: () => ({
-    //
-  }),
+  data: () => ({}),
   methods: {
+    openAccount() {
+      this.$router.push({ path: `/account` });
+    },
     darkMode() {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
       localStorage.setItem("dark_theme", this.$vuetify.theme.dark.toString());

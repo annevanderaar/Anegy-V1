@@ -58,7 +58,8 @@
       class="white--text"
       v-if="
         this.$route.path == `/movies/details/${this.$route.params.id}` ||
-        this.$route.path == `/series/details/${this.$route.params.id}`
+        this.$route.path == `/series/details/${this.$route.params.id}` ||
+        this.$route.path == `/people/${this.$route.params.id}`
       "
       ><v-icon></v-icon
     ></v-btn>

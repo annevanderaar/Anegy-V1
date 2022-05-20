@@ -2,11 +2,11 @@
   <v-app>
     <AccountAppBar />
     <v-main>
-      <h1>
-        Welkom {{ data.firstname }}. Dit is je account van Anegy. Hier kan je al
-        je favoriete films en series opslaan. En je kan alles afstrepen wat je
-        hebt gekeken.
-      </h1>
+      <v-container class="d-flex justify-center">
+        <h1>
+          Welcome {{ data.firstname }}! We are glad to have you here on Anegy
+        </h1>
+      </v-container>
     </v-main>
   </v-app>
 </template>

@@ -158,6 +158,26 @@ const routes = [
     },
   },
   {
+    path: "/account/favorites",
+    name: "Favorites",
+    component: () =>
+      import(
+        /* webpackChunkName: "account" */ "../views/Account/Favorites.vue"
+      ),
+    meta: {
+      title: "Favorites - Anegy",
+    },
+  },
+  {
+    path: "/account/watched",
+    name: "Watched",
+    component: () =>
+      import(/* webpackChunkName: "account" */ "../views/Account/Watched.vue"),
+    meta: {
+      title: "Watchlist - Anegy",
+    },
+  },
+  {
     path: "/create-account",
     name: "Create Account",
     component: () =>
@@ -181,7 +201,7 @@ const routes = [
     path: "/reset",
     name: "Reset Password",
     component: () =>
-      import(/* webpackChunkName: "login" */ "../views/Account/Reset.vue"),
+      import(/* webpackChunkName: "Reset" */ "../views/Account/Reset.vue"),
     meta: {
       title: "Reset Password - Anegy",
     },
@@ -189,7 +209,7 @@ const routes = [
   {
     path: "*",
     name: "404",
-    component: () => import(/* webpackChunkName: "login" */ "../views/404.vue"),
+    component: () => import(/* webpackChunkName: "404" */ "../views/404.vue"),
     meta: {
       title: "404 - Anegy",
     },
