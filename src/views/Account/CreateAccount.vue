@@ -90,6 +90,7 @@ export default {
           method: "post",
           url: `${config.url}/Library/Account.php`,
           data: {
+            param: "create",
             firstname: this.firstname,
             lastname: this.lastname,
             email: this.email,

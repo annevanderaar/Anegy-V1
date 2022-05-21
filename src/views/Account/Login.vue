@@ -72,6 +72,7 @@ export default {
         method: "post",
         url: `${config.url}/Library/Account.php`,
         data: {
+          param: "login",
           email: this.email,
           password: this.password,
         },

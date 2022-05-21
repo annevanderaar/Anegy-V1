@@ -12,12 +12,7 @@
           ><v-icon class="ma-2 mr-8">fas fa-filter</v-icon></v-btn
         >
         <v-btn @click="openFilter" class="filterBtn" v-else>Filter</v-btn>
-        <h1 v-if="this.$route.path == '/movies/discover'">Discover Movies</h1>
-        <h1 v-if="this.$route.path == '/movies/trending'">Trending Movies</h1>
-        <h1 v-if="this.$route.path == '/movies/popular'">Popular Movies</h1>
-        <h1 v-if="this.$route.path == '/movies/playing'">Movies Playing</h1>
-        <h1 v-if="this.$route.path == '/movies/top-rated'">Top Rated Movies</h1>
-        <h1 v-if="this.$route.path == '/movies/upcoming'">Upcoming Movies</h1>
+        <h1>{{ pageName }} Movies</h1>
         <MoviesFilters @genres="selectedGenresM" />
         <cards :data="data.results" />
         <v-pagination
@@ -67,6 +62,7 @@ export default {
     totalSearchPages: 500,
     url: "/discover/movie?",
     selectedGenresMovie: [],
+    pageName: "Discover",
   }),
   computed: {
     ...mapGetters(["show"]),
@@ -117,12 +113,30 @@ export default {
   },
   watch: {
     $route(val) {
-      if (val.path == "/movies/discover") this.url = "/discover/movie?";
-      if (val.path == "/movies/trending") this.url = "/trending/movie/day?";
-      if (val.path == "/movies/popular") this.url = "/movie/popular?";
-      if (val.path == "/movies/top-rated") this.url = "/movie/top_rated?";
-      if (val.path == "/movies/playing") this.url = "/movie/now_playing?";
-      if (val.path == "/movies/upcoming") this.url = "/movie/upcoming?";
+      if (val.path == "/movies/discover") {
+        this.url = "/discover/movie?";
+        this.pageName = "Discover";
+      }
+      if (val.path == "/movies/trending") {
+        this.url = "/trending/movie/day?";
+        this.pageName = "Trending";
+      }
+      if (val.path == "/movies/popular") {
+        this.url = "/movie/popular?";
+        this.pageName = "Popular";
+      }
+      if (val.path == "/movies/top-rated") {
+        this.url = "/movie/top_rated?";
+        this.pageName = "Top Rated";
+      }
+      if (val.path == "/movies/playing") {
+        this.url = "/movie/now_playing?";
+        this.pageName = "Playing";
+      }
+      if (val.path == "/movies/upcoming") {
+        this.url = "/movie/upcoming?";
+        this.pageName = "Upcoming";
+      }
       this.getMovies(this.currentPage, this.url, this.selectedGenresMovie);
       this.setDrawerInput(false);
       this.setShow(false);
@@ -141,13 +155,30 @@ export default {
     },
   },
   mounted() {
-    if (this.$route.path == "/movies/discover") this.url = "/discover/movie?";
-    if (this.$route.path == "/movies/trending")
+    if (this.$route.path == "/movies/discover") {
+      this.url = "/discover/movie?";
+      this.pageName = "Discover";
+    }
+    if (this.$route.path == "/movies/trending") {
       this.url = "/trending/movie/day?";
-    if (this.$route.path == "/movies/popular") this.url = "/movie/popular?";
-    if (this.$route.path == "/movies/top-rated") this.url = "/movie/top_rated?";
-    if (this.$route.path == "/movies/playing") this.url = "/movie/now_playing?";
-    if (this.$route.path == "/movies/upcoming") this.url = "/movie/upcoming?";
+      this.pageName = "Trending";
+    }
+    if (this.$route.path == "/movies/popular") {
+      this.url = "/movie/popular?";
+      this.pageName = "Popular";
+    }
+    if (this.$route.path == "/movies/top-rated") {
+      this.url = "/movie/top_rated?";
+      this.pageName = "Top Rated";
+    }
+    if (this.$route.path == "/movies/playing") {
+      this.url = "/movie/now_playing?";
+      this.pageName = "Playing";
+    }
+    if (this.$route.path == "/movies/upcoming") {
+      this.url = "/movie/upcoming?";
+      this.pageName = "Upcoming";
+    }
     this.getMovies(this.currentPage, this.url, this.selectedGenresMovie);
     this.setDrawerInput(false);
     this.setShow(false);

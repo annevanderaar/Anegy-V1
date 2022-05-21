@@ -30,6 +30,7 @@ export default {
         method: "post",
         url: `${config.url}/Library/Account.php`,
         data: {
+          param: "account",
           id: id,
         },
       })
