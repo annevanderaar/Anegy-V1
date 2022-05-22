@@ -39,7 +39,7 @@ export default {
           res.data.forEach((item) => {
             if (item.type == "movie") {
               this.getDetails("movie", item.ms_id);
-            } else if (item.type == "serie") {
+            } else if (item.type == "tv") {
               this.getDetails("tv", item.ms_id);
             } else if (item.type == "person") {
               this.getDetails("person", item.ms_id);

@@ -97,15 +97,48 @@
           :to="`/series/details/${item.id}`"
           >Know more</v-btn
         >
-        <!-- <v-btn icon color="secondary"><v-icon>far fa-heart</v-icon></v-btn> -->
-        <!-- <v-btn icon color="secondary"><v-icon>fas fa-heart</v-icon></v-btn> -->
+        <v-btn icon color="secondary" @click="addFave(item.id, item.media_type)"
+          ><v-icon>far fa-heart</v-icon></v-btn
+        >
+        <!-- <v-btn icon color="secondary" @click="deleteFave"
+          ><v-icon>fas fa-heart</v-icon></v-btn
+        > -->
       </v-card>
     </v-card>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+import config from "@/config/index.js";
+
 export default {
   props: ["data"],
+  methods: {
+    addFave(id, type) {
+      if (!this.$session.exists()) {
+        this.$toast.warning("You have to be loged in to add a favorite", {
+          timeout: 3000,
+        });
+      } else {
+        axios({
+          method: "post",
+          url: `${config.url}/Library/Account.php`,
+          data: {
+            param: "addFave",
+            userid: this.$session.get("id"),
+            msid: id,
+            type: type,
+          },
+        })
+          .then((res) => {
+            console.log(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    },
+  },
 };
 </script>
