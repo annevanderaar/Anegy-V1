@@ -36,8 +36,6 @@ export default {
         },
       })
         .then((res) => {
-          //this.data = res.data;
-          console.log(res.data);
           res.data.forEach((item) => {
             if (item.type == "movie") {
               this.getDetails("movie", item.ms_id);
@@ -61,9 +59,7 @@ export default {
         },
       })
         .then((res) => {
-          console.log(res.data);
           this.data.push(res.data);
-          console.log(this.data);
         })
         .catch((err) => {
           console.log(err);
