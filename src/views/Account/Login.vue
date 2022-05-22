@@ -78,7 +78,6 @@ export default {
         },
       })
         .then((res) => {
-          console.log(res.data);
           if (res.data == "invalid") {
             this.$toast.error("Invalid email or password.", {
               timeout: 2000,

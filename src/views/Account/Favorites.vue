@@ -4,7 +4,7 @@
     <v-main>
       <v-container fluid>
         <h1 style="text-align: center">Your favorites</h1>
-        <Cards :data="data.results" />
+        <Cards :data="data" />
       </v-container>
     </v-main>
   </v-app>
@@ -23,7 +23,7 @@ export default {
     Cards,
   },
   data: () => ({
-    data: {},
+    data: [],
   }),
   methods: {
     getFavorites(id) {
@@ -36,15 +36,34 @@ export default {
         },
       })
         .then((res) => {
-          //this.data = res.data[0];
+          //this.data = res.data;
           console.log(res.data);
           res.data.forEach((item) => {
             if (item.type == "movie") {
-              console.log("movie");
+              this.getDetails("movie", item.ms_id);
             } else if (item.type == "serie") {
-              console.log("serie");
+              this.getDetails("tv", item.ms_id);
+            } else if (item.type == "person") {
+              this.getDetails("person", item.ms_id);
             }
           });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getDetails(url, id) {
+      axios({
+        method: "post",
+        url: `${config.url}/Library/Details.php`,
+        data: {
+          url: `/${url}/${id}`,
+        },
+      })
+        .then((res) => {
+          console.log(res.data);
+          this.data.push(res.data);
+          console.log(this.data);
         })
         .catch((err) => {
           console.log(err);
@@ -53,6 +72,7 @@ export default {
   },
   mounted() {
     this.getFavorites(this.$session.get("id"));
+    this.data.splice(0);
   },
 };
 </script>

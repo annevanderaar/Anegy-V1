@@ -68,12 +68,13 @@
             })
           }}</v-card-subtitle
         >
-        <v-card-text v-if="item.media_type == 'person'"
+        <v-card-text
+          v-if="item.media_type == 'person' || item.known_for_department"
           >Known for: {{ item.known_for_department }}</v-card-text
         >
         <v-card-text v-if="item.overview">{{ item.overview }}</v-card-text>
         <v-btn
-          v-if="item.video == false"
+          v-if="item.media_type == 'movie' || item.video == false"
           elevation="0"
           color="accent"
           class="ml-2"
@@ -81,7 +82,7 @@
           >Know more</v-btn
         >
         <v-btn
-          v-else-if="item.media_type == 'person'"
+          v-else-if="item.media_type == 'person' || item.known_for_department"
           elevation="0"
           color="accent"
           class="ml-2"
@@ -89,7 +90,7 @@
           >Know more</v-btn
         >
         <v-btn
-          v-else
+          v-else-if="item.media_type == 'tv' || item.name"
           elevation="0"
           color="accent"
           class="ml-2"

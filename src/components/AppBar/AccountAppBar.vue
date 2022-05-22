@@ -38,9 +38,22 @@
       ></v-img>
     </v-btn>
     <v-spacer></v-spacer>
-    <v-btn icon class="white--text" @click="openAccount"
-      ><v-icon>fas fa-user-astronaut</v-icon></v-btn
-    >
+    <v-menu bottom min-width="200px" rounded offset-y>
+      <template v-slot:activator="{ on }">
+        <v-btn icon class="white--text" v-on="on"
+          ><v-icon>fas fa-user-astronaut</v-icon></v-btn
+        >
+      </template>
+      <v-card>
+        <v-list-item-content class="justify-center">
+          <div class="mx-auto text-center">
+            <v-btn depressed text @click="openAccount"> Account </v-btn>
+            <v-divider class="my-3"></v-divider>
+            <v-btn depressed text @click="logOut"> Logout </v-btn>
+          </div></v-list-item-content
+        >
+      </v-card>
+    </v-menu>
     <v-tooltip bottom>
       <template v-slot:activator="{ on, attrs }">
         <v-btn
@@ -91,6 +104,18 @@ export default {
     darkMode() {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
       localStorage.setItem("dark_theme", this.$vuetify.theme.dark.toString());
+    },
+    logOut() {
+      this.$session.destroy();
+      this.$toast.success(
+        "You have succesfully loged out. You will be redirected.",
+        {
+          timeout: 2000,
+        }
+      );
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     },
   },
 };
