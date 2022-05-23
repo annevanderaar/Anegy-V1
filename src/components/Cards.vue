@@ -100,7 +100,7 @@
         <v-btn icon color="secondary" @click="addFave(item.id, item.media_type)"
           ><v-icon>far fa-heart</v-icon></v-btn
         >
-        <!-- <v-btn icon color="secondary" @click="deleteFave"
+        <!-- <v-btn icon color="secondary" @click="deleteFave(item.id)"
           ><v-icon>fas fa-heart</v-icon></v-btn
         > -->
       </v-card>
@@ -132,12 +132,62 @@ export default {
           },
         })
           .then((res) => {
-            console.log(res.data);
+            if (res.data == "succes") {
+              this.$toast.success("Successfully added.", {
+                timeout: 2000,
+              });
+            } else if (res.data == "error") {
+              this.$toast.error("Something went wrong. Try again.", {
+                timeout: 2000,
+              });
+            }
           })
           .catch((err) => {
             console.log(err);
           });
       }
+    },
+    deleteFave(id) {
+      axios({
+        method: "post",
+        url: `${config.url}/Library/Account.php`,
+        data: {
+          param: "deleteFave",
+          userid: this.$session.get("id"),
+          msid: id,
+        },
+      })
+        .then((res) => {
+          if (res.data == "succes") {
+            this.$toast.success("Successfully deleted.", {
+              timeout: 2000,
+            });
+          } else if (res.data == "error") {
+            this.$toast.error("Something went wrong. Try again.", {
+              timeout: 2000,
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    checkFave() {
+      axios({
+        method: "post",
+        url: `${config.url}/Library/Account.php`,
+        data: {
+          param: "checkFave",
+          userid: this.$session.get("id"),
+          msid: 818397,
+        },
+      })
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 };

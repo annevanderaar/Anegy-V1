@@ -2,7 +2,9 @@
   <v-app>
     <AccountAppBar />
     <v-main>
-      <v-container fluid> <h1>Your watchlist</h1> </v-container>
+      <v-container fluid>
+        <h1 style="text-align: center">Your watchlist</h1>
+      </v-container>
     </v-main>
   </v-app>
 </template>

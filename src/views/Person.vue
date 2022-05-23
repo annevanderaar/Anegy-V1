@@ -28,6 +28,14 @@
             </v-card>
           </v-col>
           <v-col md="8">
+            <v-row justify="end" class="mr-2 mt-2">
+              <v-btn icon color="secondary" @click="addFave(data.id)"
+                ><v-icon>far fa-heart</v-icon></v-btn
+              >
+              <!-- <v-btn icon color="secondary" @click="deleteFave(data.id)"
+                ><v-icon>fas fa-heart</v-icon></v-btn
+              > -->
+            </v-row>
             <v-col>
               <h1>{{ data.name }}</h1>
               <h3>{{ data.known_for_department }}</h3>
@@ -219,6 +227,63 @@ export default {
   methods: {
     show(val) {
       this.val = val;
+    },
+    addFave(id) {
+      if (!this.$session.exists()) {
+        this.$toast.warning("You have to be loged in to add a favorite", {
+          timeout: 3000,
+        });
+      } else {
+        axios({
+          method: "post",
+          url: `${config.url}/Library/Account.php`,
+          data: {
+            param: "addFave",
+            userid: this.$session.get("id"),
+            msid: id,
+            type: "person",
+          },
+        })
+          .then((res) => {
+            if (res.data == "succes") {
+              this.$toast.success("Successfully added.", {
+                timeout: 2000,
+              });
+            } else if (res.data == "error") {
+              this.$toast.error("Something went wrong. Try again.", {
+                timeout: 2000,
+              });
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    },
+    deleteFave(id) {
+      axios({
+        method: "post",
+        url: `${config.url}/Library/Account.php`,
+        data: {
+          param: "deleteFave",
+          userid: this.$session.get("id"),
+          msid: id,
+        },
+      })
+        .then((res) => {
+          if (res.data == "succes") {
+            this.$toast.success("Successfully deleted.", {
+              timeout: 2000,
+            });
+          } else if (res.data == "error") {
+            this.$toast.error("Something went wrong. Try again.", {
+              timeout: 2000,
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     getDetails(id) {
       axios({
