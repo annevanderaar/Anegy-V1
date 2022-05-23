@@ -173,22 +173,32 @@ export default {
         });
     },
     checkFave() {
-      axios({
-        method: "post",
-        url: `${config.url}/Library/Account.php`,
-        data: {
-          param: "checkFave",
-          userid: this.$session.get("id"),
-          msid: 818397,
-        },
-      })
-        .then((res) => {
-          console.log(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      let data = this.data;
+      data.forEach((item) => {
+        this.faveCall(item.id);
+      });
     },
+    faveCall(id) {
+      // axios({
+      //   method: "post",
+      //   url: `${config.url}/Library/Account.php`,
+      //   data: {
+      //     param: "checkFave",
+      //     userid: this.$session.get("id"),
+      //     msid: id,
+      //   },
+      // })
+      //   .then((res) => {
+      //     console.log(res.data);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
+      console.log(id);
+    },
+  },
+  mounted() {
+    //this.checkFave();
   },
 };
 </script>
