@@ -29,10 +29,10 @@
           </v-col>
           <v-col md="8">
             <v-row justify="end" class="mr-2 mt-2">
-              <v-btn icon color="secondary" @click="addFave(data.id)"
+              <v-btn icon color="secondary" @click="addFave(data.id)" x-large
                 ><v-icon>far fa-heart</v-icon></v-btn
               >
-              <!-- <v-btn icon color="secondary" @click="deleteFave(data.id)"
+              <!-- <v-btn icon color="secondary" @click="deleteFave(data.id)" x-large
                 ><v-icon>fas fa-heart</v-icon></v-btn
               > -->
             </v-row>

@@ -103,6 +103,10 @@
         <!-- <v-btn icon color="secondary" @click="deleteFave(item.id)"
           ><v-icon>fas fa-heart</v-icon></v-btn
         > -->
+        <v-btn icon color="accent" @click="addWatched(item.id, item.media_type)"
+          ><v-icon>mdi-clipboard-list-outline</v-icon></v-btn
+        >
+        <!-- <v-btn icon color="accent"><v-icon>mdi-clipboard-list</v-icon></v-btn> -->
       </v-card>
     </v-card>
   </div>
@@ -172,33 +176,63 @@ export default {
           console.log(err);
         });
     },
-    checkFave() {
-      let data = this.data;
-      data.forEach((item) => {
-        this.faveCall(item.id);
-      });
+    addWatched(id, type) {
+      if (!this.$session.exists()) {
+        this.$toast.warning("You have to be loged in to add to watchlist", {
+          timeout: 3000,
+        });
+      } else {
+        axios({
+          method: "post",
+          url: `${config.url}/Library/Account.php`,
+          data: {
+            param: "addWatched",
+            userid: this.$session.get("id"),
+            msid: id,
+            type: type,
+          },
+        })
+          .then((res) => {
+            if (res.data == "succes") {
+              this.$toast.success("Successfully added.", {
+                timeout: 2000,
+              });
+            } else if (res.data == "error") {
+              this.$toast.error("Something went wrong. Try again.", {
+                timeout: 2000,
+              });
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
     },
-    faveCall(id) {
-      // axios({
-      //   method: "post",
-      //   url: `${config.url}/Library/Account.php`,
-      //   data: {
-      //     param: "checkFave",
-      //     userid: this.$session.get("id"),
-      //     msid: id,
-      //   },
-      // })
-      //   .then((res) => {
-      //     console.log(res.data);
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
-      console.log(id);
+    deleteWatched(id) {
+      axios({
+        method: "post",
+        url: `${config.url}/Library/Account.php`,
+        data: {
+          param: "deleteWatched",
+          userid: this.$session.get("id"),
+          msid: id,
+        },
+      })
+        .then((res) => {
+          if (res.data == "succes") {
+            this.$toast.success("Successfully deleted.", {
+              timeout: 2000,
+            });
+          } else if (res.data == "error") {
+            this.$toast.error("Something went wrong. Try again.", {
+              timeout: 2000,
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
-  },
-  mounted() {
-    //this.checkFave();
   },
 };
 </script>

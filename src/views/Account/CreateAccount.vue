@@ -8,15 +8,16 @@
           color="#919395"
           style="border-radius: 20px; min-height: 500px; width: 400px"
         >
-          <v-img
-            alt="Logo Anegy"
-            contain
-            src="/Anegy-logo.png"
-            transition="scale-transition"
-            width="40px"
-            height="40px"
-            class="ma-2"
-          ></v-img>
+          <v-btn plain depressed icon :to="`/`" class="ma-2">
+            <v-img
+              alt="Logo Anegy"
+              contain
+              src="/Anegy-logo.png"
+              transition="scale-transition"
+              width="40px"
+              height="40px"
+            ></v-img>
+          </v-btn>
           <v-card-title class="justify-center">Create Account</v-card-title>
           <v-card-subtitle class="text-center"
             >Create an account at Anegy</v-card-subtitle
