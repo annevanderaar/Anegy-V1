@@ -26,8 +26,6 @@
       </template>
       <span>Series Discover</span>
     </v-tooltip>
-    <v-btn disabled icon></v-btn>
-    <v-btn disabled icon></v-btn>
     <v-spacer></v-spacer>
     <v-btn plain depressed icon :to="`/`">
       <v-img
