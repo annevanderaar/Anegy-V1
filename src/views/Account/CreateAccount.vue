@@ -99,9 +99,12 @@ export default {
           },
         })
           .then((res) => {
-            console.log(res.data);
             if (res.data == "error") {
               this.$toast.error("Something went wrong. Try again.", {
+                timeout: 2000,
+              });
+            } else if (res.data == "emailUse") {
+              this.$toast.warning("Email already in use.", {
                 timeout: 2000,
               });
             } else {
