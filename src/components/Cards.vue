@@ -90,7 +90,7 @@
           >Know more</v-btn
         >
         <v-btn
-          v-else-if="item.media_type == 'tv' || item.name"
+          v-else-if="item.media_type == 'tv' || item.first_air_date"
           elevation="0"
           color="accent"
           class="ml-2"
@@ -108,7 +108,14 @@
           v-else
           icon
           color="secondary"
-          @click="addFave(item.id, item.media_type)"
+          @click="
+            addFave(
+              item.id,
+              item.video,
+              item.known_for_department,
+              item.first_air_date
+            )
+          "
           ><v-icon>far fa-heart</v-icon></v-btn
         >
         <v-btn
@@ -122,7 +129,14 @@
           v-else
           icon
           color="accent"
-          @click="addWatched(item.id, item.media_type)"
+          @click="
+            addWatched(
+              item.id,
+              item.video,
+              item.known_for_department,
+              item.first_air_date
+            )
+          "
           ><v-icon>mdi-clipboard-list-outline</v-icon></v-btn
         >
       </v-card>
@@ -136,13 +150,23 @@ import config from "@/config/index.js";
 
 export default {
   props: ["data", "path"],
+  data: () => ({
+    type: "",
+  }),
   methods: {
-    addFave(id, type) {
+    addFave(id, video, known, air) {
       if (!this.$session.exists()) {
         this.$toast.warning("You have to be loged in to add a favorite", {
           timeout: 3000,
         });
       } else {
+        if (video == false) {
+          this.type = "movie";
+        } else if (known) {
+          this.type = "person";
+        } else if (air) {
+          this.type = "tv";
+        }
         axios({
           method: "post",
           url: `${config.url}/Library/Account.php`,
@@ -150,7 +174,7 @@ export default {
             param: "addFave",
             userid: this.$session.get("id"),
             msid: id,
-            type: type,
+            type: this.type,
           },
         })
           .then((res) => {
@@ -194,12 +218,19 @@ export default {
           console.log(err);
         });
     },
-    addWatched(id, type) {
+    addWatched(id, video, known, air) {
       if (!this.$session.exists()) {
         this.$toast.warning("You have to be loged in to add to watchlist", {
           timeout: 3000,
         });
       } else {
+        if (video == false) {
+          this.type = "movie";
+        } else if (known) {
+          this.type = "person";
+        } else if (air) {
+          this.type = "tv";
+        }
         axios({
           method: "post",
           url: `${config.url}/Library/Account.php`,
@@ -207,7 +238,7 @@ export default {
             param: "addWatched",
             userid: this.$session.get("id"),
             msid: id,
-            type: type,
+            type: this.type,
           },
         })
           .then((res) => {

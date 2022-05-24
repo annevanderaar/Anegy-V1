@@ -4,6 +4,7 @@
     <v-main>
       <v-container fluid>
         <h1 style="text-align: center">Your favorites</h1>
+        <h3 style="text-align: center">You can add all your favorites here!</h3>
         <Cards :data="data" :path="this.$route.path" />
       </v-container>
     </v-main>
