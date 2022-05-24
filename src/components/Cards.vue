@@ -179,7 +179,7 @@ export default {
         })
           .then((res) => {
             if (res.data == "succes") {
-              this.$toast.success("Successfully added.", {
+              this.$toast.success("Successfully added favorite.", {
                 timeout: 2000,
               });
             } else if (res.data == "error") {
@@ -205,7 +205,7 @@ export default {
       })
         .then((res) => {
           if (res.data == "succes") {
-            this.$toast.success("Successfully deleted.", {
+            this.$toast.success("Successfully deleted favorite.", {
               timeout: 2000,
             });
             setTimeout(() => {
@@ -246,7 +246,7 @@ export default {
         })
           .then((res) => {
             if (res.data == "succes") {
-              this.$toast.success("Successfully added.", {
+              this.$toast.success("Successfully added to watchlist.", {
                 timeout: 2000,
               });
             } else if (res.data == "error") {
@@ -272,7 +272,7 @@ export default {
       })
         .then((res) => {
           if (res.data == "succes") {
-            this.$toast.success("Successfully deleted.", {
+            this.$toast.success("Successfully deleted from watchlist.", {
               timeout: 2000,
             });
             setTimeout(() => {

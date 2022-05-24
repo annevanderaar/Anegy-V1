@@ -10,11 +10,13 @@
         <Cards :data="data" :path="this.$route.path" />
       </v-container>
     </v-main>
+    <WebsiteFooter />
   </v-app>
 </template>
 
 <script>
 import AccountAppBar from "@/components/AppBar/AccountAppBar.vue";
+import WebsiteFooter from "@/components/WebsiteFooter.vue";
 import Cards from "@/components/Cards.vue";
 import axios from "axios";
 import config from "@/config/index.js";
@@ -23,6 +25,7 @@ export default {
   name: "Watched",
   components: {
     AccountAppBar,
+    WebsiteFooter,
     Cards,
   },
   data: () => ({

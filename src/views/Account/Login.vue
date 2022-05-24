@@ -83,6 +83,10 @@ export default {
             this.$toast.error("Invalid email or password.", {
               timeout: 2000,
             });
+          } else if (res.data == "exist") {
+            this.$toast.error("This email does not exist in our database.", {
+              timeout: 2000,
+            });
           } else {
             this.$session.start();
             this.$session.set("id", res.data);

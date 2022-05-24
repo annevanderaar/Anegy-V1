@@ -40,7 +40,14 @@
       ></v-img>
     </v-btn>
     <v-spacer></v-spacer>
-    <v-menu bottom min-width="200px" rounded offset-y>
+    <v-menu
+      bottom
+      min-width="200px"
+      rounded
+      offset-y
+      open-on-hover
+      :close-on-content-click="false"
+    >
       <template v-slot:activator="{ on }">
         <v-btn icon class="white--text" v-on="on"
           ><v-icon>fas fa-user-astronaut</v-icon></v-btn
