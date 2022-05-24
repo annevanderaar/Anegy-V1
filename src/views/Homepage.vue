@@ -17,7 +17,7 @@
         <h2 style="text-align: center">
           With Anegy you can discover all the movies and series ever made.
         </h2>
-        <v-row justify="center">
+        <v-row justify="center" v-if="!this.$session.exists()">
           <v-col>
             <v-card class="cards" elevation="4" outlined>
               <v-card-title style="text-align: center">First</v-card-title>
@@ -64,7 +64,7 @@
             </v-card>
           </v-col>
         </v-row>
-        <h1 class="mb-5" style="text-align: center">
+        <h1 class="my-5" style="text-align: center">
           Today's Trending Movies &amp; Series
         </h1>
         <Cards :data="data" :path="this.$route.path" />
