@@ -97,16 +97,34 @@
           :to="`/series/details/${item.id}`"
           >Know more</v-btn
         >
-        <v-btn icon color="secondary" @click="addFave(item.id, item.media_type)"
+        <v-btn
+          icon
+          color="secondary"
+          @click="deleteFave(item.id)"
+          v-if="path == '/account/favorites'"
+          ><v-icon>fas fa-heart</v-icon></v-btn
+        >
+        <v-btn
+          v-else
+          icon
+          color="secondary"
+          @click="addFave(item.id, item.media_type)"
           ><v-icon>far fa-heart</v-icon></v-btn
         >
-        <!-- <v-btn icon color="secondary" @click="deleteFave(item.id)"
-          ><v-icon>fas fa-heart</v-icon></v-btn
-        > -->
-        <v-btn icon color="accent" @click="addWatched(item.id, item.media_type)"
+        <v-btn
+          icon
+          color="accent"
+          @click="deleteWatched(item.id)"
+          v-if="path == '/account/watched'"
+          ><v-icon>mdi-clipboard-list</v-icon></v-btn
+        >
+        <v-btn
+          v-else
+          icon
+          color="accent"
+          @click="addWatched(item.id, item.media_type)"
           ><v-icon>mdi-clipboard-list-outline</v-icon></v-btn
         >
-        <!-- <v-btn icon color="accent"><v-icon>mdi-clipboard-list</v-icon></v-btn> -->
       </v-card>
     </v-card>
   </div>
@@ -117,7 +135,7 @@ import axios from "axios";
 import config from "@/config/index.js";
 
 export default {
-  props: ["data"],
+  props: ["data", "path"],
   methods: {
     addFave(id, type) {
       if (!this.$session.exists()) {

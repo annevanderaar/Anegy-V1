@@ -14,7 +14,7 @@
         <v-btn @click="openFilter" class="filterBtn" v-else>Filter</v-btn>
         <h1>{{ pageName }} Series</h1>
         <SeriesFilters @genres="selectedGenresS" />
-        <cards :data="data.results" />
+        <Cards :data="data.results" :path="this.$route.path"/>
         <v-pagination
           v-if="this.show == false"
           color="secondary"

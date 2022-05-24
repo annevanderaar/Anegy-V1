@@ -4,7 +4,7 @@
     <v-main>
       <v-container fluid>
         <h1 style="text-align: center">Your favorites</h1>
-        <Cards :data="data" />
+        <Cards :data="data" :path="this.$route.path" />
       </v-container>
     </v-main>
   </v-app>

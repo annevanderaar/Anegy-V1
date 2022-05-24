@@ -4,8 +4,8 @@
       <v-btn>Cast</v-btn>
       <v-btn>Crew</v-btn>
     </v-btn-toggle>
-    <cards v-if="this.value == 'cast'" :data="personSeries.cast" />
-    <cards v-if="this.value == 'crew'" :data="personSeries.crew" />
+    <Cards v-if="this.value == 'cast'" :data="personSeries.cast" :path="this.$route.path"/>
+    <Cards v-if="this.value == 'crew'" :data="personSeries.crew" :path="this.$route.path"/>
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <cards :data="similar.results" />
+    <Cards :data="similar.results" :path="this.$route.path"/>
   </div>
 </template>
 

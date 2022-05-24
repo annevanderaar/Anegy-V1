@@ -12,46 +12,62 @@
         >fas fa-arrow-up</v-icon
       >
       <h3 class="ml-2" style="position: fixed; top: 90px">Click here!</h3> -->
-      <!-- <h1 style="text-align: center">Anegy</h1>
+      <h1 style="text-align: center">Anegy</h1>
       <h2 style="text-align: center">
         With Anegy you can discover all the movies and series ever made.
       </h2>
-      <v-container fluid class="d-flex justify-center align-center flex-row">
-        <v-card class="cards" elevation="4" outlined width="100%">
-          <v-card-title style="text-align: center">First</v-card-title>
-          <v-card-text style="text-align: center">Make an account</v-card-text>
-          <v-btn
-            elevation="0"
-            color="secondary"
-            class="my-2"
-            :to="`/create-account`"
-            >Create account</v-btn
-          >
-        </v-card>
-        <v-card class="cards" elevation="4" outlined width="100%">
-          <v-card-title style="text-align: center">Second</v-card-title>
-          <v-card-text style="text-align: center"
-            >Add your favorites to your watch list.</v-card-text
-          >
-          <v-btn elevation="0" color="secondary" class="my-2" :to="`/movies`"
-            >Find favorites</v-btn
-          >
-        </v-card>
-        <v-card class="cards" elevation="4" outlined width="100%">
-          <v-card-title style="text-align: center">Third</v-card-title>
-          <v-card-text style="text-align: center"
-            >Cross of everything you have watched.</v-card-text
-          >
-          <v-btn elevation="0" color="secondary" class="my-2" :to="`/account`"
-            >Go to account</v-btn
-          >
-        </v-card>
-      </v-container> -->
+      <v-row fluid class="d-flex justify-center align-center flex-row">
+        <v-col>
+          <v-card class="cards" elevation="4" outlined width="100%">
+            <v-card-title style="text-align: center">First</v-card-title>
+            <v-card-text style="text-align: center"
+              >Make an account</v-card-text
+            >
+            <v-btn
+              elevation="0"
+              color="secondary"
+              class="my-2"
+              :to="`/create-account`"
+              >Create account</v-btn
+            >
+          </v-card>
+        </v-col>
+        <v-col>
+          <v-card class="cards" elevation="4" outlined width="100%">
+            <v-card-title style="text-align: center">Second</v-card-title>
+            <v-card-text style="text-align: center"
+              >Add your favorites to your watch list.</v-card-text
+            >
+            <v-btn
+              elevation="0"
+              color="secondary"
+              class="my-2"
+              :to="`/movies/discover`"
+              >Find favorites</v-btn
+            >
+          </v-card>
+        </v-col>
+        <v-col>
+          <v-card class="cards" elevation="4" outlined width="100%">
+            <v-card-title style="text-align: center">Third</v-card-title>
+            <v-card-text style="text-align: center"
+              >Cross of everything you have watched.</v-card-text
+            >
+            <v-btn
+              elevation="0"
+              color="secondary"
+              class="my-2"
+              :to="`/account/watched`"
+              >Go to watchlist</v-btn
+            >
+          </v-card>
+        </v-col>
+      </v-row>
       <v-container fluid>
         <h1 class="mb-5" style="text-align: center">
           Today's Trending Movies &amp; Series
         </h1>
-        <cards :data="data" />
+        <Cards :data="data" :path="this.$route.path" />
         <v-pagination
           v-if="this.show == false"
           color="secondary"

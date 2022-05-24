@@ -36,7 +36,9 @@ export default {
       })
         .then((res) => {
           this.data = res.data[0];
-          //console.log(res.data);
+          this.$session.set("firstname", res.data[0].firstname);
+          this.$session.set("lastname", res.data[0].lastname);
+          this.$session.set("email", res.data[0].email);
         })
         .catch((err) => {
           console.log(err);

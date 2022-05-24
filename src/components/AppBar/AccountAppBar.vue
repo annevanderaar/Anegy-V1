@@ -49,6 +49,14 @@
       <v-card>
         <v-list-item-content class="justify-center">
           <div class="mx-auto text-center">
+            <h3>
+              {{
+                this.$session.get("firstname") +
+                " " +
+                this.$session.get("lastname")
+              }}
+            </h3>
+            <v-divider class="my-3"></v-divider>
             <v-btn depressed text @click="openAccount"> Account </v-btn>
             <v-divider class="my-3"></v-divider>
             <v-btn depressed text @click="logOut"> Logout </v-btn>

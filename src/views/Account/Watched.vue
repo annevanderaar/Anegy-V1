@@ -4,7 +4,10 @@
     <v-main>
       <v-container fluid>
         <h1 style="text-align: center">Your watchlist</h1>
-        <Cards :data="data" />
+        <h3 style="text-align: center">
+          You can add everything you have watched here!
+        </h3>
+        <Cards :data="data" :path="this.$route.path" />
       </v-container>
     </v-main>
   </v-app>

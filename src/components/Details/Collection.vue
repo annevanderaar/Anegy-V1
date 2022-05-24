@@ -5,7 +5,7 @@
     </h2>
     <h2 style="text-align: center">{{ collection.name }}</h2>
     <p style="text-align: center">{{ collection.overview }}</p>
-    <cards :data="collection.parts" />
+    <Cards :data="collection.parts" :path="this.$route.path"/>
   </div>
 </template>
 
