@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app color="secondary" clipped-left fixed>
+  <v-app-bar app color="secondary" clipped-left absolute>
     <v-tooltip bottom>
       <template v-slot:activator="{ on, attrs }">
         <v-btn
@@ -48,6 +48,7 @@
       flat
       v-if="this.show == true"
       v-model="search"
+      style="z-index: 9999"
     ></v-text-field>
     <v-btn
       disabled

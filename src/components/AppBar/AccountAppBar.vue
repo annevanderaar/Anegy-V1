@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app color="secondary" clipped-left>
+  <v-app-bar app color="secondary" clipped-left absolute>
     <v-tooltip bottom>
       <template v-slot:activator="{ on, attrs }">
         <v-btn
