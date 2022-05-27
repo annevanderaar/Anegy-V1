@@ -27,13 +27,7 @@
       <span>Series Discover</span>
     </v-tooltip>
     <v-spacer></v-spacer>
-    <v-btn
-      plain
-      depressed
-      icon
-      :to="`/`"
-      v-if="this.$vuetify.breakpoint.xs || this.$vuetify.breakpoint.sm"
-    >
+    <v-btn plain depressed icon :to="`/`" v-if="this.$vuetify.breakpoint.xs">
       <v-img
         alt="Logo Anegy"
         contain
