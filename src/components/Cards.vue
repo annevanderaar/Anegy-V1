@@ -126,7 +126,7 @@
           ><v-icon>mdi-clipboard-list</v-icon></v-btn
         >
         <v-btn
-          v-else
+          v-else-if="item.video == false || item.first_air_date"
           icon
           color="accent"
           @click="
