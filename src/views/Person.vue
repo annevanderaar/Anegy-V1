@@ -196,6 +196,7 @@ import PersonMovies from "@/components/Details/PersonMovies.vue";
 import PersonSeries from "@/components/Details/PersonSeries.vue";
 import axios from "axios";
 import config from "@/config/index.js";
+import { mapActions } from "vuex";
 
 export default {
   components: {
@@ -237,6 +238,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["setShow"]),
     show(val) {
       this.val = val;
     },
@@ -410,6 +412,7 @@ export default {
     this.getPersonMovies(this.$route.params.id);
     this.getPersonSeries(this.$route.params.id);
     this.getImages(this.$route.params.id);
+    this.setShow(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
   },
 };
