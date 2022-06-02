@@ -139,6 +139,56 @@ export default {
           console.log(err);
         });
     },
+    getFave(id) {
+      axios({
+        method: "post",
+        url: `${config.url}/Library/Account.php`,
+        data: {
+          param: "fave",
+          id: id,
+        },
+      })
+        .then((res) => {
+          res.data.forEach((item) => {
+            // if (item.type == "movie") {
+            //   this.getDetails("movie", item.ms_id);
+            // } else if (item.type == "tv") {
+            //   this.getDetails("tv", item.ms_id);
+            // } else if (item.type == "person") {
+            //   this.getDetails("person", item.ms_id);
+            // }
+            console.log(item);
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getWatched(id) {
+      axios({
+        method: "post",
+        url: `${config.url}/Library/Account.php`,
+        data: {
+          param: "watched",
+          id: id,
+        },
+      })
+        .then((res) => {
+          res.data.forEach((item) => {
+            // if (item.type == "movie") {
+            //   this.getDetails("movie", item.ms_id);
+            // } else if (item.type == "tv") {
+            //   this.getDetails("tv", item.ms_id);
+            // } else if (item.type == "person") {
+            //   this.getDetails("person", item.ms_id);
+            // }
+            console.log(item);
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
     watched(data) {
       this.data = data.results;
       this.currentSearchPage = data.page;
@@ -155,6 +205,10 @@ export default {
   },
   mounted() {
     this.getTrending(this.currentPage, this.selectedGenres);
+    if (this.$session.exists()) {
+      this.getFave(this.$session.get("id"));
+      this.getWatched(this.$session.get("id"));
+    }
     this.setShow(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
   },
