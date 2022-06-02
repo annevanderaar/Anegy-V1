@@ -67,7 +67,12 @@
         <h1 class="my-5" style="text-align: center">
           Today's Trending Movies &amp; Series
         </h1>
-        <Cards :data="data" :path="this.$route.path" />
+        <Cards
+          :data="data"
+          :path="this.$route.path"
+          :faves="faves"
+          :watcheds="watcheds"
+        />
         <v-pagination
           v-if="this.show == false"
           color="secondary"
@@ -112,6 +117,8 @@ export default {
     currentSearchPage: 1,
     totalSearchPages: 500,
     selectedGenres: [],
+    faves: [],
+    watcheds: [],
   }),
   computed: {
     ...mapGetters(["show"]),
@@ -150,14 +157,7 @@ export default {
       })
         .then((res) => {
           res.data.forEach((item) => {
-            // if (item.type == "movie") {
-            //   this.getDetails("movie", item.ms_id);
-            // } else if (item.type == "tv") {
-            //   this.getDetails("tv", item.ms_id);
-            // } else if (item.type == "person") {
-            //   this.getDetails("person", item.ms_id);
-            // }
-            console.log(item);
+            this.faves.push(item.ms_id);
           });
         })
         .catch((err) => {
@@ -175,14 +175,7 @@ export default {
       })
         .then((res) => {
           res.data.forEach((item) => {
-            // if (item.type == "movie") {
-            //   this.getDetails("movie", item.ms_id);
-            // } else if (item.type == "tv") {
-            //   this.getDetails("tv", item.ms_id);
-            // } else if (item.type == "person") {
-            //   this.getDetails("person", item.ms_id);
-            // }
-            console.log(item);
+            this.watcheds.push(item.ms_id);
           });
         })
         .catch((err) => {

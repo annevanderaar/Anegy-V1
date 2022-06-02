@@ -101,7 +101,7 @@
           icon
           color="secondary"
           @click="deleteFave(item.id)"
-          v-if="path == '/account/favorites'"
+          v-if="path == '/account/watched' || item.id == faves"
           ><v-icon>fas fa-heart</v-icon></v-btn
         >
         <v-btn
@@ -118,15 +118,18 @@
           "
           ><v-icon>far fa-heart</v-icon></v-btn
         >
-        <v-btn
+        <!-- <v-btn
+          v-for="watch in watcheds"
+          :key="watch.id"
           icon
           color="accent"
           @click="deleteWatched(item.id)"
-          v-if="path == '/account/watched'"
+          v-show="path == '/account/watched' || item.id == watch.ms_id"
           ><v-icon>mdi-clipboard-list</v-icon></v-btn
         >
         <v-btn
-          v-else
+          v-for="watch in watcheds"
+          :key="watch.id"
           icon
           color="accent"
           @click="
@@ -137,8 +140,9 @@
               item.first_air_date
             )
           "
+          v-show="!path == '/account/watched' || !item.id == watch.ms_id"
           ><v-icon>mdi-clipboard-list-outline</v-icon></v-btn
-        >
+        > -->
       </v-card>
     </v-card>
   </div>
@@ -149,7 +153,7 @@ import axios from "axios";
 import config from "@/config/index.js";
 
 export default {
-  props: ["data", "path"],
+  props: ["data", "path", "faves", "watcheds"],
   data: () => ({
     type: "",
   }),
