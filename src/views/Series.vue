@@ -14,7 +14,7 @@
         <v-btn @click="openFilter" class="filterBtn" v-else>Filter</v-btn>
         <h1>{{ pageName }} Series</h1>
         <SeriesFilters @genres="selectedGenresS" />
-        <Cards :data="data.results" :path="this.$route.path" />
+        <Cards :data="data.results" :faves="faves" :watcheds="watcheds" />
         <v-pagination
           v-if="this.show == false"
           color="secondary"
@@ -63,6 +63,8 @@ export default {
     url: "/discover/tv?",
     selectedGenresSerie: [],
     pageName: "Discover",
+    faves: [],
+    watcheds: [],
   }),
   computed: {
     ...mapGetters(["show"]),
@@ -88,6 +90,42 @@ export default {
           }
           this.currentPage = res.data.page;
           this.data = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getFave(id) {
+      axios({
+        method: "post",
+        url: `${config.url}/Library/Account.php`,
+        data: {
+          param: "fave",
+          id: id,
+        },
+      })
+        .then((res) => {
+          res.data.forEach((item) => {
+            this.faves.push(item.ms_id);
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getWatched(id) {
+      axios({
+        method: "post",
+        url: `${config.url}/Library/Account.php`,
+        data: {
+          param: "watched",
+          id: id,
+        },
+      })
+        .then((res) => {
+          res.data.forEach((item) => {
+            this.watcheds.push(item.ms_id);
+          });
         })
         .catch((err) => {
           console.log(err);
@@ -155,6 +193,10 @@ export default {
     },
   },
   mounted() {
+    if (this.$session.exists()) {
+      this.getFave(this.$session.get("id"));
+      this.getWatched(this.$session.get("id"));
+    }
     if (this.$route.path == "/series/discover") {
       this.url = "/discover/tv?";
       this.pageName = "Discover";

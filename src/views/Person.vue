@@ -29,12 +29,22 @@
           </v-col>
           <v-col md="8">
             <v-row justify="end" class="mr-2 mt-2">
-              <v-btn icon color="secondary" @click="addFave(data.id)" x-large
+              <v-btn
+                icon
+                color="secondary"
+                @click="deleteFave(data.id)"
+                v-if="faves.includes(data.id)"
+                x-large
+                ><v-icon>fas fa-heart</v-icon></v-btn
+              >
+              <v-btn
+                v-else
+                icon
+                color="secondary"
+                @click="addFave(data.id)"
+                x-large
                 ><v-icon>far fa-heart</v-icon></v-btn
               >
-              <!-- <v-btn icon color="secondary" @click="deleteFave(data.id)" x-large
-                ><v-icon>fas fa-heart</v-icon></v-btn
-              > -->
             </v-row>
             <v-col>
               <h1>{{ data.name }}</h1>
@@ -201,6 +211,8 @@ export default {
     personSeries: [],
     personMovies: [],
     images: [],
+    faves: [],
+    watcheds: [],
     tabs: [
       {
         title: "Movies",
@@ -241,12 +253,12 @@ export default {
             param: "addFave",
             userid: this.$session.get("id"),
             msid: id,
-            type: "person",
+            type: "movie",
           },
         })
           .then((res) => {
             if (res.data == "succes") {
-              this.$toast.success("Successfully added.", {
+              this.$toast.success("Successfully added favorite.", {
                 timeout: 2000,
               });
             } else if (res.data == "error") {
@@ -272,7 +284,7 @@ export default {
       })
         .then((res) => {
           if (res.data == "succes") {
-            this.$toast.success("Successfully deleted.", {
+            this.$toast.success("Successfully deleted favorite.", {
               timeout: 2000,
             });
           } else if (res.data == "error") {
@@ -280,6 +292,24 @@ export default {
               timeout: 2000,
             });
           }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getFave(id) {
+      axios({
+        method: "post",
+        url: `${config.url}/Library/Account.php`,
+        data: {
+          param: "fave",
+          id: id,
+        },
+      })
+        .then((res) => {
+          res.data.forEach((item) => {
+            this.faves.push(item.ms_id);
+          });
         })
         .catch((err) => {
           console.log(err);
@@ -372,6 +402,9 @@ export default {
     },
   },
   mounted() {
+    if (this.$session.exists()) {
+      this.getFave(this.$session.get("id"));
+    }
     this.getDetails(this.$route.params.id);
     this.getLinks(this.$route.params.id);
     this.getPersonMovies(this.$route.params.id);

@@ -7,7 +7,7 @@
         <h3 style="text-align: center">
           You can add everything you have watched here!
         </h3>
-        <Cards :data="data" :path="this.$route.path" />
+        <Cards :data="data" :faves="faves" :watcheds="watcheds" />
       </v-container>
     </v-main>
     <WebsiteFooter />
@@ -30,6 +30,8 @@ export default {
   },
   data: () => ({
     data: [],
+    faves: [],
+    watcheds: [],
   }),
   methods: {
     getWatched(id) {
@@ -43,6 +45,7 @@ export default {
       })
         .then((res) => {
           res.data.forEach((item) => {
+            this.watcheds.push(item.ms_id);
             if (item.type == "movie") {
               this.getDetails("movie", item.ms_id);
             } else if (item.type == "tv") {
@@ -50,6 +53,24 @@ export default {
             } else if (item.type == "person") {
               this.getDetails("person", item.ms_id);
             }
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getFave(id) {
+      axios({
+        method: "post",
+        url: `${config.url}/Library/Account.php`,
+        data: {
+          param: "fave",
+          id: id,
+        },
+      })
+        .then((res) => {
+          res.data.forEach((item) => {
+            this.faves.push(item.ms_id);
           });
         })
         .catch((err) => {
@@ -73,6 +94,7 @@ export default {
     },
   },
   mounted() {
+    this.getFave(this.$session.get("id"));
     this.getWatched(this.$session.get("id"));
     this.data.splice(0);
   },

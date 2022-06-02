@@ -101,7 +101,7 @@
           icon
           color="secondary"
           @click="deleteFave(item.id)"
-          v-if="path == '/account/watched' || item.id == faves"
+          v-if="faves.includes(item.id)"
           ><v-icon>fas fa-heart</v-icon></v-btn
         >
         <v-btn
@@ -118,18 +118,15 @@
           "
           ><v-icon>far fa-heart</v-icon></v-btn
         >
-        <!-- <v-btn
-          v-for="watch in watcheds"
-          :key="watch.id"
+        <v-btn
           icon
           color="accent"
           @click="deleteWatched(item.id)"
-          v-show="path == '/account/watched' || item.id == watch.ms_id"
+          v-if="watcheds.includes(item.id)"
           ><v-icon>mdi-clipboard-list</v-icon></v-btn
         >
         <v-btn
-          v-for="watch in watcheds"
-          :key="watch.id"
+          v-else
           icon
           color="accent"
           @click="
@@ -140,9 +137,8 @@
               item.first_air_date
             )
           "
-          v-show="!path == '/account/watched' || !item.id == watch.ms_id"
           ><v-icon>mdi-clipboard-list-outline</v-icon></v-btn
-        > -->
+        >
       </v-card>
     </v-card>
   </div>

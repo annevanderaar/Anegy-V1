@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Cards :data="similar.results" :path="this.$route.path"/>
+    <Cards :data="similar.results" :faves="faves" :watcheds="watcheds" />
   </div>
 </template>
 
@@ -12,5 +12,9 @@ export default {
   components: {
     Cards,
   },
+  data: () => ({
+    faves: [],
+    watcheds: [],
+  }),
 };
 </script>

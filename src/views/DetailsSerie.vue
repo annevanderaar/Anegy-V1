@@ -29,16 +29,38 @@
           </v-col>
           <v-col lg="8">
             <v-row justify="end" class="mr-2 mt-2">
-              <v-btn icon color="secondary" @click="addFave(data.id)" x-large
+              <v-btn
+                icon
+                color="secondary"
+                @click="deleteFave(data.id)"
+                v-if="faves.includes(data.id)"
+                x-large
+                ><v-icon>fas fa-heart</v-icon></v-btn
+              >
+              <v-btn
+                v-else
+                icon
+                color="secondary"
+                @click="addFave(data.id)"
+                x-large
                 ><v-icon>far fa-heart</v-icon></v-btn
               >
-              <!-- <v-btn icon color="secondary" @click="deleteFave(data.id)" x-large
-                ><v-icon>fas fa-heart</v-icon></v-btn
-              > -->
-              <v-btn icon color="accent" x-large
+              <v-btn
+                icon
+                color="accent"
+                @click="deleteWatched(data.id)"
+                v-if="watcheds.includes(data.id)"
+                x-large
+                ><v-icon>mdi-clipboard-list</v-icon></v-btn
+              >
+              <v-btn
+                v-else
+                icon
+                color="accent"
+                @click="addWatched(data.id)"
+                x-large
                 ><v-icon>mdi-clipboard-list-outline</v-icon></v-btn
               >
-              <!-- <v-btn icon color="accent" x-large><v-icon>mdi-clipboard-list</v-icon></v-btn> -->
             </v-row>
             <v-col>
               <h1>{{ data.name }}</h1>
@@ -331,6 +353,8 @@ export default {
     reviews: [],
     season: [],
     videos: [],
+    faves: [],
+    watcheds: [],
     tabs: [
       {
         title: "Cast",
@@ -407,12 +431,12 @@ export default {
             param: "addFave",
             userid: this.$session.get("id"),
             msid: id,
-            type: "tv",
+            type: "movie",
           },
         })
           .then((res) => {
             if (res.data == "succes") {
-              this.$toast.success("Successfully added.", {
+              this.$toast.success("Successfully added favorite.", {
                 timeout: 2000,
               });
             } else if (res.data == "error") {
@@ -438,7 +462,7 @@ export default {
       })
         .then((res) => {
           if (res.data == "succes") {
-            this.$toast.success("Successfully deleted.", {
+            this.$toast.success("Successfully deleted favorite.", {
               timeout: 2000,
             });
           } else if (res.data == "error") {
@@ -446,6 +470,99 @@ export default {
               timeout: 2000,
             });
           }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    addWatched(id) {
+      if (!this.$session.exists()) {
+        this.$toast.warning("You have to be loged in to add a favorite", {
+          timeout: 3000,
+        });
+      } else {
+        axios({
+          method: "post",
+          url: `${config.url}/Library/Account.php`,
+          data: {
+            param: "addWatched",
+            userid: this.$session.get("id"),
+            msid: id,
+            type: "movie",
+          },
+        })
+          .then((res) => {
+            if (res.data == "succes") {
+              this.$toast.success("Successfully added to watchlist.", {
+                timeout: 2000,
+              });
+            } else if (res.data == "error") {
+              this.$toast.error("Something went wrong. Try again.", {
+                timeout: 2000,
+              });
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    },
+    deleteWatched(id) {
+      axios({
+        method: "post",
+        url: `${config.url}/Library/Account.php`,
+        data: {
+          param: "deleteWatched",
+          userid: this.$session.get("id"),
+          msid: id,
+        },
+      })
+        .then((res) => {
+          if (res.data == "succes") {
+            this.$toast.success("Successfully deleted from watchlist.", {
+              timeout: 2000,
+            });
+          } else if (res.data == "error") {
+            this.$toast.error("Something went wrong. Try again.", {
+              timeout: 2000,
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getFave(id) {
+      axios({
+        method: "post",
+        url: `${config.url}/Library/Account.php`,
+        data: {
+          param: "fave",
+          id: id,
+        },
+      })
+        .then((res) => {
+          res.data.forEach((item) => {
+            this.faves.push(item.ms_id);
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getWatched(id) {
+      axios({
+        method: "post",
+        url: `${config.url}/Library/Account.php`,
+        data: {
+          param: "watched",
+          id: id,
+        },
+      })
+        .then((res) => {
+          res.data.forEach((item) => {
+            this.watcheds.push(item.ms_id);
+          });
         })
         .catch((err) => {
           console.log(err);
@@ -576,6 +693,10 @@ export default {
     },
   },
   mounted() {
+    if (this.$session.exists()) {
+      this.getFave(this.$session.get("id"));
+      this.getWatched(this.$session.get("id"));
+    }
     this.id = this.$route.params.id;
     this.getDetails(this.$route.params.id);
     this.getProviders(this.$route.params.id);

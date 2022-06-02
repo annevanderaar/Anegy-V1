@@ -67,12 +67,7 @@
         <h1 class="my-5" style="text-align: center">
           Today's Trending Movies &amp; Series
         </h1>
-        <Cards
-          :data="data"
-          :path="this.$route.path"
-          :faves="faves"
-          :watcheds="watcheds"
-        />
+        <Cards :data="data" :faves="faves" :watcheds="watcheds" />
         <v-pagination
           v-if="this.show == false"
           color="secondary"

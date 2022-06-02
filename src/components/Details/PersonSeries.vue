@@ -4,8 +4,18 @@
       <v-btn>Cast</v-btn>
       <v-btn>Crew</v-btn>
     </v-btn-toggle>
-    <Cards v-if="this.value == 'cast'" :data="personSeries.cast" :path="this.$route.path"/>
-    <Cards v-if="this.value == 'crew'" :data="personSeries.crew" :path="this.$route.path"/>
+    <Cards
+      v-if="this.value == 'cast'"
+      :data="personSeries.cast"
+      :faves="faves"
+      :watcheds="watcheds"
+    />
+    <Cards
+      v-if="this.value == 'crew'"
+      :data="personSeries.crew"
+      :faves="faves"
+      :watcheds="watcheds"
+    />
   </div>
 </template>
 
@@ -16,6 +26,8 @@ export default {
   data: () => ({
     value: "",
     values: "",
+    faves: [],
+    watcheds: [],
   }),
   props: ["personSeries"],
   components: {

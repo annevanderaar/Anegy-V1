@@ -5,7 +5,7 @@
     </h2>
     <h2 style="text-align: center">{{ collection.name }}</h2>
     <p style="text-align: center">{{ collection.overview }}</p>
-    <Cards :data="collection.parts" :path="this.$route.path"/>
+    <Cards :data="collection.parts" :faves="faves" :watcheds="watcheds" />
   </div>
 </template>
 
@@ -17,5 +17,9 @@ export default {
   components: {
     Cards,
   },
+  data: () => ({
+    faves: [],
+    watcheds: [],
+  }),
 };
 </script>
