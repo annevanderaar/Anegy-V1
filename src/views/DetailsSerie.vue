@@ -439,6 +439,9 @@ export default {
               this.$toast.success("Successfully added favorite.", {
                 timeout: 2000,
               });
+              setTimeout(() => {
+                window.location.reload();
+              }, 2000);
             } else if (res.data == "error") {
               this.$toast.error("Something went wrong. Try again.", {
                 timeout: 2000,
@@ -465,6 +468,9 @@ export default {
             this.$toast.success("Successfully deleted favorite.", {
               timeout: 2000,
             });
+            setTimeout(() => {
+              window.location.reload();
+            }, 2000);
           } else if (res.data == "error") {
             this.$toast.error("Something went wrong. Try again.", {
               timeout: 2000,
@@ -496,6 +502,9 @@ export default {
               this.$toast.success("Successfully added to watchlist.", {
                 timeout: 2000,
               });
+              setTimeout(() => {
+                window.location.reload();
+              }, 2000);
             } else if (res.data == "error") {
               this.$toast.error("Something went wrong. Try again.", {
                 timeout: 2000,
@@ -522,6 +531,9 @@ export default {
             this.$toast.success("Successfully deleted from watchlist.", {
               timeout: 2000,
             });
+            setTimeout(() => {
+              window.location.reload();
+            }, 2000);
           } else if (res.data == "error") {
             this.$toast.error("Something went wrong. Try again.", {
               timeout: 2000,
