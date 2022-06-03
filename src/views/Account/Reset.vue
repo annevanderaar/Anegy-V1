@@ -21,7 +21,7 @@
           <v-card-subtitle class="text-center"
             >Reset your password for Anegy</v-card-subtitle
           >
-          <v-btn class="ma-2" @click="login">Reset</v-btn>
+          <v-btn class="ma-2">Reset</v-btn>
         </v-card>
       </v-container>
     </v-main>
@@ -32,6 +32,22 @@
 export default {
   name: "Reset",
   data: () => ({}),
-  methods: {},
+  methods: {
+    reset() {
+      axios({
+        method: "post",
+        url: `${config.url}/Library/Account.php`,
+        data: {
+          param: "reset",
+        },
+      })
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
 };
 </script>
