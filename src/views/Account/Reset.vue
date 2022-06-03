@@ -29,6 +29,9 @@
 </template>
 
 <script>
+import axios from "axios";
+import config from "@/config/index.js";
+
 export default {
   name: "Reset",
   data: () => ({}),

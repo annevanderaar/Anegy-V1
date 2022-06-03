@@ -483,7 +483,7 @@ export default {
     },
     addWatched(id) {
       if (!this.$session.exists()) {
-        this.$toast.warning("You have to be loged in to add a favorite", {
+        this.$toast.warning("You have to be loged in to add to watchlist", {
           timeout: 3000,
         });
       } else {
