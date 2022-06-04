@@ -211,6 +211,9 @@ export default {
             });
             let index = this.faves.indexOf(id);
             this.faves.splice(index, 1);
+            if (this.path == "/account/favorites") {
+              this.$emit("refresh", "delete");
+            }
           } else if (res.data == "error") {
             this.$toast.error("Something went wrong. Try again.", {
               timeout: 2000,
@@ -278,6 +281,9 @@ export default {
             });
             let index = this.watcheds.indexOf(id);
             this.watcheds.splice(index, 1);
+            if (this.path == "/account/watched") {
+              this.$emit("refresh", "delete");
+            }
           } else if (res.data == "error") {
             this.$toast.error("Something went wrong. Try again.", {
               timeout: 2000,

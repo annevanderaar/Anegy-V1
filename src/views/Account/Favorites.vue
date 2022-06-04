@@ -5,7 +5,13 @@
       <v-container fluid>
         <h1 style="text-align: center">Your favorites</h1>
         <h3 style="text-align: center">You can add all your favorites here!</h3>
-        <Cards :data="data" :faves="faves" :watcheds="watcheds" />
+        <Cards
+          :data="data"
+          :faves="faves"
+          :watcheds="watcheds"
+          :path="this.$route.path"
+          @refresh="refresh"
+        />
       </v-container>
     </v-main>
     <WebsiteFooter />
@@ -89,6 +95,11 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+    },
+    refresh(val) {
+      if (val == "delete") {
+        window.location.reload();
+      }
     },
   },
   mounted() {
