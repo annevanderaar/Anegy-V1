@@ -213,7 +213,6 @@ export default {
     personMovies: [],
     images: [],
     faves: [],
-    watcheds: [],
     tabs: [
       {
         title: "Movies",
@@ -263,9 +262,7 @@ export default {
               this.$toast.success("Successfully added favorite.", {
                 timeout: 2000,
               });
-              setTimeout(() => {
-                window.location.reload();
-              }, 2000);
+              this.getFave(this.$session.get("id"));
             } else if (res.data == "error") {
               this.$toast.error("Something went wrong. Try again.", {
                 timeout: 2000,
@@ -292,9 +289,7 @@ export default {
             this.$toast.success("Successfully deleted favorite.", {
               timeout: 2000,
             });
-            setTimeout(() => {
-              window.location.reload();
-            }, 2000);
+            this.faves = [];
           } else if (res.data == "error") {
             this.$toast.error("Something went wrong. Try again.", {
               timeout: 2000,

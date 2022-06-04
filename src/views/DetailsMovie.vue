@@ -451,7 +451,7 @@ export default {
             this.$toast.success("Successfully deleted favorite.", {
               timeout: 2000,
             });
-            this.getFave(this.$session.get("id"));
+            this.faves = [];
           } else if (res.data == "error") {
             this.$toast.error("Something went wrong. Try again.", {
               timeout: 2000,
@@ -510,7 +510,7 @@ export default {
             this.$toast.success("Successfully deleted from watchlist.", {
               timeout: 2000,
             });
-            this.getWatched(this.$session.get("id"));
+            this.watcheds = [];
           } else if (res.data == "error") {
             this.$toast.error("Something went wrong. Try again.", {
               timeout: 2000,
@@ -531,6 +531,7 @@ export default {
         },
       })
         .then((res) => {
+          console.log(res.data);
           res.data.forEach((item) => {
             this.faves.push(item.ms_id);
           });
