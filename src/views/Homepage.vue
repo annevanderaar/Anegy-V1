@@ -67,7 +67,12 @@
         <h1 class="my-5" style="text-align: center">
           Today's Trending Movies &amp; Series
         </h1>
-        <Cards :data="data" :faves="faves" :watcheds="watcheds" />
+        <Cards
+          :data="data"
+          :faves="faves"
+          :watcheds="watcheds"
+          @refresh="refresh"
+        />
         <v-pagination
           v-if="this.show == false"
           color="secondary"
@@ -188,6 +193,12 @@ export default {
         this.currentSearchPage = 1;
         this.setShow(false);
         this.getTrending(this.currentPage, this.selectedGenres);
+      }
+    },
+    refresh(val) {
+      if (val == "add") {
+        this.getFave(this.$session.get("id"));
+        this.getWatched(this.$session.get("id"));
       }
     },
   },

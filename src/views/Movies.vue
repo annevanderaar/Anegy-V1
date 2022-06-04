@@ -14,7 +14,12 @@
         <v-btn @click="openFilter" class="filterBtn" v-else>Filter</v-btn>
         <h1>{{ pageName }} Movies</h1>
         <MoviesFilters @genres="selectedGenresM" />
-        <Cards :data="data.results" :faves="faves" :watcheds="watcheds" />
+        <Cards
+          :data="data.results"
+          :faves="faves"
+          :watcheds="watcheds"
+          @refresh="refresh"
+        />
         <v-pagination
           v-if="this.show == false"
           color="secondary"
@@ -142,6 +147,12 @@ export default {
         this.currentSearchPage = 1;
         this.setShow(false);
         this.getMovies(this.currentPage, this.url, this.selectedGenresMovie);
+      }
+    },
+    refresh(val) {
+      if (val == "add") {
+        this.getFave(this.$session.get("id"));
+        this.getWatched(this.$session.get("id"));
       }
     },
     selectedGenresM(val) {
