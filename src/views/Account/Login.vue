@@ -27,6 +27,7 @@
               label="Email"
               v-model="email"
               :rules="[rules.required, rules.emailRules]"
+              v-on:keyup.native.enter="login"
             ></v-text-field>
             <v-text-field
               :rules="[rules.required, rules.min]"
@@ -36,6 +37,7 @@
               v-model="password"
               counter
               @click:append="show = !show"
+              v-on:keyup.native.enter="login"
             ></v-text-field>
           </div>
           <v-btn class="ma-2" @click="login">Login</v-btn>

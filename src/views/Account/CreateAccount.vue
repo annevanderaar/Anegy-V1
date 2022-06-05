@@ -27,16 +27,19 @@
               :rules="[rules.required]"
               label="First name"
               v-model="firstname"
+              v-on:keyup.native.enter="register"
             ></v-text-field>
             <v-text-field
               :rules="[rules.required]"
               label="Last name"
               v-model="lastname"
+              v-on:keyup.native.enter="register"
             ></v-text-field>
             <v-text-field
               :rules="[rules.required, rules.emailRules]"
               label="Email"
               v-model="email"
+              v-on:keyup.native.enter="register"
             ></v-text-field>
             <v-text-field
               :rules="[rules.required, rules.min, rules.passwordRules]"
@@ -46,6 +49,7 @@
               v-model="password"
               counter
               @click:append="show = !show"
+              v-on:keyup.native.enter="register"
             ></v-text-field>
           </div>
           <v-btn class="ma-2" @click="register">Create</v-btn>
@@ -57,8 +61,8 @@
 </template>
 
 <script>
-// import axios from "axios";
-// import config from "@/config/index.js";
+import axios from "axios";
+import config from "@/config/index.js";
 
 export default {
   name: "CreateAccount",
@@ -82,51 +86,49 @@ export default {
   }),
   methods: {
     register() {
-      console.log(this.email);
-      console.log(this.password);
-      // if (this.name == "" || this.email == "" || this.password == "") {
-      //   this.$toast.warning("You forgot something, try again.", {
-      //     timeout: 2000,
-      //   });
-      // } else {
-      //   axios({
-      //     method: "post",
-      //     url: `${config.url}/Library/Account.php`,
-      //     data: {
-      //       param: "create",
-      //       firstname: this.firstname,
-      //       lastname: this.lastname,
-      //       email: this.email,
-      //       password: this.password,
-      //     },
-      //   })
-      //     .then((res) => {
-      //       if (res.data == "error") {
-      //         this.$toast.error("Something went wrong. Try again.", {
-      //           timeout: 2000,
-      //         });
-      //       } else if (res.data == "emailUse") {
-      //         this.$toast.warning("Email already in use.", {
-      //           timeout: 2000,
-      //         });
-      //       } else {
-      //         this.$session.start();
-      //         this.$session.set("id", res.data);
-      //         this.$toast.success(
-      //           "Account successfully made. You will be redirected.",
-      //           {
-      //             timeout: 2000,
-      //           }
-      //         );
-      //         setTimeout(() => {
-      //           this.$router.push({ path: `/account` });
-      //         }, 2000);
-      //       }
-      //     })
-      //     .catch((err) => {
-      //       console.log(err);
-      //     });
-      // }
+      if (this.name == "" || this.email == "" || this.password == "") {
+        this.$toast.warning("You forgot something, try again.", {
+          timeout: 2000,
+        });
+      } else {
+        axios({
+          method: "post",
+          url: `${config.url}/Library/Account.php`,
+          data: {
+            param: "create",
+            firstname: this.firstname,
+            lastname: this.lastname,
+            email: this.email,
+            password: this.password,
+          },
+        })
+          .then((res) => {
+            if (res.data == "error") {
+              this.$toast.error("Something went wrong. Try again.", {
+                timeout: 2000,
+              });
+            } else if (res.data == "emailUse") {
+              this.$toast.warning("Email already in use.", {
+                timeout: 2000,
+              });
+            } else {
+              this.$session.start();
+              this.$session.set("id", res.data);
+              this.$toast.success(
+                "Account successfully made. You will be redirected.",
+                {
+                  timeout: 2000,
+                }
+              );
+              setTimeout(() => {
+                this.$router.push({ path: `/account` });
+              }, 2000);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
     },
   },
 };
