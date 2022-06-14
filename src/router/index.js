@@ -207,6 +207,15 @@ const routes = [
     },
   },
   {
+    path: "/reset-form",
+    name: "Reset Password Form",
+    component: () =>
+      import(/* webpackChunkName: "Reset" */ "../views/Account/ResetForm.vue"),
+    meta: {
+      title: "Reset Password - Anegy",
+    },
+  },
+  {
     path: "*",
     name: "404",
     component: () => import(/* webpackChunkName: "404" */ "../views/404.vue"),
