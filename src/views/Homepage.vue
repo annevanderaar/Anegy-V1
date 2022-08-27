@@ -15,7 +15,7 @@
         <h3 class="ml-2" style="position: fixed; top: 90px">Click here!</h3> -->
         <h1 style="text-align: center">Anegy</h1>
         <h2 style="text-align: center">
-          With Anegy you can discover all the movies and series ever made.
+          With Anegy you can discover all the movies and series ever made
         </h2>
         <v-row justify="center" v-if="!this.$session.exists()">
           <v-col>
