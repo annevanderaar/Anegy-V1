@@ -342,7 +342,7 @@ export default {
       },
       {
         title: "Reviews",
-        icon: "mdi-android-messages",
+        icon: "mdi-message-text",
         val: "reviews",
       },
       {
