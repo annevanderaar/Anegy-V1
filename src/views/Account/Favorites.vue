@@ -48,16 +48,18 @@ export default {
         },
       })
         .then((res) => {
-          res.data.forEach((item) => {
-            this.faves.push(item.ms_id);
-            if (item.type == "movie") {
-              this.getDetails("movie", item.ms_id);
-            } else if (item.type == "tv") {
-              this.getDetails("tv", item.ms_id);
-            } else if (item.type == "person") {
-              this.getDetails("person", item.ms_id);
-            }
-          });
+          if (res.data.length != 0) {
+            res.data.forEach((item) => {
+              this.faves.push(item.ms_id);
+              if (item.type == "movie") {
+                this.getDetails("movie", item.ms_id);
+              } else if (item.type == "tv") {
+                this.getDetails("tv", item.ms_id);
+              } else if (item.type == "person") {
+                this.getDetails("person", item.ms_id);
+              }
+            });
+          }
         })
         .catch((err) => {
           console.log(err);
