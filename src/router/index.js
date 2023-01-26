@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Homepage from "../views/Homepage.vue";
+import { authGuard } from '../auth/authGuard';
 
 Vue.use(VueRouter);
 
@@ -17,7 +18,7 @@ const routes = [
     path: "/movies/details/:id",
     name: "Movie Details",
     component: () =>
-      import(/* webpackChunkName: "account" */ "../views/DetailsMovie.vue"),
+      import(/* webpackChunkName: "DetailsMovie" */ "../views/DetailsMovie.vue"),
     meta: {
       title: "Details ... - Anegy",
     },
@@ -26,7 +27,7 @@ const routes = [
     path: "/movies/discover",
     name: "Discover Movies",
     component: () =>
-      import(/* webpackChunkName: "account" */ "../views/Movies.vue"),
+      import(/* webpackChunkName: "Movies" */ "../views/Movies.vue"),
     meta: {
       title: "Discover Movies - Anegy",
     },
@@ -35,7 +36,7 @@ const routes = [
     path: "/movies/trending",
     name: "Trending Movies",
     component: () =>
-      import(/* webpackChunkName: "account" */ "../views/Movies.vue"),
+      import(/* webpackChunkName: "Movies" */ "../views/Movies.vue"),
     meta: {
       title: "Trending Movies - Anegy",
     },
@@ -44,7 +45,7 @@ const routes = [
     path: "/movies/popular",
     name: "Popular Movies",
     component: () =>
-      import(/* webpackChunkName: "account" */ "../views/Movies.vue"),
+      import(/* webpackChunkName: "Movies" */ "../views/Movies.vue"),
     meta: {
       title: "Popular Movies - Anegy",
     },
@@ -53,7 +54,7 @@ const routes = [
     path: "/movies/playing",
     name: "Playing Movies",
     component: () =>
-      import(/* webpackChunkName: "account" */ "../views/Movies.vue"),
+      import(/* webpackChunkName: "Movies" */ "../views/Movies.vue"),
     meta: {
       title: "Playing Movies - Anegy",
     },
@@ -62,7 +63,7 @@ const routes = [
     path: "/movies/top-rated",
     name: "Top Rated Movies",
     component: () =>
-      import(/* webpackChunkName: "account" */ "../views/Movies.vue"),
+      import(/* webpackChunkName: "Movies" */ "../views/Movies.vue"),
     meta: {
       title: "Top Rated Movies - Anegy",
     },
@@ -71,7 +72,7 @@ const routes = [
     path: "/movies/upcoming",
     name: "Upcoming Movies",
     component: () =>
-      import(/* webpackChunkName: "account" */ "../views/Movies.vue"),
+      import(/* webpackChunkName: "Movies" */ "../views/Movies.vue"),
     meta: {
       title: "Upcoming Movies - Anegy",
     },
@@ -80,7 +81,7 @@ const routes = [
     path: "/series/details/:id",
     name: "Serie Details",
     component: () =>
-      import(/* webpackChunkName: "account" */ "../views/DetailsSerie.vue"),
+      import(/* webpackChunkName: "DetailsSerie" */ "../views/DetailsSerie.vue"),
     meta: {
       title: "Details ... - Anegy",
     },
@@ -89,7 +90,7 @@ const routes = [
     path: "/series/discover",
     name: "Discover Series",
     component: () =>
-      import(/* webpackChunkName: "account" */ "../views/Series.vue"),
+      import(/* webpackChunkName: "Series" */ "../views/Series.vue"),
     meta: {
       title: "Discover Series - Anegy",
     },
@@ -98,7 +99,7 @@ const routes = [
     path: "/series/trending",
     name: "Trending Series",
     component: () =>
-      import(/* webpackChunkName: "account" */ "../views/Series.vue"),
+      import(/* webpackChunkName: "Series" */ "../views/Series.vue"),
     meta: {
       title: "Trending Series - Anegy",
     },
@@ -107,7 +108,7 @@ const routes = [
     path: "/series/popular",
     name: "Popular Series",
     component: () =>
-      import(/* webpackChunkName: "account" */ "../views/Series.vue"),
+      import(/* webpackChunkName: "Series" */ "../views/Series.vue"),
     meta: {
       title: "Popular Series - Anegy",
     },
@@ -116,7 +117,7 @@ const routes = [
     path: "/series/playing",
     name: "Playing Series",
     component: () =>
-      import(/* webpackChunkName: "account" */ "../views/Series.vue"),
+      import(/* webpackChunkName: "Series" */ "../views/Series.vue"),
     meta: {
       title: "Playing Series - Anegy",
     },
@@ -125,7 +126,7 @@ const routes = [
     path: "/series/top-rated",
     name: "Top Rated Series",
     component: () =>
-      import(/* webpackChunkName: "account" */ "../views/Series.vue"),
+      import(/* webpackChunkName: "Series" */ "../views/Series.vue"),
     meta: {
       title: "Top Rated Series - Anegy",
     },
@@ -134,7 +135,7 @@ const routes = [
     path: "/series/upcoming",
     name: "Upcoming Series",
     component: () =>
-      import(/* webpackChunkName: "account" */ "../views/Series.vue"),
+      import(/* webpackChunkName: "Series" */ "../views/Series.vue"),
     meta: {
       title: "Upcoming Series - Anegy",
     },
@@ -143,7 +144,7 @@ const routes = [
     path: "/people/:id",
     name: "People",
     component: () =>
-      import(/* webpackChunkName: "account" */ "../views/Person.vue"),
+      import(/* webpackChunkName: "Person" */ "../views/Person.vue"),
     meta: {
       title: "Details ... - Anegy",
     },
@@ -152,35 +153,38 @@ const routes = [
     path: "/account",
     name: "Account",
     component: () =>
-      import(/* webpackChunkName: "account" */ "../views/Account/Account.vue"),
+      import(/* webpackChunkName: "Account" */ "../views/Account/Account.vue"),
     meta: {
       title: "Account - Anegy",
     },
+    beforeEnter: authGuard,
   },
   {
-    path: "/create-account",
-    name: "Create Account",
+    path: "/account/favorites",
+    name: "Favorites",
     component: () =>
       import(
-        /* webpackChunkName: "createAccount" */ "../views/Account/CreateAccount.vue"
+        /* webpackChunkName: "Favorites" */ "../views/Account/Favorites.vue"
       ),
     meta: {
-      title: "Create Account - Anegy",
+      title: "Favorites - Anegy",
     },
+    beforeEnter: authGuard,
   },
   {
-    path: "/login",
-    name: "Login",
+    path: "/account/watched",
+    name: "Watched",
     component: () =>
-      import(/* webpackChunkName: "login" */ "../views/Account/Login.vue"),
+      import(/* webpackChunkName: "Watched" */ "../views/Account/Watched.vue"),
     meta: {
-      title: "Login - Anegy",
+      title: "Watchlist - Anegy",
     },
+    beforeEnter: authGuard,
   },
   {
     path: "*",
     name: "404",
-    component: () => import(/* webpackChunkName: "login" */ "../views/404.vue"),
+    component: () => import(/* webpackChunkName: "404" */ "../views/404.vue"),
     meta: {
       title: "404 - Anegy",
     },

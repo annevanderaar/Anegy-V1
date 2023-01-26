@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app color="secondary" clipped-left>
+  <v-app-bar app color="secondary" clipped-left absolute>
     <v-tooltip bottom>
       <template v-slot:activator="{ on, attrs }">
         <v-btn
@@ -26,11 +26,18 @@
       </template>
       <span>Series Discover</span>
     </v-tooltip>
-    <!-- <v-btn icon class="white--text" :to="`/`"
-      ><v-icon>fas fa-home</v-icon></v-btn
-    > -->
     <v-spacer></v-spacer>
-    <v-btn plain depressed icon :to="`/`">
+    <v-btn plain depressed icon :to="`/`" v-if="this.$vuetify.breakpoint.xs">
+      <v-img
+        alt="Logo Anegy"
+        contain
+        src="/Anegy-logo.png"
+        transition="scale-transition"
+        width="40px"
+        height="40px"
+      ></v-img>
+    </v-btn>
+    <v-btn plain depressed icon :to="`/`" v-else class="ml-10">
       <v-img
         alt="Logo Anegy"
         contain
@@ -51,6 +58,7 @@
       flat
       v-if="this.show == true"
       v-model="search"
+      style="z-index: 9999"
     ></v-text-field>
     <v-btn
       disabled
@@ -66,10 +74,16 @@
     <v-btn icon class="white--text" @click="showSearch" v-else
       ><v-icon>fas fa-search</v-icon></v-btn
     >
-    <!-- <v-btn icon class="white--text" @click="openAccount"
+    <v-btn v-if="!$auth.isAuthenticated" icon class="white--text" @click="login"
       ><v-icon>fas fa-user-astronaut</v-icon></v-btn
     >
-    <v-btn icon class="white--text"><v-icon>fas fa-heart</v-icon></v-btn> -->
+    <v-btn
+      v-if="$auth.isAuthenticated"
+      icon
+      class="white--text"
+      @click="openAccount"
+      ><v-icon>fas fa-user-astronaut</v-icon></v-btn
+    >
     <v-btn
       icon
       class="white--text"
@@ -87,7 +101,6 @@
 import axios from "axios";
 import config from "@/config/index.js";
 import { mapActions, mapGetters } from "vuex";
-
 export default {
   name: "AppBar",
   props: ["currentSearchPage"],
@@ -102,6 +115,10 @@ export default {
     ...mapActions(["setShow"]),
     openAccount() {
       this.$router.push({ path: `/account` });
+    },
+    login() {
+      //Does not work?
+      this.$auth.loginWithRedirect();
     },
     darkMode() {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark;

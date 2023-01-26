@@ -1,43 +1,134 @@
 <template>
-  <v-app-bar app color="primary" dark>
-    <div class="d-flex align-center">
-      <v-img
-        alt="Vuetify Logo"
-        class="shrink mr-2"
-        contain
-        src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-        transition="scale-transition"
-        width="40"
-      />
-
-      <v-img
-        alt="Vuetify Name"
-        class="shrink mt-1 hidden-sm-and-down"
-        contain
-        min-width="100"
-        src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-        width="100"
-      />
-    </div>
-
+  <v-app-bar app color="secondary" clipped-left absolute>
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          v-bind="attrs"
+          v-on="on"
+          icon
+          class="white--text"
+          :to="`/movies/discover`"
+          ><v-icon>mdi-movie-open</v-icon></v-btn
+        >
+      </template>
+      <span>Movies Discover</span>
+    </v-tooltip>
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          v-bind="attrs"
+          v-on="on"
+          icon
+          class="white--text"
+          :to="`/series/discover`"
+          ><v-icon>mdi-television-classic</v-icon></v-btn
+        >
+      </template>
+      <span>Series Discover</span>
+    </v-tooltip>
     <v-spacer></v-spacer>
-
-    <v-btn
-      href="https://github.com/vuetifyjs/vuetify/releases/latest"
-      target="_blank"
-      text
-    >
-      <span class="mr-2">Latest Release</span>
-      <v-icon>mdi-open-in-new</v-icon>
+    <v-btn plain depressed icon :to="`/`" v-if="this.$vuetify.breakpoint.xs">
+      <v-img
+        alt="Logo Anegy"
+        contain
+        src="/Anegy-logo.png"
+        transition="scale-transition"
+        width="40px"
+        height="40px"
+      ></v-img>
     </v-btn>
+    <v-btn plain depressed icon :to="`/`" v-else class="ml-16">
+      <v-img
+        alt="Logo Anegy"
+        contain
+        src="/Anegy-logo.png"
+        transition="scale-transition"
+        width="40px"
+        height="40px"
+      ></v-img>
+    </v-btn>
+    <v-spacer></v-spacer>
+    <v-menu
+      bottom
+      min-width="200px"
+      rounded
+      offset-y
+      open-on-hover
+      :close-on-content-click="false"
+    >
+      <template v-slot:activator="{ on }">
+        <v-btn icon class="white--text" v-on="on"
+          ><v-icon>fas fa-user-astronaut</v-icon></v-btn
+        >
+      </template>
+      <v-card>
+        <v-list-item-content class="justify-center">
+          <div class="mx-auto text-center">
+            <h3>Test</h3>
+            <v-divider class="my-3"></v-divider>
+            <v-btn depressed text @click="openAccount"> Account </v-btn>
+            <v-divider class="my-3"></v-divider>
+            <v-btn depressed text @click="logOut"> Logout </v-btn>
+          </div></v-list-item-content
+        >
+      </v-card>
+    </v-menu>
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          v-bind="attrs"
+          v-on="on"
+          icon
+          class="white--text"
+          :to="`/account/watched`"
+          ><v-icon>mdi-clipboard-list-outline</v-icon></v-btn
+        >
+      </template>
+      <span>Watchlist</span>
+    </v-tooltip>
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          v-bind="attrs"
+          v-on="on"
+          icon
+          class="white--text"
+          :to="`/account/favorites`"
+          ><v-icon>fas fa-heart</v-icon></v-btn
+        >
+      </template>
+      <span>Favorites</span>
+    </v-tooltip>
+    <v-btn
+      icon
+      class="white--text"
+      v-if="!$vuetify.theme.dark"
+      @click="darkMode"
+      ><v-icon>fas fa-moon</v-icon></v-btn
+    >
+    <v-btn icon class="white--text" v-else @click="darkMode"
+      ><v-icon>fas fa-sun</v-icon></v-btn
+    >
   </v-app-bar>
 </template>
 
 <script>
 export default {
   name: "AppBar",
-  data: () => ({
-    //
-  }),
+  data: () => ({}),
+  methods: {
+    openAccount() {
+      this.$router.push({ path: `/account` });
+    },
+    darkMode() {
+      this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
+      localStorage.setItem("dark_theme", this.$vuetify.theme.dark.toString());
+    },
+    logOut() {
+      this.$auth.logout({
+        returnTo: window.location.origin,
+      });
+    },
+  },
 };
 </script>
