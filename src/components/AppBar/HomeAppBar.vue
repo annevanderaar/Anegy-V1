@@ -30,7 +30,7 @@
       ><v-icon>fas fa-home</v-icon></v-btn
     > -->
     <v-spacer></v-spacer>
-    <v-btn plain depressed icon :to="`/`">
+    <v-btn plain depressed icon :to="`/`" @click="resetPage">
       <v-img
         alt="Logo Anegy"
         contain
@@ -130,6 +130,11 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+    },
+    resetPage() {
+      console.log("test");
+      localStorage.currentPage = 1;
+      localStorage.currentSearchPage = 1;
     },
   },
   watch: {
