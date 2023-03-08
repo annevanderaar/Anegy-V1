@@ -7,7 +7,7 @@
           v-on="on"
           icon
           class="white--text"
-          :to="`/movies/discover`"
+          @click="resetMoviesPage"
           ><v-icon>mdi-movie-open</v-icon></v-btn
         >
       </template>
@@ -20,7 +20,7 @@
           v-on="on"
           icon
           class="white--text"
-          :to="`/series/discover`"
+          @click="resetSeriesPage"
           ><v-icon>mdi-television-classic</v-icon></v-btn
         >
       </template>
@@ -30,7 +30,7 @@
       ><v-icon>fas fa-home</v-icon></v-btn
     > -->
     <v-spacer></v-spacer>
-    <v-btn plain depressed icon :to="`/`">
+    <v-btn plain depressed icon @click="resetPage">
       <v-img
         alt="Logo Anegy"
         contain
@@ -130,6 +130,33 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+    },
+    resetPage() {
+      localStorage.currentPage = 1;
+      localStorage.currentSearchPage = 1;
+      if (this.$route.path == "/") {
+        window.location.reload();
+      } else {
+        this.$router.push({ path: "/" });
+      }
+    },
+    resetMoviesPage() {
+      localStorage.currentPage = 1;
+      localStorage.currentSearchPage = 1;
+      if (this.$route.path == "/movies/discover") {
+        window.location.reload();
+      } else {
+        this.$router.push({ path: "/movies/discover" });
+      }
+    },
+    resetSeriesPage() {
+      localStorage.currentPage = 1;
+      localStorage.currentSearchPage = 1;
+      if (this.$route.path == "/series/discover") {
+        window.location.reload();
+      } else {
+        this.$router.push({ path: "/series/discover" });
+      }
     },
   },
   watch: {
