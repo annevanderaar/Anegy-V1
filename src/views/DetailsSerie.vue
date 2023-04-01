@@ -505,29 +505,28 @@ export default {
           console.log(err);
         });
     },
+    getAllDetails(id) {
+      this.getDetails(id);
+      this.getProviders(id);
+      this.getLinks(id);
+      this.getCredits(id);
+      this.getSimilar(id);
+      this.getReviews(id);
+      this.getVideos(id);
+    },
   },
   mounted() {
     this.id = this.$route.params.id;
-    this.getDetails(this.$route.params.id);
-    this.getProviders(this.$route.params.id);
-    this.getLinks(this.$route.params.id);
-    this.getCredits(this.$route.params.id);
-    this.getSimilar(this.$route.params.id);
-    this.getReviews(this.$route.params.id);
-    this.getVideos(this.$route.params.id);
+    this.getAllDetails(this.id);
+
     this.setShow(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
   },
   watch: {
     $route() {
       this.id = this.$route.params.id;
-      this.getDetails(this.$route.params.id);
-      this.getProviders(this.$route.params.id);
-      this.getLinks(this.$route.params.id);
-      this.getCredits(this.$route.params.id);
-      this.getSimilar(this.$route.params.id);
-      this.getReviews(this.$route.params.id);
-      this.getVideos(this.$route.params.id);
+      this.getAllDetails(this.id);
+
       window.scrollTo({ top: 0, behavior: "smooth" });
       history.go(0);
     },

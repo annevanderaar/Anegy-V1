@@ -111,34 +111,36 @@ export default {
       this.selectedGenresSerie = val;
       this.getSeries(this.currentPage, this.url, this.selectedGenresSerie);
     },
-  },
-  watch: {
-    $route(val) {
-      if (val.path == "/series/discover") {
+    getPath(path) {
+      if (path == "/series/discover") {
         this.url = "/discover/tv?";
         this.pageName = "Discover";
       }
-      if (val.path == "/series/trending") {
+      if (path == "/series/trending") {
         this.url = "/trending/tv/day?";
         this.pageName = "Trending";
       }
-      if (val.path == "/series/popular") {
+      if (path == "/series/popular") {
         this.url = "/tv/popular?";
         this.pageName = "Popular";
       }
-      if (val.path == "/series/top-rated") {
+      if (path == "/series/top-rated") {
         this.url = "/tv/top_rated?";
         this.pageName = "Top Rated";
       }
-      if (val.path == "/series/playing") {
+      if (path == "/series/playing") {
         this.url = "/tv/on_the_air?";
         this.pageName = "Playing";
       }
-      if (val.path == "/series/upcoming") {
+      if (path == "/series/upcoming") {
         this.url = "/tv/airing_today?";
         this.pageName = "Upcoming";
       }
-
+    },
+  },
+  watch: {
+    $route(val) {
+      this.getPath(val.path);
       this.getSeries(this.currentPage, this.url, this.selectedGenresSerie);
       this.setDrawerInput(false);
       this.setShow(false);
@@ -161,30 +163,7 @@ export default {
     if (localStorage.currentPage) {
       this.currentPage = parseInt(localStorage.currentPage);
     }
-    if (this.$route.path == "/series/discover") {
-      this.url = "/discover/tv?";
-      this.pageName = "Discover";
-    }
-    if (this.$route.path == "/series/trending") {
-      this.url = "/trending/tv/day?";
-      this.pageName = "Trending";
-    }
-    if (this.$route.path == "/series/popular") {
-      this.url = "/tv/popular?";
-      this.pageName = "Popular";
-    }
-    if (this.$route.path == "/series/top-rated") {
-      this.url = "/tv/top_rated?";
-      this.pageName = "Top Rated";
-    }
-    if (this.$route.path == "/series/playing") {
-      this.url = "/tv/on_the_air?";
-      this.pageName = "Playing";
-    }
-    if (this.$route.path == "/series/upcoming") {
-      this.url = "/tv/airing_today?";
-      this.pageName = "Upcoming";
-    }
+    this.getPath(this.$route.path);
     this.getSeries(this.currentPage, this.url, this.selectedGenresSerie);
     this.setDrawerInput(false);
     this.setShow(false);
