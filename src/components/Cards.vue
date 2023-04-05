@@ -8,15 +8,15 @@
     >
       <v-img
         v-if="item.profile_path"
-        :src="`https://image.tmdb.org/t/p/w500${item.profile_path}`"
-      ></v-img>
-      <v-img
-        v-else-if="item.poster_path == null"
-        src="http://via.placeholder.com/1080x1580"
+        :src="posterPath + item.profile_path"
       ></v-img>
       <v-img
         v-else
-        :src="`https://image.tmdb.org/t/p/w500${item.poster_path}`"
+        :src="
+          item.poster_path
+            ? posterPath + item.poster_path
+            : 'http://via.placeholder.com/1080x1580'
+        "
       ></v-img>
       <div class="movie-info d-flex justify-space-between">
         <v-card-title v-if="item.title" style="word-break: normal">{{
@@ -107,5 +107,9 @@
 <script>
 export default {
   props: ["data"],
+
+  data: () => ({
+    posterPath: "https://image.tmdb.org/t/p/w500",
+  }),
 };
 </script>
