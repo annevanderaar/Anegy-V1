@@ -139,6 +139,7 @@ export default {
     watched(data) {
       this.data = data;
       this.currentSearchPage = data.page;
+      localStorage.currentSearchPage = this.currentSearchPage;
       if (data.total_pages <= 500) {
         this.totalSearchPages = data.total_pages;
       }
@@ -192,6 +193,7 @@ export default {
       window.scrollTo({ top: 0, behavior: "smooth" });
     },
     currentPage(val) {
+      localStorage.currentPage = val;
       this.getMovies(val, this.url, this.selectedGenresMovie);
       window.scrollTo({ top: 0, behavior: "smooth" });
     },

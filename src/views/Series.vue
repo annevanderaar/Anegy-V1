@@ -139,6 +139,7 @@ export default {
     watched(data) {
       this.data = data;
       this.currentSearchPage = data.page;
+      localStorage.currentSearchPage = this.currentSearchPage;
       if (data.total_pages <= 500) {
         this.totalSearchPages = data.total_pages;
       }
@@ -166,6 +167,8 @@ export default {
         this.url = "/discover/tv?";
         this.pageName = "Discover";
       }
+        this.pageName = "Discover";
+      }
       if (val.path == "/series/trending") {
         this.url = "/trending/tv/day?";
         this.pageName = "Trending";
@@ -174,12 +177,17 @@ export default {
         this.url = "/tv/popular?";
         this.pageName = "Popular";
       }
+        this.pageName = "Popular";
+      }
       if (val.path == "/series/top-rated") {
         this.url = "/tv/top_rated?";
         this.pageName = "Top Rated";
       }
+        this.pageName = "Top Rated";
+      }
       if (val.path == "/series/playing") {
-        this.url = "/tv/on_the_air?";
+        this.url = "/tv/on_the_air?";this.pageName = "Playing";
+      }
         this.pageName = "Playing";
       }
       if (val.path == "/series/upcoming") {
@@ -192,6 +200,7 @@ export default {
       window.scrollTo({ top: 0, behavior: "smooth" });
     },
     currentPage(val) {
+      localStorage.currentPage = val;
       this.getSeries(val, this.url, this.selectedGenresSerie);
       window.scrollTo({ top: 0, behavior: "smooth" });
     },
@@ -204,9 +213,12 @@ export default {
     },
   },
   mounted() {
+    if (localStorage.currentPage) {
+      this.currentPage = parseInt(localStorage.currentPage);
+    }
     if (this.$session.exists()) {
-      this.getFave(this.$session.get("id"));
-      this.getWatched(this.$session.get("id"));
+        this.getFave(this.$session.get("id"));
+        this.getWatched(this.$session.get("id"));
     }
     if (this.$route.path == "/series/discover") {
       this.url = "/discover/tv?";

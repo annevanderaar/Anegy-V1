@@ -415,6 +415,7 @@ export default {
     this.getImages(this.$route.params.id);
     this.setShow(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
+    console.log(this.data.name);
   },
 };
 </script>

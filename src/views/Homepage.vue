@@ -185,6 +185,7 @@ export default {
     watched(data) {
       this.data = data.results;
       this.currentSearchPage = data.page;
+      localStorage.currentSearchPage = this.currentSearchPage;
       if (data.total_pages <= 500) {
         this.totalSearchPages = data.total_pages;
       }
@@ -203,6 +204,9 @@ export default {
     },
   },
   mounted() {
+    if (localStorage.currentPage) {
+      this.currentPage = parseInt(localStorage.currentPage);
+    }
     this.getTrending(this.currentPage, this.selectedGenres);
     if (this.$session.exists()) {
       this.getFave(this.$session.get("id"));
@@ -213,6 +217,7 @@ export default {
   },
   watch: {
     currentPage(val) {
+      localStorage.currentPage = val;
       this.getTrending(val, this.selectedGenres);
       window.scrollTo({ top: 0, behavior: "smooth" });
     },
